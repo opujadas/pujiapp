@@ -30,12 +30,15 @@ exports.index = function (req, res) {
 // Handle create element actions
 exports.new = function (req, res) {
     var element = new Element();
-    element.user_id = req.body.user_id ? req.body.user_id : element.user_id;
     element.type = req.body.type ? req.body.type : element.type;
     element.tags = req.body.tags ? req.body.tags : element.tags;
     element.data = req.body.data ? req.body.data : element.data;
+    element.user = req.body.user_id ? req.body.user_id : element.user;
     // element.color = req.body.color;
-
+/*    console.log(req.body.user_id); 
+    categorie.user = req.body.user_id ? req.body.user_id : categorie.user;
+    console.log(categorie); 
+*/
     // save the element and check for errors
     element.save(function (err) {
         if (err) {
@@ -58,8 +61,12 @@ exports.new = function (req, res) {
 // Handle view elements by type 
 
 exports.viewbytype = function (req, res) {
-    if(req.params.type){
-        Element.find({type: req.params.type}, function (err, element) {
+    if ((req.params.type) && (req.params.user_id)) {
+        console.log('params ok'); 
+        console.log(req.params.type); 
+        console.log(req.params.user_id); 
+
+        Element.find({type: req.params.type, user: req.params.user_id}, function (err, element) {
             if (err) {
                 res.json({
                     status: "error",

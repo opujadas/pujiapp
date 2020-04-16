@@ -24,36 +24,12 @@ export class Element {
 
 
 var elementSchema = mongoose.Schema({
-    /*name: {
-        type: String,
-        required: true
-    },*/
-    /*user: {
-        type: String,
-        required: false
-    }*/
-    type: {
-    	type: String,
-    	required: true
-    },
-    data: {
-    	type : mongoose.Schema.Types.Mixed
-    },
-
-    create_date: { 
-    	type: Date, 
-    	default: Date.now 
-   	},
-    update_date: { 
-    	type: Date, 
-    	default: Date.now 
-   	},
-   	tags: { 
-    	type: [{ 
-    		type: mongoose.Schema.Types.ObjectId, 
-    		ref: 'Tag', required: false }
-    	]    	
-   	}
+    type: {	type: String,	required: true },
+    data: {	type : mongoose.Schema.Types.Mixed },
+    create_date: { type: Date, default: Date.now },
+    update_date: { type: Date, default: Date.now },
+   	tags: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', required: false }]},
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
 

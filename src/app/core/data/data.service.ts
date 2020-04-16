@@ -199,8 +199,17 @@ export class DataService
       return this.http.get(ServicesEndPoints.ELEMENTS + '/' + id);         
   }
 
+/*
+  getTags() {
+      console.log('Entré dans la fonction'); 
+      return this.http.get(ServicesEndPoints.TAGS+ '/user/' + localStorage.getItem('user_id'));
+  }
+*/
+
   getElementsByType(type: string){
-      return this.http.get(ServicesEndPoints.ELEMENTS + '/type/' + type);
+      console.log(type); 
+      console.log(localStorage.getItem('user_id')); 
+      return this.http.get(ServicesEndPoints.ELEMENTS + '/type/' + type + '/user/'  + localStorage.getItem('user_id'));
   } 
 
 

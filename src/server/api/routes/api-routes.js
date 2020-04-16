@@ -55,7 +55,7 @@ router.route('/tags')
 
 var elementController = require('../controllers/elementController');
 // Categories routes
-router.route('/elements/type/:type')
+router.route('/elements/type/:type/user/:user_id')
     .get(elementController.viewbytype);
 router.route('/elements/addtag')
     .post(elementController.addtag);

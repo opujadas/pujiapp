@@ -127,7 +127,7 @@ export class PostAddComponent implements OnInit, OnDestroy  {
     console.log(post); 
 
     //constructor(id : number = -1, user_id: number = 1, tags : Tag[], type, data : {}) {
-    let element = new Element(-1, 9999, this.selectedTags, "post", post); // type = 1 pour les posts 
+    let element = new Element(-1, localStorage.getItem('user_id'), this.selectedTags, "post", post); // type = 1 pour les posts 
     console.log('Element'); 
     console.log(element); 
 
