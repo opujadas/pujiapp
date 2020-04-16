@@ -3,11 +3,11 @@ var mongoose = require('mongoose');
 // Setup schema
 var viewSchema = mongoose.Schema({
     name: 		{ type: String, required: true },
-    parent: 	{ type: mongoose.Schema.Types.ObjectId, ref: 'View', required: true },
-    /* user: { type: String, required: true },*/
+    parent: 	{ type: mongoose.Schema.Types.ObjectId, ref: 'View', required: false },
+    user: 		{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
     create_date: { type: Date, default: Date.now },
-    update_date: { type: Date, default: Date.now },    
-    rootview: 	 { type: Boolean, required: true, default: false },
+    update_date: { type: Date, default: Date.now },
+    is_rootview: { type: Boolean, required: true, default: false }
 });
 
 /*viewSchema.pre('deleteOne', function(next) {

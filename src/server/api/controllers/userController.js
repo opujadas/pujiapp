@@ -281,18 +281,45 @@ exports.activate = function (req, res) {
                 console.log('On a un user !');
                 user = user[0]; 
                 user.active = true; 
+                // On va créer la vue Root du user
+                var rootView = new View();
+                rootView.name = "ROOT VIEW";
+                rootView.user = user;
+                rootView.is_rootview = true;
 
                 // save the contact and check for errors
-                user.save(function (err) {
-                    if (err)
-                        res.json(err);
-                    res.json({
-                        status: "success",
-                        message: 'Utilisateur bien activé',
-                        data: user
-                    });
-                });
-
+                rootView.save(function (errview) {
+                    if (errview){
+                            res.json({
+                                status: "error",
+                                message: errview
+                            });                      
+                    }
+                    else {
+                      console.log(rootView); 
+                      user.rootview = rootView._id; 
+                      console.log(user); 
+                      // save the contact and check for errors
+                      user.save(function (err) {
+                          if (err){
+                            res.json({
+                                status: "error",
+                                message: err
+                            });                             
+                          }
+                          else {
+                            console.log('Save OK'); 
+                            console.log(user); 
+                            // Renvoi OK                    
+                            res.json({
+                                status: "success",
+                                message: 'Utilisateur bien activé',
+                                data: user
+                            });
+                          }
+                      });
+                    }
+                  }); 
             }
         }
     }); 

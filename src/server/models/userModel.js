@@ -9,7 +9,8 @@ var userSchema = mongoose.Schema({
     activationKey:  { type : String, required: false },
     active:         { type : Boolean, required: true, default: false },
     create_date:    { type: Date, default: Date.now },
-    update_date:    { type: Date, default: Date.now }
+    update_date:    { type: Date, default: Date.now },
+    rootview:       { type: mongoose.Schema.Types.ObjectId, ref: 'View', required: false }
 });
 
 /*
