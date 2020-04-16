@@ -1,0 +1,17 @@
+<h1>Liste des tags</h1>
+
+
+  <div class="panel panel-success">
+      <div class="panel-heading">Available to drag</div>
+
+      <div class="panel-body" *ngFor="let tag of tags; let i = index">
+          <div class="panel panel-default" dnd-draggable [dragEnabled]="true"  [dragData]="tag">
+                   
+            <tagelement  
+              [label]="tag.name"
+              [bgcolor]="tag.category.color"
+            ></tagelement>
+                  
+          </div>
+      </div>
+  </div>

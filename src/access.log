@@ -1,0 +1,41 @@
+::1 - - [14/Dec/2017:06:03:39 +0000] "GET /getContacts HTTP/1.1" 304 - "http://localhost:4200/contacts" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:03:39 +0000] "GET /getContacts HTTP/1.1" 304 - "http://localhost:4200/contacts" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:03:44 +0000] "GET /getSites HTTP/1.1" 304 - "http://localhost:4200/sites" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:03:56 +0000] "GET /getMessages?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQkwyNjkzNyIsImlhdCI6MTUxMjk3MDU5NywiZXhwIjoxNTEyOTcxMTk3fQ.3_5q0iTYkxMudRHJCf8pyL4wS93pc7G5y7abAYS3mQA HTTP/1.1" 304 - "http://localhost:4200/messages" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:04:03 +0000] "GET /getMessage/10 HTTP/1.1" 200 363 "http://localhost:4200/messages/edit/10" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:04:10 +0000] "GET /getMessages?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQkwyNjkzNyIsImlhdCI6MTUxMjk3MDU5NywiZXhwIjoxNTEyOTcxMTk3fQ.3_5q0iTYkxMudRHJCf8pyL4wS93pc7G5y7abAYS3mQA HTTP/1.1" 304 - "http://localhost:4200/messages" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:04:14 +0000] "GET /getContactLists HTTP/1.1" 304 - "http://localhost:4200/messages/new" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:04:14 +0000] "GET /getContacts HTTP/1.1" 304 - "http://localhost:4200/messages/new" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:04:14 +0000] "GET /getMessages?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQkwyNjkzNyIsImlhdCI6MTUxMjk3MDU5NywiZXhwIjoxNTEyOTcxMTk3fQ.3_5q0iTYkxMudRHJCf8pyL4wS93pc7G5y7abAYS3mQA HTTP/1.1" 304 - "http://localhost:4200/messages/new" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:04:33 +0000] "OPTIONS /message/send HTTP/1.1" 200 4 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:05:22 +0000] "GET /getSites HTTP/1.1" 304 - "http://localhost:4200/sites" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:06:34 +0000] "POST /message/send HTTP/1.1" - - "http://localhost:4200/messages/new" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:08:34 +0000] "POST /message/send HTTP/1.1" - - "http://localhost:4200/messages/new" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:15:50 +0000] "GET /getContacts HTTP/1.1" 304 - "http://localhost:4200/contacts" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:15:50 +0000] "GET /getContacts HTTP/1.1" 304 - "http://localhost:4200/contacts" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:15:52 +0000] "GET /getContactLists HTTP/1.1" 304 - "http://localhost:4200/contactlists" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:15:56 +0000] "GET /getListcontact/28 HTTP/1.1" 304 - "http://localhost:4200/contactlists/edit/28" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:15:56 +0000] "GET /getContactsInContactlist/28 HTTP/1.1" 304 - "http://localhost:4200/contactlists/edit/28" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+::1 - - [14/Dec/2017:06:15:56 +0000] "GET /getContactsNotInContactlist/28 HTTP/1.1" 200 3579 "http://localhost:4200/contactlists/edit/28" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36"
+[0mGET /getContacts [36m304 [0m48.792 ms - -[0m
+[0mGET /getContacts [36m304 [0m25.560 ms - -[0m
+[0mGET /getContactLists [36m304 [0m5.249 ms - -[0m
+[0mGET /getSites [36m304 [0m7.584 ms - -[0m
+[0mGET /getContactLists [36m304 [0m25.276 ms - -[0m
+[0mGET /getContacts [36m304 [0m52.010 ms - -[0m
+[0mGET /getMessages?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQkwyNjkzNyIsImlhdCI6MTUxMjk3MDU5NywiZXhwIjoxNTEyOTcxMTk3fQ.3_5q0iTYkxMudRHJCf8pyL4wS93pc7G5y7abAYS3mQA [36m304 [0m46.155 ms - -[0m
+[0mGET /getContacts [36m304 [0m15.900 ms - -[0m
+[0mGET /getContacts [36m304 [0m56.767 ms - -[0m
+[0mGET /getContactLists [36m304 [0m2.144 ms - -[0m
+[0mGET /getSites [36m304 [0m12.226 ms - -[0m
+[0mGET /getContacts [36m304 [0m26.000 ms - -[0m
+[0mGET /getContacts [36m304 [0m24.081 ms - -[0m
+[0mGET /getContactLists [36m304 [0m8.682 ms - -[0m
+[0mGET /getContacts [36m304 [0m20.634 ms - -[0m
+[0mGET /getMessages?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQkwyNjkzNyIsImlhdCI6MTUxMjk3MDU5NywiZXhwIjoxNTEyOTcxMTk3fQ.3_5q0iTYkxMudRHJCf8pyL4wS93pc7G5y7abAYS3mQA [36m304 [0m17.648 ms - -[0m
+[0mGET /getContactLists [36m304 [0m4.915 ms - -[0m
+[0mGET /getContacts [36m304 [0m34.247 ms - -[0m
+[0mGET /getMessages?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQkwyNjkzNyIsImlhdCI6MTUxMjk3MDU5NywiZXhwIjoxNTEyOTcxMTk3fQ.3_5q0iTYkxMudRHJCf8pyL4wS93pc7G5y7abAYS3mQA [36m304 [0m23.128 ms - -[0m
+[0mGET /getContactLists [36m304 [0m60.694 ms - -[0m
+[0mGET /getContacts [36m304 [0m155.730 ms - -[0m
+[0mGET /getMessages?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiQkwyNjkzNyIsImlhdCI6MTUxMjk3MDU5NywiZXhwIjoxNTEyOTcxMTk3fQ.3_5q0iTYkxMudRHJCf8pyL4wS93pc7G5y7abAYS3mQA [36m304 [0m169.232 ms - -[0m

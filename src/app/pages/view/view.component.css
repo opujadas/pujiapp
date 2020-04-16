@@ -1,0 +1,15 @@
+
+#infoview {
+	background-color: #fafafa;
+	color: #333; 
+	width: 100%; 
+	position: fixed;
+	/* height: 50px; */
+	top: 60px;	
+	z-index: 1000; 
+}
+
+#infoview h1 {
+	font-size: 24px;
+	color: #425465; 
+}

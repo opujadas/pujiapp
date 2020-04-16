@@ -1,0 +1,89 @@
+<h1>Documentation</h1>
+
+
+<h2>BUT de cette application</h2>
+
+
+<p>Le but de cette application est de pouvoir faire des envois de masse de SMS vers des groupes prédéfinis (DM, DR, etc...)<br>
+
+- Le fichier de référence se trouve sur le Google Drive, il va donc falloir récupérer les numéros de téléphone des DM, etc... sous forme de liste (faire un service par ex. pour récupérer l'info) <br>
+- On doit pouvoir également chopper des messages prédéfinis (titre + contenu) qui lorsque l'on clique dessus vont compléter le formulaire de base<br>
+- Faire également un service qui va gérer les messages (pour setter un message qd on clique dessus par ex. ou qui va permettre d'envoyer les SMS - appel à l'API REST Json)
+</p>
+
+
+<h2>Documentation technique</h2>
+
+<h3>Environnement de développement</h3>
+
+- Client : développement avec le framework javascript Angular(v5)<br>
+- Backend : NodeJS/ExpressJS (version 8.9.3)<br>
+- Base de données : MySQL<br>
+- Webservices : authentification AD et envoi des SMS via la PFS<br>
+<br>
+
+
+<h3>En cas de plantage</h3>
+
+<h4>Serveur node JS / PM2</h4>
+Sur le serveur (dexpcc1g en DEV ou pexpcc1g en PROD), il faut s'assurer que le serveur nodeJS soit bien démarré. <br>
+Le seveur nodeJS permet de communiquer avec le client (votre navigateur), ainsi que d'interroger la base de données ainsi que la PFS. C'est donc l'élément central de cette application.<br>
+<br>
+Techniquement, le serveur node est simplement un fichier nommé <b>app.js</b>. Ce fichier est situé dans le répertoire /dev/smsenvoi/src/ (sur le serveur de DEV dexpcc1g).<br>
+En info, pour démarrer ce serveur, il suffit de taper la commande : node app.js
+Le problème c'est que si ce serveur plante, l'application plante et fin de l'histoire. C'est pourquoi, un service a été mis en place (basé sur le package pm2 - site officiel : <a href="https://github.com/unitech/pm2">https://github.com/unitech/pm2</a>), permettant de redémarrer automatiquement le serveur nodeJS si celui-ci se plante.<br>
+<br>
+<h5>Commandes utiles (pour info)</h5>
+
+<b>Démarrer un serveur nodeJS avec PM2</b>
+> pm2 start app.js (à faire dans le répertoire du serveur nodeJS où le fichier app.js est présent. Ex : /dev/smsenvoi/src/ en DEV). Le serveur sera présent dans la liste avec le nom "app"<br><br>
+<img src="/assets/images/pm2_start.PNG">
+
+
+<br><br>
+<b>Arrêter un serveur nodeJS avec PM2</b>
+> pm2 stop app<br><br>
+<img src="/assets/images/pm2_stop.PNG">
+<br>
+
+<b>Voir les logs du serveur node avec PM2</b>
+> pm2 logs app<br>
+<br><br>
+Voir les autres commandes dans la doc officielle (<a href="https://github.com/unitech/pm2">https://github.com/unitech/pm2</a>). 
+<br><br>
+
+
+<h4>Base de données MySQL</h4>
+
+
+
+<h4>Mode console du navigateur / Fichiers de logs</h4>
+
+
+<h4>Autres pistes, FAQ</h4>
+
+- PFS ?<br>
+
+<b>Je viens de faire un envoi de SMS, mais il n'a pas été reçu</b><br>
+- problème chez SMS envoi (expérience vécue en décembre 2017 - les SMS ont mis jusqu'à 3 heures pour arriver certains après-midi). Checker le site SMSenvoi, voir s'ils n'ont pas des soucis chez eux<br>
+- problème sur la PFS ? <br>
+Alerte nagios sur la PFS ? Queue de SMS non envoyés ? P-etre se rapprocher du socle (Mr NUTTIN entre autre) voir s'il n'y a pas un soucis sur la PFS (lui donner l'ID du paquet envoyé à la PFS lors de l'envoi du SMS - numéro affiché dans le toaster lors de la validation de l'envoi du SMS, numéro également stocké dans la BDD dans la table sms_histo - vais faire un CRUD en LOT2 pour que soit plus visuel)<br>
+<br>
+<b>Pourquoi certains destinataires sont grisés quand je les sélectionne ?</b><br>
+Pour connaitre la raison du pourquoi, il suffit de positionner la souris sur le contact.<br>
+- Mauvais formattage des données : le numéro a des caractères invalides, des lettres, etc... Il y a une certaine tolérance ex : +(33) 6.12.34-56_78 est un numéro qui valide, car après filtrage et remplacement des parenthèses, tirets, points.. on arrive sur un numéro "composable" avec un + et 11 chiffres ! 0612345678 passera également. Par contre un numéro 0612345 ne passera pas, 0600abCDdf non plus. etc. Au final, il faut que ça colle à l'expression régulière mise en place<br>
+<img src="/assets/images/contact_invalide.png">
+
+<br><br>
+
+- Le contact n'est pas actif - Un contact peut ne pas souhaiter recevoir les SMS. Pour l'activer, il suffit d'aller sur "contacts", choisir le contact à éditer, puis cocher "contact actif" puis "Mettre à jour"<br>
+<br>
+<img src="/assets/images/Capture_actif.PNG">
+<br>
+
+
+
+
+
+
+

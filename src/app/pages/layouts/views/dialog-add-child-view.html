@@ -1,0 +1,67 @@
+<h1>Ajout d'une sous-vue de "{{parentView.name}}"</h1>
+
+
+
+
+
+<div class="row">
+  <div class="col-md-8">
+
+ID Vue mère : {{parentView.id}}<br>
+Nom Vue mère : {{parentView.name}}<br><br>
+Tags Vue mère (qu'on doit garder) : <br>
+<span *ngFor="let tag of parentView.tags">
+          <tagelement
+          [label]="tag.name"
+          [bgcolor]="tag.category.color"
+          [tag_id]="tag.id"
+        ></tagelement>
+</span>
+<br><br>
+
+    <form  [formGroup]="addChildViewForm"  (ngSubmit)="onSubmit()">
+       <mat-form-field  class="example-full-width">      
+            <input matInput id="childname" formControlName="childname" placeholder="{{ 'PAGES.VIEW.ADD.FIELD.TITLE.PLACEHOLDER' | translate }}"  [(ngModel)]="newView.name" required>
+        </mat-form-field><br>
+        <br>    
+    <br>
+    <div class="element"  dnd-droppable class="panel panel-info" (onDropSuccess)="addToTags($event)">
+
+      <div class="panel-heading">Déposez les tags ici pour filtrer</div>
+        <div class="panel-body">
+          <div *ngIf="selectedTags.length > 0">Tags :
+          <span *ngFor="let tag of selectedTags; let i = index;">
+
+          <tagelement
+            [label]="tag.name"
+            [bgcolor]="tag.category.color"
+            [tag_id]="tag.id"
+            [view_id]="view.id"
+            (deleteTag)='deleteTag(tag)'
+          ></tagelement>
+
+          </span>
+          </div>
+      </div>
+    </div>    
+
+   </form>
+  </div>
+  <div class="col-md-4">
+    <b>Tags</b><br>
+    <br>
+    XXXX résultats sont filtrés par cette vue<br>
+    <br>
+      <div *ngFor="let tag of tags; let i = index">
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="tag">
+                   
+            <tagelement  
+              [label]="tag.name"
+              [bgcolor]="tag.category.color"
+            ></tagelement>
+                 
+          </div>
+      </div>    
+
+  </div>
+</div>

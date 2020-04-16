@@ -1,0 +1,36 @@
+@media (min-width: 1200px)
+.container {
+    width: 100%;
+    color:#F00; 
+}
+
+
+app-header {
+	position: fixed;
+	width: 100%;
+	min-height:40px; 
+	z-index: 1000000; 
+}
+
+.app-content {
+    padding: 20px;
+    margin-top: 90px;
+}
+
+
+.app-container {
+	top: 200px !important; 
+}
+
+
+.mat-drawer-container {
+	/* top: 50px !important; */
+}
+
+.h1, h1 {
+    font-size: 20px !important;
+}
+
+body {
+	font-family: 'Roboto', sans-serif !important;
+}

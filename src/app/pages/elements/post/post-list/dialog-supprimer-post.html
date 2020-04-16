@@ -1,0 +1,10 @@
+<h1>{{ 'PAGES.POST.DELETE.TITLE' | translate }}</h1>
+
+<div [innerHTML]="'PAGES.POST.DELETE.MESSAGE' | translate:param"></div><br><br>
+
+        <button mat-button md-raised-button class="button-action" (click)="onNoClick()">
+          <i class="material-icons">cancel</i> {{ 'PAGES.POST.DELETE.BT.CANCEL' | translate }}
+        </button>
+        <button mat-button md-raised-button class="button-danger" (click)="deletePostConfirm(data.post)">
+          <i class="material-icons">delete_forever</i> {{ 'PAGES.POST.DELETE.BT.SUBMIT' | translate }}
+        </button>

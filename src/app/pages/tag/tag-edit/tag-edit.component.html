@@ -1,0 +1,39 @@
+<h1>{{ 'PAGES.TAG.EDIT.TITLE' | translate }}</h1>
+<br>
+
+
+<button mat-raised-button  routerLink="/tags">
+  <i class="material-icons">arrow_back</i> {{ 'CORE.BUTTON.BACK' | translate }}
+</button>
+<br><br>
+<br><br>
+
+<div class="row">
+  <div class="col-md-6">
+    <form  [formGroup]="editTagForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="name" formControlName="name" placeholder="{{ 'PAGES.TAG.EDIT.FIELD.NAME.PLACEHOLDER' | translate }}"  [(ngModel)]="name" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select  id="category_id" formControlName="category_id" placeholder="{{ 'PAGES.TAG.EDIT.FIELD.CATEGORY.PLACEHOLDER' | translate}}" [(ngModel)]="category_id">
+        <mat-option *ngFor="let category of categories" [value]="category._id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+        <br>
+        <br>
+
+        <button     mat-button type="submit" 
+                    mat-raised-button 
+                    class="button-action"
+                    [disabled]="!editTagForm.valid">
+                    <i class="material-icons">update</i> {{ 'PAGES.TAG.EDIT.BT.EDIT' | translate }}
+        </button>
+      </form>
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>

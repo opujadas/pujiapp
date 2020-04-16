@@ -1,0 +1,79 @@
+<div class="item item-3" fxFlex>
+
+  <!-- vue avec un ID défini -->
+  <div id="infoview" *ngIf="view.id > 0">
+     <h1 (click)="editView(view)">{{view.name}}</h1> 
+      
+      <div *ngIf="view.tags.length > 0">Tags : 
+        <span *ngFor="let tag of view.tags">
+
+        <tagelement 
+          [label]="tag.name"
+          [bgcolor]="tag.category.color"
+          [tag_id]="tag.id"
+          [view_id]="view.id"
+          [show_delete_action] = false
+        ></tagelement>
+
+        </span>
+      </div>
+  </div>
+
+  <!-- cas de la vue root -->
+  <div id="infoview" *ngIf="view.id == 0">
+    <h1>{{view.name}}</h1>
+  </div> 
+<hr>
+
+<mat-tab-group>
+  <mat-tab label="Posts">
+     <form  [formGroup]="addPostForm"  (ngSubmit)="onSubmit()">
+
+       <mat-form-field>      
+            <input matInput id="title" formControlName="title" placeholder="{{ 'PAGES.POST.ADD.FIELD.TITLE.PLACEHOLDER' | translate }}"  [(ngModel)]="title" required>
+        </mat-form-field><br>
+        
+
+        <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"  formControlName="content"  [(ngModel)]="content"  matInput name="content" id="content"></ckeditor><br>
+
+
+<!-- 
+       <mat-form-field  class="form-field">      
+          <textarea class="contenupost" matInput name="content" id="content" placeholder="{{ 'PAGES.POST.ADD.FIELD.CONTENT.PLACEHOLDER' | translate }}"  formControlName="content"  [(ngModel)]="content"></textarea>
+        </mat-form-field>
+-->
+        <br>
+          <button     mat-button type="submit" 
+                      mat-raised-button 
+                      class="button-action"
+                      [disabled]="!addPostForm.valid">
+                      <i class="material-icons">update</i> {{ 'PAGES.POST.ADD.BT.ADD' | translate }}
+          </button>
+    </form> 
+
+  </mat-tab>
+  <mat-tab label="Checklist">Checklist </mat-tab>
+  <mat-tab label="Images">Images </mat-tab>
+  <mat-tab label="Fichiers">Fichiers </mat-tab>
+</mat-tab-group>
+
+
+
+
+
+  <hr>
+[OPTIONS | PREFERENCES, etc.] [Filtres par : [TYPE ELEMENT] [DATE] [CONTACT]] | [Tri par [ORDRE CHRONO]
+  <br>
+
+      <div *ngFor="let el of elements; let i = index" >
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="el"> 
+                   
+              <element  [element]="el"></element>
+                  
+          </div>
+      </div>
+
+
+	<br>
+
+  </div>

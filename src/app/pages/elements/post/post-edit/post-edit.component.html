@@ -1,0 +1,61 @@
+<h1>{{ 'PAGES.POST.EDIT.TITLE' | translate }}</h1>
+<br>
+
+
+<button mat-raised-button  routerLink="/posts">
+  <i class="material-icons">arrow_back</i> {{ 'CORE.BUTTON.BACK' | translate }}
+</button>
+<br><br>
+<br><br>
+
+<div class="row">
+  <div class="col-md-6">
+    <form  [formGroup]="editPostForm"  (ngSubmit)="onSubmit()">
+     <mat-form-field  class="example-full-width">      
+          <input matInput id="title" formControlName="title" placeholder="{{ 'PAGES.POST.EDIT.FIELD.TITLE.PLACEHOLDER' | translate }}"  [(ngModel)]="title" required>
+      </mat-form-field><br>
+
+     <mat-form-field  class="example-full-width">      
+        <textarea class="contenupost" matInput name="content" id="content" placeholder="{{ 'PAGES.POST.EDIT.FIELD.CONTENT.PLACEHOLDER' | translate }}"  formControlName="content"  [(ngModel)]="content"></textarea>
+      </mat-form-field>
+      <br>
+      <br>
+    <!-- On va mettre le form pour ajouter des tags -->
+    <mat-form-field>
+      <mat-select placeholder="{{ 'PAGES.POST.ADD.FIELD.TAGS.PLACEHOLDER' | translate }}">        
+        <mat-option *ngFor="let tag of selectableTags; let i = index" [value]="tag.tag_id" (click)="addTag(tag, i)">
+          {{ tag.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+    <br>
+    Selected tags : 
+
+<div *ngFor="let tag of selectedTags; let i = index"  id="tag.id" [style.background-color]=tag.category.color class="tagelement">{{tag.name}} <a (click)="deleteTagAffectation(tag, i)">Supprimer</a></div>
+        
+ <!--        <tagelement  *ngFor="let tag of selectedTags; let i = index" 
+          [id]="tag.tag_id"
+          [post_id]="-1"
+          [label]="tag.tag_name"
+          [bgcolor]="tag.cat_color"
+        ></tagelement>
+-->
+      
+    <!-- Tags selectionnés : <div *ngFor="tag in selectedTags">{{tag.tag_name}} | </div> -->
+    <br>
+    <br>
+    <br>
+
+        <button     mat-button type="submit" 
+                    mat-raised-button 
+                    class="button-action"
+                    [disabled]="!editPostForm.valid">
+                    <i class="material-icons">update</i> {{ 'PAGES.POST.EDIT.BT.EDIT' | translate }}
+        </button>
+      </form>
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>

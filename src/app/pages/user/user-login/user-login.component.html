@@ -1,0 +1,20 @@
+<h1>{{ 'PAGES.AUTHENTIFICATION.TITLE' | translate}}</h1>
+
+<form class="example-form" [formGroup]="myForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+      <input matInput name="login" id="login" placeholder="{{ 'PAGES.AUTHENTIFICATION.FIELD.LOGIN.PLACEHOLDER' | translate}}"  formControlName="login" value="">
+    </mat-form-field><br>
+
+   <mat-form-field  class="example-full-width">      
+      <input type="password" matInput name="password" id="password" placeholder="{{ 'PAGES.AUTHENTIFICATION.FIELD.PASSWORD.PLACEHOLDER' | translate}}"  formControlName="password" value="">
+    </mat-form-field>
+    <br>
+
+        <button mat-button 
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!myForm.valid">{{ 'PAGES.AUTHENTIFICATION.SUBMIT' | translate}}</button>
+    
+</form>
+<br><br>
+<a routerLink="/user/signup">{{ 'PAGES.AUTHENTIFICATION.LABEL.SIGNUP' | translate}}</a>

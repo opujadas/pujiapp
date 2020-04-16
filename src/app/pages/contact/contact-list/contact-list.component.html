@@ -1,0 +1,86 @@
+      <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column 
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+        -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nom}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="prenom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> prenom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.prenom}} </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="telephone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> telephone </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.telephone}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> role </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="code_site">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> code_site </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.code_site}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="ville">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ville </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ville}} </mat-cell>
+    </ng-container>        
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="region">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> region </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+    </ng-container>        
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> actions </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="editContact(element)">
+          <i class="material-icons">person_add</i> Editer
+        </button>
+
+        <button mat-button md-raised-button class="button-danger" (click)="deleteContact(element)">
+          <i class="material-icons">delete_forever</i> Supprimer
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+
+
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>  
+</div>

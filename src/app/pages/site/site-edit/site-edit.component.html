@@ -1,0 +1,76 @@
+<h1>Editer un site</h1>
+<br>
+
+
+<button mat-raised-button  routerLink="/sites">
+  <i class="material-icons">arrow_back</i> Retour (annuler)
+</button>
+<br><br>
+<br><br>
+<!-- /* ['code_site', 'ville', 'adresse', 'cp', 'telephone']; */
+ -->
+<div class="row">
+  <div class="col-md-6"> 
+
+<form  [formGroup]="editSiteForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="code_site" formControlName="code_site" placeholder="code_site"  [(ngModel)]="code_site" required>
+    </mat-form-field><br>
+
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="ville" formControlName="ville" placeholder="ville"  [(ngModel)]="ville" required>
+    </mat-form-field><br>
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="adresse" formControlName="adresse" placeholder="adresse"  [(ngModel)]="adresse" required>
+    </mat-form-field><br>
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="adresse2" formControlName="adresse2" placeholder="adresse2"  [(ngModel)]="adresse2" required>
+    </mat-form-field><br>
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="cp" formControlName="cp" placeholder="cp"  [(ngModel)]="cp" required>
+    </mat-form-field><br>
+
+    
+<mat-form-field>
+  <mat-select  id="region_id" formControlName="region_id" placeholder="Région"  [(ngModel)]="region_id" [(value)]="region_id">
+    <mat-option *ngFor="let region of regions" [value]="region.id">
+      {{ region.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br> 
+
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="telephone" formControlName="telephone" placeholder="N° de téléphone"  [(ngModel)]="telephone" required>
+    </mat-form-field><br>
+
+<!-- 
+      <mat-slide-toggle 
+          class="example-margin"
+          [checked]="checked"
+         
+           formControlName="actif"
+           [(ngModel)]="actif">
+        Contact actif (si actif, il recevra les SMS)
+      </mat-slide-toggle> 
+    -->
+      <br>
+      <br>
+ 
+      <button     mat-button type="submit" 
+                  mat-raised-button 
+                  class="button-action"
+                 >
+                  <i class="material-icons">update</i> Mettre à jour
+      </button>
+
+</form>
+</div>
+<div class="col-md-6"> 
+  </div>
+</div>

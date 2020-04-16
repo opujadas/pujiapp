@@ -1,0 +1,57 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="code_site">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> code_site </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.code_site}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ville">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ville </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ville}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="adresse">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> adresse </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.adresse}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="region">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> region </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+    </ng-container>    
+
+<!--
+    <ng-container matColumnDef="cp">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> cp </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.cp}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telephone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> telephone </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.telephone}} </mat-cell>
+    </ng-container>
+-->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> actions </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="editSite(element)">
+          <i class="material-icons">person_add</i> Editer
+        </button>
+        <button mat-button md-raised-button class="button-danger" (click)="deleteSite(element)">
+          <i class="material-icons">delete_forever</i> Supprimer
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+

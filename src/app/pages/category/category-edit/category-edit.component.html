@@ -1,0 +1,36 @@
+<h1>Editer une catégorie</h1>
+<br>
+
+
+<button mat-raised-button  routerLink="/categories">
+  <i class="material-icons">arrow_back</i> {{ 'CORE.BUTTON.BACK' | translate }}
+</button>
+<br><br>
+<br><br>
+
+<div class="row">
+  <div class="col-md-6">
+    <form  [formGroup]="editCategoryForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="name" formControlName="name" placeholder="Nom de la catégorie"  [(ngModel)]="name" required>
+    </mat-form-field><br>
+
+   <mat-form-field class="example-full-width">      
+<input matInput formControlName="color" id="color" [(colorPicker)]="color" [style.background]="color" [(ngModel)]="color" placeholder="Couleur de la catégorie"/>
+
+    </mat-form-field>
+
+        <br>
+        <br>
+
+        <button     mat-button type="submit" 
+                    mat-raised-button 
+                    class="button-action"
+                    [disabled]="!editCategoryForm.valid">
+                    <i class="material-icons">update</i> Mettre à jour
+        </button>
+      </form>
+    </div>
+    <div class="col-md-6">
+    </div>
+</div>

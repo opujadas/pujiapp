@@ -1,0 +1,246 @@
+
+<h1>Modifier la liste de contacts : {{nom}}</h1>
+<br>
+
+
+<button mat-raised-button  routerLink="/contactlists">
+  <i class="material-icons">arrow_back</i> Retour (annuler)
+</button>
+<br><br>
+<br><br>
+
+Nom de la liste de contacts : 
+<form  [formGroup]="editContactListForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="nom" formControlName="nom" placeholder="Nom de la liste"  [(ngModel)]="nom" required>
+    </mat-form-field><br>
+    <br>
+      <button     mat-button type="submit" 
+                  mat-raised-button 
+                  class="button-action"
+                  [disabled]="!editContactListForm.valid">
+                  <i class="material-icons">update</i> Mettre à jour
+      </button>    
+</form>
+<br>
+<div class="row">
+  <div class="col-md-6">
+    Contacts de la liste : <br>
+    <br>
+
+
+
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource_contacts_affectes" matSort>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nom}} {{element.prenom}}</mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="code_site">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> code_site </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.code_site}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="ville">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ville </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ville}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="region">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> region </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> actions </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="desaffectContact(element, index)">
+          <i class="material-icons">person_add</i> Désaffecter
+        </button>
+
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<!-- 
+    <ul>
+      <li *ngFor="let contact of contacts_affectes; let i = index"  (click)="desaffectContact(contact, i)">
+          <b>{{contact.nom}} {{contact.prenom}}</b> ({{contact.code_site}} - {{contact.ville}} / {{contact.region}})  [Desaffecter]
+      </li>
+    </ul>
+  -->
+  </div>
+
+
+
+
+
+  <div class="col-md-6">
+    Contacts ajoutables à la liste<br><br>
+    
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource_contacts_disponibles" matSort>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nom}} {{element.prenom}}</mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="code_site">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> code_site </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.code_site}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="ville">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ville </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ville}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="region">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> region </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> actions </mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="affectContact(element, index)">
+          <i class="material-icons">person_add</i> Ajouter
+        </button>
+
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+  </mat-table>
+</div>    
+<!-- 
+    <ul>
+      <li *ngFor="let contact of contacts_disponibles; let i = index"  (click)="affectContact(contact, i)">
+          <b>{{contact.nom}} {{contact.prenom}}</b> ({{contact.code_site}} - {{contact.ville}} / {{contact.region}})  [Affecter]
+      </li>
+    </ul>    
+-->
+  </div>
+</div>
+
+
+
+
+
+<!-- 
+<form  [formGroup]="addContactListForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="nom" formControlName="nom" placeholder="Nom de la liste"  [(ngModel)]="nom" required>
+    </mat-form-field><br>
+</form>
+<br>
+
+
+Sélectionner les contacts à ajouter :
+
+
+
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+
+
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nom}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="prenom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> prenom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.prenom}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telephone">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> telephone </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.telephone}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> role </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="code_site">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> code_site </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.code_site}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ville">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ville </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.ville}} </mat-cell>
+    </ng-container>        
+
+    <ng-container matColumnDef="region">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> region </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.region}} </mat-cell>
+    </ng-container>        
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> actions </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="editContact(element)">
+          <i class="material-icons">person_add</i> Ajouter
+        </button>
+
+
+      </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>    
+  </mat-grid-tile>
+
+</mat-grid-list>
+-->
+
+
+
+
+<!-- 
+<form  [formGroup]="addContactListForm"  (ngSubmit)="onSubmit()">
+   
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="nom" formControlName="nom" placeholder="Nom"  [(ngModel)]="nom" required>
+    </mat-form-field><br>
+
+
+      <button     mat-button type="submit" 
+                  mat-raised-button 
+                  class="button-action"
+                  [disabled]="!addContactListForm.valid">
+                  <i class="material-icons">update</i> Ajouter
+      </button>
+
+</form>
+
+-->

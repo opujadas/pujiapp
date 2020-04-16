@@ -1,0 +1,19 @@
+
+
+- Aff.enf de {{parentview.id}}<br>
+
+          <span *ngFor="let child of parentview.children;">
+                - <a (click)="showChildren(child)" routerLink="/views/{{child.id}}">{{child.name}}</a><br>          
+          </span>
+
+
+
+
+<!-- <div [style.background-color]="bgcolor" class="tagelement">
+	{{label}} 	
+
+	<span *ngIf="show_delete_action">
+		<a *ngIf="element_id !== 0" (click)="deleteTagFromElement(tag_id)"> X ELEM </a>
+		<a *ngIf="view_id !== 0" (click)="deleteTagFromElement(tag_id)"> X VIEW </a>
+	</span>
+</div>-->

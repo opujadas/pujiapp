@@ -1,0 +1,19 @@
+<h1>Supprimer le site</h1>
+Attention !
+Vous êtes sur le point de supprimer ce site :<br>
+<h2>{{data.site.code_site}} {{data.site.ville}}</h2>
+
+La suppression du site entraînera : <br>
+- la remise à blanc du code site pour les contacts anciennement liés à ce site<br>
+- la suppression du site de la table 'sites'<br><br>
+
+Etes-vous sûr de vouloir le supprimer ?<br><br><br>
+
+
+
+        <button mat-button md-raised-button class="button-action" (click)="onNoClick()">
+          <i class="material-icons">person_add</i> NON (annuler)
+        </button>
+        <button mat-button md-raised-button class="button-danger" (click)="deleteSiteConfirm(data.site.id)">
+          <i class="material-icons">delete_forever</i> OUI (supprimer)
+        </button>

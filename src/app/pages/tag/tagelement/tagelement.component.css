@@ -1,0 +1,12 @@
+.tagelement {
+	border-radius: 5px  !important;
+	padding: 4px;
+	margin: 3px; 
+	border-color: #333333  !important; 
+	border-width: 1px  !important;
+	background-color: #F00;  
+	/* width: 120px; */
+	position: float;
+	display: initial;
+	line-height: 26px; 
+}

@@ -1,0 +1,67 @@
+
+
+<h1>Editer un contact</h1>
+
+<button mat-raised-button  routerLink="/contacts">
+  <i class="material-icons">arrow_back</i> Retour (annuler)
+</button>
+<br><br>
+<br><br>
+<div class="row">
+  <div class="col-md-6"> 
+
+<form  [formGroup]="editContactForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="nom" formControlName="nom" placeholder="Nom"  [(ngModel)]="nom" required>
+    </mat-form-field><br>
+
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="prenom" formControlName="prenom" placeholder="Prénom"  [(ngModel)]="prenom" required>
+    </mat-form-field><br>
+
+  <mat-form-field>
+    <mat-select  id="role_id" formControlName="role_id" placeholder="Rôle" [(ngModel)]="role_id" [(value)]="role_id">
+      <mat-option *ngFor="let role of roles"  [value]="role.id">
+        {{ role.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br>
+<mat-form-field>
+  <mat-select  id="site_id" formControlName="site_id" placeholder="Site"  [(ngModel)]="site_id" [(value)]="site_id">
+    <mat-option *ngFor="let site of sites" [value]="site.id">
+      {{ site.code_site }} - {{ site.ville }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br>
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="telephone" formControlName="telephone" placeholder="N° de téléphone"  [(ngModel)]="telephone" required>
+    </mat-form-field><br>  
+      <mat-slide-toggle 
+          class="example-margin"
+          [checked]="actif" 
+         
+           formControlName="actif"
+           [(ngModel)]="actif" >
+        Contact actif (si actif, il recevra les SMS)
+      </mat-slide-toggle> 
+      <br>
+      <br>
+      <br>
+      <br>
+
+      <button     mat-button type="submit" 
+                  mat-raised-button 
+                  class="button-action"
+                  >
+                  <i class="material-icons">update</i> Mettre à jour
+      </button>
+
+</form>
+</div>
+<div class="col-md-6">
+</div>
+</div>

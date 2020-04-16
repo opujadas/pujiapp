@@ -1,0 +1,32 @@
+
+
+
+
+<div class="element"  dnd-droppable class="panel panel-info" (onDropSuccess)="addToTags($event)">
+
+    <!-- <div class="panel-heading">Place to drop</div> -->
+    <div class="panel-body">
+
+		<b>Element #{{element.id}}</b> <span class="element_infos">{{element.created}}</span><br>
+
+    <!-- Affichage selon le type d'élément -->
+    <div *ngIf="element.typeelement_id == 1"  (click)="editElement(element)">
+        <h3>{{element.data.title}}</h3>
+        <p [innerHTML]="element.data.content | htmlcontent"></p>
+    </div>
+
+		<span *ngIf="element.tags.length > 0">Tags : </span>
+		<span *ngFor="let tag of element.tags;">
+
+        <tagelement 
+          [label]="tag.name"
+          [bgcolor]="tag.category.color"
+          [tag_id]="tag.id"
+          [element_id]="element.id"
+          (deleteTag)='deleteTag(tag.id)'
+        ></tagelement>
+
+		</span>
+		<br>
+	</div>
+</div>

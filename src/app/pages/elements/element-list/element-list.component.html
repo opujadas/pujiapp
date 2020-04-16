@@ -1,0 +1,61 @@
+ <div class="item item-3" fxFlex>
+    Affichage du nom de la vue [OPTIONS | PREFERENCES, etc.] Filtrer les résultats de la vue par : [TYPE ELEMENT] [DATE] [CONTACT] ... | Trier par [ORDRE CHRONO]<br>
+	<br><br>
+  
+<mat-tab-group>
+  <mat-tab label="Posts">
+      <br>
+     <form  [formGroup]="addPostForm"  (ngSubmit)="onSubmit()">
+
+       <mat-form-field>      
+            <input matInput id="title" formControlName="title" placeholder="{{ 'PAGES.POST.ADD.FIELD.TITLE.PLACEHOLDER' | translate }}"  [(ngModel)]="title" required>
+        </mat-form-field><br>
+
+       <mat-form-field  class="form-field">      
+          <textarea class="contenupost" matInput name="content" id="content" placeholder="{{ 'PAGES.POST.ADD.FIELD.CONTENT.PLACEHOLDER' | translate }}"  formControlName="content"  [(ngModel)]="content"></textarea>
+        </mat-form-field>
+          <button     mat-button type="submit" 
+                      mat-raised-button 
+                      class="button-action"
+                      [disabled]="!addPostForm.valid">
+                      <i class="material-icons">update</i> {{ 'PAGES.POST.ADD.BT.ADD' | translate }}
+          </button>
+    </form> 
+
+  </mat-tab>
+  <mat-tab label="Checklist">Checklist </mat-tab>
+  <mat-tab label="Images">Images </mat-tab>
+  <mat-tab label="Fichiers">Fichiers </mat-tab>
+</mat-tab-group>
+
+
+
+
+
+  <hr>
+
+      <div *ngFor="let el of elements; let i = index" >
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="el"> 
+                   
+              <element  [element]="el"></element>
+                  
+          </div>
+      </div>
+
+
+	<br>
+
+  </div><!--
+  <div class="item item-2" fxFlex="20%" fxFlexOrder="3">
+  	<b>Colonne misc</b><br><br>
+  	Colonne facultative à afficher si on a de la place sur l'écran.<br>
+  	Affichage d'informations directes (contacts de la vue, checklist, liens web, etc.). Fil d'actu ? Récupération des infos via webservices, préférences, etc. 
+  	<br>
+
+
+  </div>
+-->
+
+
+
+

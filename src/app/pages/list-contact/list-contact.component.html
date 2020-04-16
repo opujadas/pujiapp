@@ -1,0 +1,52 @@
+<h1>Gestion des listes de contacts</h1>
+
+    <button mat-button md-raised-button class="button-action" (click)="onNewContactList()">
+      <i class="material-icons">person_add</i> Ajouter une liste de contacts
+    </button>
+    <br><br>
+
+
+
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column 
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+        -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nom">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> nom </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.nom}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> actions </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="editContactlist(element)">
+          <i class="material-icons">person_add</i> Editer
+        </button>
+        <button mat-button md-raised-button class="button-danger" (click)="deleteContactList(element)">
+          <i class="material-icons">delete_forever</i> Supprimer
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

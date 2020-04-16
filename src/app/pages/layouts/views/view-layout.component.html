@@ -1,0 +1,178 @@
+
+
+<mat-drawer-container class="app-container" autosize>
+
+  <!-- Side bar droite (infos, options, etc...) -->
+  <mat-drawer #drawer class="app-sidenav" mode="side" position="end">
+  <div id="draweroptions">
+     
+      <button type="button" mat-button (click)="drawer.toggle()">
+            <i class="material-icons">clear</i>    
+      </button>    
+  </div>  
+
+
+<h2>Informations / Détails</h2>
+
+<!--
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="40%" class="info_label">ID de la vue</div><div fxFlex="60%">{{view.id}}</div>
+</div>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="40%" class="info_label">Nom de la vue</div><div fxFlex="60%">{{view.name}}</div>
+</div>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="40%" class="info_label">Date de création</div><div fxFlex="60%">{{view.created}}</div>
+</div>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="40%" class="info_label">Nombre d'éléments</div><div fxFlex="60%">{{view.elements.length}}</div>
+</div>
+
+
+<br>
+
+
+
+
+
+
+      <hr>
+      <br><br>
+      <div *ngFor="let tag of tags; let i = index">
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="tag">                    
+            <tagelement  
+              [label]="tag.name"
+              [bgcolor]="tag.category.color"
+            ></tagelement>
+                  
+          </div>
+      </div>
+-->
+  </mat-drawer>
+  <!-- FIN Side bar (infos, options, etc...) -->
+
+  <div class="app-sidenav-content">
+
+
+
+
+<div class="container"
+     fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+  <!-- DEBUT Colonne menu interactif -->
+  <div class="item item-1" fxFlex="20%">
+
+
+    <b>TAGGERS</b><br>
+    <br>
+      <a *ngIf="!showDialogTags" (click)="showDialogSelectorTags()">[AFFICHER LES TAGS]</a>
+      <a *ngIf="showDialogTags" (click)="hideDialogSelectorTags()">[MASQUER LES TAGS]</a>
+
+      <a *ngIf="!showDialogTrash" (click)="showTrash()">[CORBEILLE]</a>
+      <a *ngIf="showDialogTrash" (click)="hideTrash()">[MASQUER CORBEILLE]</a>
+<br>
+<br>
+
+
+
+<!--      <br>
+      Contacts<br>
+      Dates/Times<br>
+      Places<br>
+      Catégories<br>
+
+    -->
+      <hr>    
+
+    <b>VUES FILTREES</b><br>
+    <br>
+    <!--
+    <a routerLink="/views/0">View Root</a> <a routerLink="/views/add"><span class="badge">Nouvelle vue</span></a><br>
+    - Affichage des enfants<br>
+      <span *ngFor="let view of rootViews; let i = index">
+
+          <a dnd-draggable [dragEnabled]="true"  [dragData]="view" (click)="showChildren(view)" routerLink="/views/{{view.id}}">{{view.name}}</a> <a (click)="addChildView(view)">&nbsp; <span class="badge"> + </span></a><br>
+
+          <span *ngFor="let child of view.children;">
+                - <a dnd-draggable [dragEnabled]="true"  [dragData]="child" (click)="showChildren(child)" routerLink="/views/{{child.id}}">{{child.name}}</a><br>          
+          </span>
+
+         </span>
+-->
+      <hr>    
+
+    <b>GENERAL</b><br><br>
+    
+      <a routerLink="/views/elements"><span class="badge">1 </span> -- Tous les éléments --</a><br>
+      <a [routerLink]="1"><span class="badge">1 </span> Posts</a><br>
+      Rechercher élément<br>
+      Eléments supprimés (corbeille)
+    <hr>
+    <br><br>
+
+  <br>  
+  <b>Menu</b><br><br>
+    - Vue générale<br>
+  - Eléments non taggés<br>
+  <br>
+  Vues dynamiques<br>
+  ROOT VIEW [OPTIONS]<br>
+  <hr>  
+  </div>
+  <!-- FIN colonne menu -->
+
+
+
+
+
+ <div  fxFlex="100%">
+
+
+  <div id="options">
+    OPTIONS 
+      <button type="button" mat-button (click)="drawer.toggle()">
+            <i class="material-icons">vertical_split</i>    
+      </button>    
+  </div>  
+  <!-- DEBUT Colonne affichage principal -->
+    <router-outlet></router-outlet>
+  </div> 
+
+ </div>
+
+  </div>
+
+</mat-drawer-container>
+
+
+
+<div id="panelTags" ngDraggable [handle]="myHandle" class="mypanel" *ngIf="showDialogTags">
+    <div #myHandle class="drag-block-handle" id="mydivheader">Liste des tags <a  (click)="hideDialogSelectorTags()">[FERMER]</a></div>
+
+   <!--   
+      <div *ngFor="let tag of tags; let i = index">
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="tag"> 
+                   
+            <tagelement  
+              [label]="tag.name"
+              [bgcolor]="tag.category.color"
+            ></tagelement>
+                  
+          </div>
+      </div>
+-->
+</div>
+
+    <div id="panelTrash" ngDraggable [handle]="myHandle" class="mypanel" *ngIf="showDialogTrash">
+
+      <!-- <div class="panel-heading">Place to drop</div> -->
+      <div class="panel-body"  dnd-droppable class="panel corbeille" (onDropSuccess)="moveToRecycleBin($event)">
+      Déposer ici les choses à mettre à la corbeille (tags, contacts, éléments...). Durée de conservation définie : 7 jours<br><br>
+      Activer / Désactiver la corbeille
+      </div>
+    </div>
+
+

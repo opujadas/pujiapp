@@ -1,0 +1,140 @@
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" routerLink="/">Pujiapp</a> 
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a routerLink="/">{{ 'HEADER.MENU.HOME' | translate }}</a></li>
+              <li><a routerLink="/test">Tests</a></li>
+              <li><a routerLink="/views/0">VUES LAYOUT</a></li>
+              <li  *ngIf="isLoggedIn()" class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Référentiel <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Tags</li>
+                      <li><a routerLink="/tags">Gérer les tags (tags simples ? lieux ? contacts ?...)</a></li>
+                      <li><a routerLink="/categories">Gérer les catégories de tags (?)</a></li>
+                    <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Vues</li>
+                      <li><a routerLink="/posts">Gérer les vues (vue composée de tags / période dans le temps / personnes...)</a></li>
+                      
+                    <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Contacts</li>
+                      <li><a routerLink="/contacts">Gérer mes contacts</a></li>
+                      
+                  <li role="separator" class="divider"></li>
+                </ul>
+              </li>
+              <li  *ngIf="isLoggedIn()" class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Data <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Posts</li>
+                      <li><a routerLink="/posts">Posts</a></li>
+                      <li><a routerLink="/posts">Posts partagés (?)</a></li>
+                    <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Contacts</li>
+                      <li><a routerLink="/contacts">Mon annuaire</a></li>
+                      <li><a routerLink="/contacts">Anniversaires</a></li>
+
+                 <li class="dropdown-header">Tasklists / checklists</li>
+                      <li><a routerLink="/posts">Tasklists (choses à faire avec date ?)</a></li>
+                      <li><a routerLink="/posts">Checklists (checklist courses ? qd on part en vacances ?)</a></li>
+                    <li role="separator" class="divider"></li>
+
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Gallerie</li>
+                      <li><a routerLink="/documentation" *ngIf="isLoggedIn()">Gérer mes galleries</a></li>
+                      
+                  <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Documentation</li>
+                      <li><a routerLink="/documentation" *ngIf="isLoggedIn()">Documentation technique</a></li>
+                      
+                  <li role="separator" class="divider"></li>
+                </ul>
+              </li>
+              <li  *ngIf="isLoggedIn()" class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Exploitation data <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Au jour le jour</li>
+                      <li><a routerLink="/posts">Dashboard journée</a></li>
+                      <li><a routerLink="/posts">Dashboard sur la semaine</a></li>
+                      <li><a routerLink="/posts">Dashboard sur le mois</a></li>
+                    <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Mes vues</li>
+                      <li><a routerLink="/posts">Toutes mes vues</a></li>
+                      <li><a routerLink="/posts">Vue manager...</a></li>
+                      <li><a routerLink="/posts">Vues préférées...</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Vues partagées</li>
+                      <li><a routerLink="/posts">Liste des vues partagées</a></li>
+                  <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Contacts</li>
+                      <li><a routerLink="/contacts">Mon annuaire</a></li>
+                      <li><a routerLink="/contacts">Anniversaires</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Documentation</li>
+                      <li><a routerLink="/documentation" *ngIf="isLoggedIn()">Documentation technique</a></li>
+                      
+                  <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Documentation</li>
+                      <li><a routerLink="/documentation" *ngIf="isLoggedIn()">Documentation technique</a></li>
+                      
+                  <li role="separator" class="divider"></li>
+                </ul>
+              </li>
+              <li  *ngIf="isLoggedIn()" class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Réseau online <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Utilisateurs / relations</li>
+                      <li><a routerLink="/posts">Rechercher un utilisateur</a></li>
+                      <li><a routerLink="/posts">Gérer un utilisateur</a></li>
+
+                  <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Chat</li>
+                      <li><a routerLink="/contacts">Chat</a></li>
+                  <li role="separator" class="divider"></li>
+                     
+                  <li role="separator" class="divider"></li>
+                </ul>
+              </li>
+              <li  *ngIf="isLoggedIn()" class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Préférences et paramètres <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-header">Paramètres</li>
+                      <li><a routerLink="/posts">Gérer mon profil</a></li>
+                      <li><a routerLink="/posts"></a></li>
+
+                  <li class="dropdown-header">Préférences</li>
+                      <li><a routerLink="/posts">Affichages</a></li>
+                      <li><a routerLink="/posts">Préférences</a></li>
+
+                  <li role="separator" class="divider"></li>
+
+                  <li class="dropdown-header">Confidentialité</li>
+                      <li><a routerLink="/contacts">Partages</a></li>
+                      <li><a routerLink="/contacts">Code secret (timer lock)</a></li>
+                  <li role="separator" class="divider"></li>
+                     
+                </ul>
+              </li>
+              <li><a routerLink="/user/login"  *ngIf="!isLoggedIn()">Connexion</a></li>
+              <li><a  (click)="onLogout()"  *ngIf="isLoggedIn()">Déconnexion  [{{userSigne}}]</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>

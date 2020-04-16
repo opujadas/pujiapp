@@ -1,0 +1,160 @@
+<mat-drawer-container class="app-container" autosize>
+  <mat-drawer #drawer class="app-sidenav" mode="side" position="end">
+    <p>Auto-resizing sidenav</p>
+    <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+    <button (click)="showFiller = !showFiller" mat-raised-button>
+      Toggle extra text
+    </button>
+      <div *ngFor="let tag of tags; let i = index">
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="tag"> 
+                   
+            <tagelement  
+              [label]="tag.name"
+              [bgcolor]="tag.category.color"
+            ></tagelement>
+                  
+          </div>
+      </div>
+
+  </mat-drawer>
+
+  <div class="app-sidenav-content">
+
+
+<div class="container"
+     fxLayout
+     fxLayout.xs="column"
+     fxLayoutAlign="center"
+     fxLayoutGap="10px"
+     fxLayoutGap.xs="0">
+  <!-- DEBUT Colonne menu interactif -->
+  <div class="item item-1" fxFlex="15%">
+
+
+<mat-tree [dataSource]="nestedDataSource" [treeControl]="nestedTreeControl" class="example-tree">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+    <li class="mat-tree-node">
+      <button mat-icon-button disabled></button>
+      {{node.filename}}:  {{node.type}}
+    </li>
+  </mat-tree-node>
+
+  <mat-nested-tree-node *matTreeNodeDef="let node; when: hasNestedChild">
+    <li>
+      <div class="mat-tree-node">
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'toggle ' + node.filename">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{nestedTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        {{node.filename}}
+      </div>
+      <ul [class.example-tree-invisible]="!nestedTreeControl.isExpanded(node)">
+        <ng-container matTreeNodeOutlet></ng-container>
+      </ul>
+    </li>
+  </mat-nested-tree-node>
+</mat-tree>
+
+
+
+    <b>TAGGERS</b><br>
+    <br>
+      <a *ngIf="!showDialogTags" (click)="showDialogSelectorTags()">[AFFICHER LES TAGS]</a>
+      <a *ngIf="showDialogTags" (click)="hideDialogSelectorTags()">[MASQUER LES TAGS]</a>
+
+      <a *ngIf="!showDialogTrash" (click)="showTrash()">[CORBEILLE]</a>
+      <a *ngIf="showDialogTrash" (click)="hideTrash()">[MASQUER CORBEILLE]</a>
+
+
+<!--      <br>
+      Contacts<br>
+      Dates/Times<br>
+      Places<br>
+      Catégories<br>
+
+    -->
+      <hr>    
+
+    <b>VUES FILTREES</b><br>
+    <br>
+    <a routerLink="/views/0">View Root</a> <a routerLink="/views/add"><span class="badge">Nouvelle vue</span></a><br>
+    - Affichage des enfants<br>
+      <span *ngFor="let view of rootViews; let i = index">
+          <a routerLink="/views/{{view.id}}">{{view.name}}</a> <a (click)="addChildView(view)"><span class="badge"> + </span></a><br>
+      </span>
+      <hr>    
+
+    <b>GENERAL</b><br><br>
+    
+      <a routerLink="/views/elements"><span class="badge">1 </span> -- Tous les éléments --</a><br>
+      <a [routerLink]="1"><span class="badge">1 </span> Posts</a><br>
+      Rechercher élément<br>
+      Eléments supprimés (corbeille)
+    <hr>
+    <br><br>
+
+  <br>  
+  <b>Menu</b><br><br>
+    - Vue générale<br>
+  - Eléments non taggés<br>
+  <br>
+  Vues dynamiques<br>
+  ROOT VIEW [OPTIONS]<br>
+  <hr>  
+  </div>
+  <!-- FIN colonne menu -->
+
+
+
+
+
+ <div  fxFlex="100%">
+
+
+  <div id="options">
+    OPTIONS 
+      <button type="button" mat-button (click)="drawer.toggle()">
+            <i class="material-icons">vertical_split</i>    
+      </button>    
+  </div>  
+  <!-- DEBUT Colonne affichage principal -->
+    <router-outlet></router-outlet>
+  </div> 
+
+ </div>
+
+  </div>
+
+</mat-drawer-container>
+
+
+
+<div id="panelTags" ngDraggable [handle]="myHandle" class="mypanel" *ngIf="showDialogTags">
+    <div #myHandle class="drag-block-handle" id="mydivheader">Click here to move <a  (click)="hideDialogSelectorTags()">[FERMER]</a></div>
+
+      
+      <div *ngFor="let tag of tags; let i = index">
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="tag"> 
+                   
+            <tagelement  
+              [label]="tag.name"
+              [bgcolor]="tag.category.color"
+            ></tagelement>
+                  
+          </div>
+      </div>
+
+</div>
+
+    <div id="panelTrash" ngDraggable [handle]="myHandle" class="mypanel" *ngIf="showDialogTrash">
+
+      <!-- <div class="panel-heading">Place to drop</div> -->
+      <div class="panel-body"  dnd-droppable class="panel corbeille" (onDropSuccess)="moveToRecycleBin($event)">
+      Déposer ici les choses à mettre à la corbeille (tags, contacts, éléments...). Durée de conservation définie : 7 jours<br><br>
+      Activer / Désactiver la corbeille
+      </div>
+    </div>
+
+

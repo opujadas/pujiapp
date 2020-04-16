@@ -1,0 +1,33 @@
+<div *ngIf="element.typeelement_id == 1">
+	<h3>Edition d'un post</h3><br>
+
+     <form  [formGroup]="editPostForm"  (ngSubmit)="onSubmit()">
+
+       	<mat-form-field  class="example-full-width">      
+            <input matInput id="title" formControlName="title" placeholder="{{ 'PAGES.POST.ADD.FIELD.TITLE.PLACEHOLDER' | translate }}"  [(ngModel)]="element.data.title" required>
+        </mat-form-field><br>
+
+        <ckeditor [editor]="Editor" data="<p>Hello, world!</p>"  formControlName="content"  [(ngModel)]="element.data.content"  matInput name="content" id="content"></ckeditor><br>
+
+
+<!--
+       <mat-form-field  class="form-field">      
+          <textarea class="contenupost" matInput name="content" id="content" placeholder="{{ 'PAGES.POST.ADD.FIELD.CONTENT.PLACEHOLDER' | translate }}"  formControlName="content"  [(ngModel)]="element.data.content"></textarea>
+        </mat-form-field>
+      -->
+          <br>
+          <br>
+
+        <button mat-button md-raised-button class="button-action" (click)="onNoClick()">
+          <i class="material-icons">cancel</i> {{ 'PAGES.POST.DELETE.BT.CANCEL' | translate }}
+        </button>
+
+          <button     mat-button type="submit" 
+                      mat-raised-button 
+                      class="button-action"
+                      [disabled]="!editPostForm.valid">
+                      <i class="material-icons">update</i> {{ 'PAGES.POST.ADD.BT.ADD' | translate }}
+          </button>
+    </form> 
+
+</div>

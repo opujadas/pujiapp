@@ -1,0 +1,146 @@
+
+
+
+
+<h4>Simple Drag-and-Drop</h4>
+<div class="row">
+
+    <div class="col-sm-3">
+        <!-- <div dnd-droppable class="panel panel-info" (onDropSuccess)="simpleDrop=$event"> -->
+          <div dnd-droppable class="panel panel-info" (onDropSuccess)="addToTags($event)">
+            <div class="panel-heading">Place to drop</div>
+            <div class="panel-body">
+                <div *ngIf="simpleDrop">Item was dropped here</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+_______________________________________
+XXX
+<div>
+
+      ------------
+      <div dragula="DRAGULA_FACTS">TAGS 
+        <div>Tag4</div>
+        <div>Tag5</div>
+        <div>Tag6</div>
+      </div>
+  </div>
+
+      
+      <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column 
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+        -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.POST.LIST.TABLE.ID.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.POST.LIST.TABLE.TITLE.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+            <span *ngIf="(element.data !== undefined) && (element.data.title !== undefined)">{{element.data.title}}</span>
+            <span *ngIf="(element.data === undefined) || (element.data.title === undefined)">-- Non définie --</span>      
+    </mat-cell>
+    </ng-container>
+
+    <!-- Color Column -->
+    <ng-container matColumnDef="content">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.POST.LIST.TABLE.CONTENT.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+            <span *ngIf="(element.data !== undefined) && (element.data.content !== undefined)">{{element.data.content}}</span>
+            <span *ngIf="(element.data === undefined) || (element.data.content === undefined)">-- Non définie --</span>      
+    </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="created">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.POST.LIST.TABLE.DATE.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.create_date}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="user_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.POST.LIST.TABLE.USER.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
+    </ng-container>
+
+    <!-- Tags Column -->
+    <ng-container matColumnDef="tags">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.POST.LIST.TABLE.TAG.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        
+<!-- 
+      <div *ngIf="view.tags.length > 0">Tags : 
+        <span *ngFor="let tag of view.tags">
+
+        <tagelement 
+          [label]="tag.name"
+          [bgcolor]="tag.category.color"
+          [tag_id]="tag.id"
+          [view_id]="view.id"
+          [show_delete_action] = false
+        ></tagelement>
+
+        </span>
+
+-->
+
+
+        <div *ngFor="let tag of element.tags">
+            <span *ngIf="(tag.category !== undefined)"><tagelement 
+          [label]="tag.name"
+          [bgcolor]="tag.category.color"
+        ></tagelement></span>
+            <span *ngIf="(tag.category === undefined)"><tagelement 
+          [label]="tag.name"
+        ></tagelement></span>            
+        </div>
+
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.POST.LIST.TABLE.ACTIONS.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="editPost(element)">
+          <i class="material-icons">person_add</i> {{ 'PAGES.POST.LIST.BT.EDIT' | translate }}
+        </button>
+
+        <button mat-button md-raised-button class="button-danger" (click)="deletePost(element)">
+          <i class="material-icons">delete_forever</i> {{ 'PAGES.POST.LIST.BT.DELETE' | translate }}
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+
+
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>  
+</div>

@@ -1,0 +1,220 @@
+{
+    "HELLO": "Salut toi !",
+
+	"CORE": {
+        "BUTTON": {
+            "BACK": "Retour / Annuler"
+        }
+	},
+
+	"TOASTER":	{
+		"LOGIN": {
+			"SUCCESS": "Vous êtes bien connecté sur cette application"
+		},
+        "POST": {
+            "ADD": {
+                "SUCCESS": "Le post a bien été ajouté !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de créer un nouveau post :  {{value}} !"
+                }
+            },
+            "DELETE": {
+                "SUCCESS": "Le post a bien été supprimé !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de supprimer un post :  {{value}} !"
+                }                
+            }
+        },
+        "ELEMENT": {
+            "ADD": {
+                "SUCCESS": "L'élément post a bien été ajouté !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de créer un nouvel élément :  {{value}} !"
+                }
+            },
+            "TRASH": {
+                "SUCCESS": "L'élément a bien été déplacé vers la corbeille !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de déplacer un élément dans la corbeille :  {{value}} !"
+                }                
+            },
+            "UPDATE": {
+                "SUCCESS": "L'élément a bien été mise à jour !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de mettre à jour un élément"
+                }                
+            },
+            "DELETE": {
+                "SUCCESS": "Le post a bien été supprimé !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de supprimer un post :  {{value}} !"
+                }                
+            }            
+        },
+        "VIEW": {
+            "ADD": {
+                "SUCCESS": "Le vue a bien été créée",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de créer une nouvelle vue :  {{value}} !"
+                }
+            },
+            "DELETE": {
+                "SUCCESS": "La vue a bien été supprimée !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de supprimer une vue :  {{value}} !"
+                }                
+            }
+        },
+        "TAG": {
+            "ADD": {
+                "SUCCESS": "Le tag a bien été ajouté !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de créer un nouveau tag :  {{value}} !"
+                }
+            },
+            "DELETE": {
+                "SUCCESS": "Le tag a bien été supprimé !",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de supprimer un tag :  {{value}} !"
+                }                
+            }
+        }
+	},
+	
+
+    "HEADER": {
+
+    	"MAIN": {
+    		"APPLICATION_TITLE" : "Liens exploitation"
+    	},
+
+        "MENU": {
+        	"HOME": "Accueil",
+
+        	"REFERENTIAL": "Référentiel",
+        	"REFERENTIAL.TITLE.TAGS": "Tags",
+			"REFERENTIAL.ITEM.TAGS": "Gérer les tags",
+			"REFERENTIAL.ITEM.TAG_CATEGORIES": "Gérer les catégories de tags",
+
+        	"ADMINISTRATION": "Administration",
+        	"ADMINISTRATION.TITLE.ROLES_AUTH": "Rôles et autorisations",
+			"ADMINISTRATION.ITEM.AUTH": "Autorisations"
+        },
+        "USER": {
+        	"CONNECT" : "Connexion",
+        	"DISCONNECT" : "Déconnexion"
+        }
+    },
+
+    "PAGES": {
+        "HOME": {
+        	"TITLE" : "Accueil",
+        	"SUBTITLE" : "But de cette application",
+        	"DESCRIPTION" : "Le but de cette application est de e Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.",
+        	"BT.CONNECTION" : "Connexion"
+        },
+        "AUTHENTIFICATION": {
+	        "TITLE": "Connexion espace admin",
+	        "FIELD.LOGIN.PLACEHOLDER": "Login",
+	        "FIELD.PASSWORD.PLACEHOLDER": "Mot de passe",
+	        "SUBMIT": "Login",
+	        "LABEL.SIGNUP" : "Pas encore de compte ? Inscription !"
+        },
+        "VIEW": {
+            "LIST":{
+                "TITLE" : "Gestion des vues",                        
+                "BT.ADD" : "Ajouter un nouveau vue",
+                "BT.EDIT" : "Editer",
+                "BT.DELETE" : "Supprimer",
+                "TABLE":{
+                    "ID.LABEL":"ID",
+                    "TITLE.LABEL":"Titre",
+                    "CONTENT.LABEL":"Contenu",
+                    "DATE.LABEL":"Date",
+                    "USER.LABEL":"Utilisateur",
+                    "ACTIONS.LABEL":"Actions"
+                }
+
+            },
+            "ADD":{
+                "TITLE" : "Ajouter une nouvelle vue",                        
+                "FIELD.TITLE.PLACEHOLDER": "Nom de la vue",
+                "FIELD.CONTENT.PLACEHOLDER": "Contenu de la vue",
+                "FIELD.TAGS.PLACEHOLDER": "Tags de la vue",
+                "BT.ADD" : "Créer"                
+            }
+        },
+        "POST": {
+            "LIST":{
+                "TITLE" : "Gestion des posts",                        
+                "BT.ADD" : "Ajouter un nouveau post",
+                "BT.EDIT" : "Editer",
+                "BT.DELETE" : "Supprimer",
+                "TABLE":{
+                    "ID.LABEL":"ID",
+                    "TITLE.LABEL":"Titre",
+                    "CONTENT.LABEL":"Contenu",
+                    "DATE.LABEL":"Date",
+                    "USER.LABEL":"Utilisateur",
+                    "ACTIONS.LABEL":"Actions"
+                }
+
+            },
+            "ADD":{
+                "TITLE" : "Ajouter un nouveau post",                        
+                "FIELD.TITLE.PLACEHOLDER": "Titre du post",
+                "FIELD.CONTENT.PLACEHOLDER": "Contenu du post",
+                "FIELD.TAGS.PLACEHOLDER": "Tags du post",
+                "BT.ADD" : "Ajouter"                
+            },
+            "DELETE":{
+                "TITLE" : "Supprimer le post",
+                "MESSAGE" : "Attention ! Vous êtes sur le point de SUPPRIMER le post : <br><h2>{{value}}</h2><br> Etes-vous sûr de vouloir le supprimer ?",
+                "BT.CANCEL" : "NON (ANNULER)",
+                "BT.SUBMIT" : "OUI (SUPPRIMER)"    
+            },            
+            "EDIT":{
+                "TITLE" : "Editer un post",  
+                "FIELD.TITLE.PLACEHOLDER": "Titre du post",
+                "FIELD.CONTENT.PLACEHOLDER": "Contenu du post",    
+                "FIELD.TAGS.PLACEHOLDER": "Tags du post",                                  
+                "BT.EDIT" : "Mettre à jour"
+            }            
+        },
+        "TAG": {
+            "LIST":{
+                "TITLE" : "Gestion des tags",                        
+                "BT.ADD" : "Ajouter un nouveau tag",
+                "BT.EDIT" : "Editer",
+                "BT.DELETE" : "Supprimer",
+                "TABLE":{
+                    "ID.LABEL":"ID",
+                    "NAME.LABEL":"Titre",
+                    "CATEGORY.LABEL":"Catégorie",
+                    "PREVIEW.LABEL":"Prévisu",
+                    "ACTIONS.LABEL":"Actions"
+                }
+
+            },
+            "ADD":{
+                "TITLE" : "Ajouter un nouveau tag",                        
+                "FIELD.NAME.PLACEHOLDER": "Nom du tag",
+                "FIELD.CATEGORY.PLACEHOLDER": "Catégorie du tag",
+                "BT.ADD" : "Ajouter"                
+            },
+            "DELETE":{
+                "TITLE" : "Supprimer le tag",
+                "MESSAGE" : "Attention ! Vous êtes sur le point de SUPPRIMER le tag : <br><h2>{{value}}</h2><br> Etes-vous sûr de vouloir le supprimer ?",
+                "BT.CANCEL" : "NON (ANNULER)",
+                "BT.SUBMIT" : "OUI (SUPPRIMER)"    
+            },            
+            "EDIT":{
+                "TITLE" : "Editer un tag",  
+                "FIELD.TITLE.PLACEHOLDER": "Titre du tag",
+                "FIELD.CATEGORY.PLACEHOLDER": "Contenu du tag",                                      
+                "BT.EDIT" : "Mettre à jour"
+            }            
+        }  
+    }
+}
+    

@@ -1,0 +1,25 @@
+<h1>Ajouter une liste de contacts</h1>
+<br>
+
+
+<button mat-raised-button  routerLink="/contactlists">
+  <i class="material-icons">arrow_back</i> Retour (annuler)
+</button>
+<br><br>
+<br><br>
+
+Nom de la liste de contacts : 
+
+<form  [formGroup]="addContactListForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="nom" formControlName="nom" placeholder="Nom de la liste"  [(ngModel)]="nom" required>
+    </mat-form-field><br>
+    <br>
+      <button     mat-button type="submit" 
+                  mat-raised-button 
+                  class="button-action"
+                  [disabled]="!addContactListForm.valid">
+                  <i class="material-icons">update</i> Ajouter
+      </button>    
+</form>
+<br>

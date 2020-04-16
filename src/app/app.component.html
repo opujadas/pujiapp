@@ -1,0 +1,23 @@
+<!-- <ng2-slim-loading-bar [color]="'white'" [height]="'4px'"></ng2-slim-loading-bar> -->
+<ng2-slim-loading-bar height="'4px'"></ng2-slim-loading-bar>
+
+
+<mat-sidenav-container class="example-container">
+
+<app-header (featureSelected)="onNavigate($event)"></app-header>
+
+  <div class="app-content">
+     <router-outlet></router-outlet>
+    </div>
+
+<!--
+
+
+<mat-sidenav-layout [class.m2app-dark]="isDarkTheme">
+  <div class="app-content">
+     <router-outlet></router-outlet>
+    </div>
+</mat-sidenav-layout>
+-->
+</mat-sidenav-container>
+

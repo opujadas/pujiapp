@@ -1,0 +1,22 @@
+.contenupost {
+	width: 90%;
+}
+
+.form-field {
+	display: block !important;
+}
+
+element {
+	border-radius: 5px  !important;
+	padding: 5px;
+	margin: 10px; 
+	border-color: #333333  !important; 
+	border-width: 1px  !important;
+	background-color: #F00;  
+	width: 120px;
+	position: float;
+}
+
+.element_infos {
+	color: #BBB; 
+}

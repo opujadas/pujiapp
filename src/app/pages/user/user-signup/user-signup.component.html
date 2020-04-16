@@ -1,0 +1,24 @@
+<h1>Inscription</h1>
+
+<form class="example-form" [formGroup]="myForm"  (ngSubmit)="onSubmit()">
+   <mat-form-field  class="example-full-width">      
+      <input matInput name="login" id="login" placeholder="Login (ex : BL******)"  formControlName="login" value="">
+    </mat-form-field><br>
+   <mat-form-field  class="example-full-width">      
+      <input matInput name="email" id="email" placeholder="E-mail"  formControlName="email" value="">
+    </mat-form-field><br>
+   <mat-form-field  class="example-full-width">      
+      <input type="password" matInput name="password" id="password" placeholder="Mot de passe"  formControlName="password" value="">
+    </mat-form-field>
+    <br>
+   <mat-form-field  class="example-full-width">      
+      <input type="password" matInput name="passwordConfirm" id="passwordConfirm" placeholder="Répéter Mot de passe"  formControlName="passwordConfirm" value="">
+    </mat-form-field>
+<br>
+
+        <button mat-button 
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="!myForm.valid">Inscription</button>
+    
+</form>

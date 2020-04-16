@@ -1,0 +1,14 @@
+<h1>Supprimer le category</h1>
+Attention !<br>
+Vous êtes sur le point de supprimer cette categorie :<br>
+<h2>{{data.category.name}}</h2><br>
+<br>
+Etes-vous sûr de vouloir le supprimer ?<br><br>
+
+
+        <button mat-button md-raised-button class="button-action" (click)="onNoClick()">
+          <i class="material-icons">cancel</i> NON (annuler)
+        </button>
+        <button mat-button md-raised-button class="button-danger" (click)="deleteCategoryConfirm(data.category)">
+          <i class="material-icons">delete_forever</i> OUI (supprimer)
+        </button>

@@ -1,0 +1,14 @@
+<h1>Supprimer le contact</h1>
+Attention !<br>
+Vous êtes sur le point de supprimer ce contact :<br>
+<h2>{{data.contact.prenom}} {{data.contact.nom}}</h2><br>
+<br>
+Etes-vous sûr de vouloir le supprimer ?<br><br>
+
+
+        <button mat-button md-raised-button class="button-action" (click)="onNoClick()">
+          <i class="material-icons">cancel</i> NON (annuler)
+        </button>
+        <button mat-button md-raised-button class="button-danger" (click)="deleteContactConfirm(data.contact)">
+          <i class="material-icons">delete_forever</i> OUI (supprimer)
+        </button>

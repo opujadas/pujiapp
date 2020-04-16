@@ -1,0 +1,93 @@
+      <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+
+
+
+  <div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column 
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+        -->
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.TAG.LIST.TABLE.ID.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element._id}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.TAG.LIST.TABLE.NAME.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="cat_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.TAG.LIST.TABLE.CATEGORY.LABEL' | translate }} </mat-header-cell>
+      <mat-cell  *matCellDef="let element"> 
+            <span *ngIf="(element.category !== undefined)">{{element.category.name}}</span>
+            <span *ngIf="(element.category === undefined)">-- Non définie --</span>
+      </mat-cell>
+      
+      
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="preview">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.TAG.LIST.TABLE.PREVIEW.LABEL' | translate }} </mat-header-cell>
+      <!-- <mat-cell *matCellDef="let element" [style.background]="element.cat_color">{{element.tag_name}}</mat-cell> -->
+      <mat-cell *matCellDef="let element"> <!-- On affiche le tag à partir de l'objet tagelement -->
+      
+            <span *ngIf="(element.category !== undefined)"><tagelement 
+          [label]="element.name"
+          [bgcolor]="element.category.color"
+        ></tagelement></span>
+            <span *ngIf="(element.category === undefined)"><tagelement 
+          [label]="element.name"
+        ></tagelement></span>
+        <!-- 
+        <tagelement 
+          [label]="element.name"
+          [bgcolor]="element.category.color"
+        ></tagelement> -->
+      </mat-cell>
+
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'PAGES.TAG.LIST.TABLE.ACTIONS.LABEL' | translate }} </mat-header-cell>
+      <mat-cell *matCellDef="let element"> 
+
+        <button mat-button md-raised-button class="button-action" (click)="editTag(element._id)">
+          <i class="material-icons">person_add</i> {{ 'PAGES.TAG.LIST.BT.EDIT' | translate }}
+        </button>
+
+        <button mat-button md-raised-button class="button-danger" (click)="deleteTag(element)">
+          <i class="material-icons">delete_forever</i> {{ 'PAGES.TAG.LIST.BT.DELETE' | translate }}
+        </button>
+
+      </mat-cell>
+    </ng-container>
+
+
+
+
+
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]">
+  </mat-paginator>  
+</div>

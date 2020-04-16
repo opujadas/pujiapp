@@ -1,0 +1,83 @@
+
+<div class="item item-3" fxFlex>
+
+<h1>{{view.name}}</h1> 
+
+Vue créée par {{view.user_id}} le {{view.created}}<br>
+Nb de tags : {{view.tags.length}}
+
+
+
+
+
+
+<div class="row">
+  <div class="col-md-8">
+<form  [formGroup]="editViewForm"  (ngSubmit)="onSubmit()">
+
+
+   <mat-form-field  class="example-full-width">      
+        <input matInput id="name" formControlName="name" placeholder="{{ 'PAGES.VIEW.ADD.FIELD.TITLE.PLACEHOLDER' | translate }}"  [(ngModel)]="view.name" required>
+    </mat-form-field><br>
+
+    <br>
+
+
+    <br>
+
+<div class="element"  dnd-droppable class="panel panel-info" (onDropSuccess)="addToTags($event)">
+
+    <div class="panel-heading">Déposez les tags ici pour filtrer</div>
+    <div class="panel-body">
+
+
+<div *ngIf="view.tags.length > 0">Tags : 
+<span *ngFor="let tag of view.tags">
+
+<tagelement 
+  [label]="tag.name"
+  [bgcolor]="tag.category.color"
+  [tag_id]="tag.id"
+  [view_id]="view.id"
+  (deleteTag)='deleteTag(tag.id)'
+></tagelement>
+
+</span>
+</div>
+
+  </div>
+</div>
+
+
+    <br>
+    <br>
+
+
+      <button     mat-button type="submit" 
+                  mat-raised-button 
+                  class="button-action"
+                  [disabled]="!editViewForm.valid">
+                  <i class="material-icons">update</i> {{ 'PAGES.VIEW.ADD.BT.ADD' | translate }}
+      </button>
+</form>
+  </div>
+  <div class="col-md-4">
+    <b>Tags</b><br>
+    <br>
+    XXXX résultats sont filtrés par cette vue<br>
+    <br>
+      <div *ngFor="let tag of tags; let i = index">
+          <div dnd-draggable [dragEnabled]="true"  [dragData]="tag"> 
+                   
+            <tagelement  
+              [label]="tag.name"
+              [bgcolor]="tag.category.color"
+            ></tagelement>
+                  
+          </div>
+      </div>    
+  </div>
+</div>
+
+</div>
+
