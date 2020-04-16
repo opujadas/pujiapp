@@ -83,7 +83,8 @@ export class TagAddComponent implements OnInit, OnDestroy  {
     let tag = new Tag(
       -1, 
       this.name,
-      this.category
+      this.category,
+      localStorage.getItem('user_id')
     );   
 
     return  this._dataService.addTag(tag)

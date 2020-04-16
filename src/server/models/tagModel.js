@@ -4,7 +4,8 @@ var mongoose = require('mongoose');
 var tagSchema = mongoose.Schema({
     name: 				{ type: String, required: true },
     create_date: 		{ type: Date, default: Date.now },
-    category: 			{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: false }
+    category: 			{ type: mongoose.Schema.Types.ObjectId, ref: 'Category', required: false },
+    user: 				{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false }
 });
 // Export Contact model
 var Tag = module.exports = mongoose.model('Tag', tagSchema);

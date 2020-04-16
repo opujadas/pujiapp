@@ -42,6 +42,8 @@ router.route('/categories')
 
 var tagController = require('../controllers/tagController');
 // Categories routes
+router.route('/tags/user/:user_id')
+    .get(tagController.index);
 router.route('/tags/:tag_id')
     .get(tagController.view)
     .delete(tagController.delete);

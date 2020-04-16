@@ -10,7 +10,7 @@ Tag = require('../../models/tagModel');
 exports.index = function (req, res) {
 
     // Tag.get(function (err, tags) { 
-    Tag.find({}, function(err, result) {
+    Tag.find({user: req.params.user_id}, function(err, result) {
 
        if (err) {
             res.json({
@@ -33,9 +33,10 @@ exports.index = function (req, res) {
 exports.new = function (req, res) {
 
     var tag = new Tag();
-    tag.name = req.body.name ? req.body.name : tag.name;
-    tag.color = req.body.color;
-    tag.category = req.body.category;
+    tag.name        = req.body.name ? req.body.name : tag.name;
+    tag.color       = req.body.color;
+    tag.category    = req.body.category;
+    tag.user        = req.body.user_id ? req.body.user_id : tag.user;
 
     // save the tag and check for errors
     tag.save(function (err) {

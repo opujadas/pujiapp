@@ -9,17 +9,6 @@ Categorie = require('../../models/categorieModel');
 // Handle index actions
 exports.index = function (req, res) {
 
-    console.log(req.params); 
-    console.log(req.body); 
-
-
-    var token = req.headers['x-access-token'];
-
-
-  console.log('HEADERS TOKEN : '); 
-  console.log(token);
-
-
     /* Categorie.get(function (err, categories) {   */
         Categorie.find({user: req.params.user_id}, function (err, categories) {    
         if (err) {

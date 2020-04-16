@@ -99,7 +99,7 @@ export class DataService
   /*********************************************************************** 
   *                         MESSAGES
   ***********************************************************************/
-
+/*
   getMessage(id)
   {
     return this.http.get(ServicesEndPoints.MESSAGES + '/' + id);
@@ -132,7 +132,7 @@ export class DataService
   deleteMessage(message_id : number) {
     return this.http.delete(ServicesEndPoints.MESSAGES + '/' + message_id);
   }  
-
+*/
   /*********************************************************************** 
   *                         VIEWS
   ***********************************************************************/
@@ -296,10 +296,17 @@ export class DataService
   *                         TAGS
   ***********************************************************************/
 
+/*
+  getCategories() {
+    console.log(ServicesEndPoints.CATEGORIES + '/user/' + localStorage.getItem('user_id')); 
+    return this.http.get(ServicesEndPoints.CATEGORIES + '/user/' + localStorage.getItem('user_id'));
+  }  
+
+*/
 
   getTags() {
-    console.log('Entré dans la fonction'); 
-      return this.http.get(ServicesEndPoints.TAGS);
+      console.log('Entré dans la fonction'); 
+      return this.http.get(ServicesEndPoints.TAGS+ '/user/' + localStorage.getItem('user_id'));
   }
 
   addTag(tag: Tag)  {
