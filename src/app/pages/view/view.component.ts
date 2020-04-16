@@ -49,7 +49,7 @@ export class ViewComponent implements OnInit, OnDestroy {
   //   constructor(id : number = -1, name: string = "", user_id: number = -1, parent_id : number = 0, tags : Tag[]) {
 
   private view : View = new View(-1, "", -1, 0, [], []);
-  private id : number; 
+  private id : string; 
   private elements : Element[]; 
   addPostForm: FormGroup; 
 
@@ -82,14 +82,15 @@ private title : string;
 
   ngOnInit() {
     console.log(this.route.snapshot); 
-    this.id = +this.route.snapshot.url[0].path; 
+    this.id = this.route.snapshot.url[0].path; 
     
     console.log('ID view compo : ' + this.id); 
 
     this.subscription = this.route.params
       .subscribe(
-        (params: Params) => {            
-            this.id = +params['idview'];
+        (params: Params) => {
+            console.log(params);             
+            this.id = params['idview'];
             // Dans tous les cas on initialise le formulaire
             console.log('Initialisation du form'); 
             this.refreshElementList(); 

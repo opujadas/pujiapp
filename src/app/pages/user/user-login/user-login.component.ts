@@ -51,7 +51,8 @@ export class UserLoginComponent implements OnInit {
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user_id', data.userid);
                 localStorage.setItem('username', data.username);
-                localStorage.setItem('user', data.user);
+                localStorage.setItem('email', data.email);
+                localStorage.setItem('rootview', data.rootview);
 
                 // Envoi d'un message aux users
                 //console.log('on logge in ' + data.username); 

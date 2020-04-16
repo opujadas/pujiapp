@@ -69,13 +69,16 @@ exports.login = function (req, res) {
                   else
                   {            
                       var token = jwt.sign({user: user}, '$2a$10$iP2XpIMll4pJKJsxS.430li.lreX8YW8wlMBYFpPHStO6XGvuscF2AS', {expiresIn: 10});
+console.log('user'); 
+                      console.log(user); 
                       res.status(200).json({
                           status: "success",
                           message: 'Successfully logged in',
                           token: token,
                           userid: user._id,
                           username: user.login,
-                          user: user                           
+                          email: user.email,
+                          rootview: user.rootview
                       });
                     
                   }                

@@ -14,12 +14,14 @@ import { TranslateService } from 'ng2-translate';
 export class HeaderComponent implements OnInit {
 
   userSigne : string; 
-    nombreUtilisateursConnectes : number; 
+  rootview : string; 
+  nombreUtilisateursConnectes : number; 
 
   constructor(private authService: AuthService, private router: Router, private socket: Socket) { }
 
   ngOnInit() {
   		this.userSigne = localStorage.getItem('userId');
+      this.rootview = localStorage.getItem('rootview');
 
       this.socket.on('getNbUsers', function (data) {
         // this.toastr.success(data, 'Success!');

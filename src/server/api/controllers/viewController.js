@@ -29,9 +29,24 @@ exports.index = function (req, res) {
 
 // Handle create view actions
 exports.new = function (req, res) {
+
+/*
+var viewSchema = mongoose.Schema({
+    name:       { type: String, required: true },
+    parent:     { type: mongoose.Schema.Types.ObjectId, ref: 'View', required: false },
+    user:       { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
+    create_date: { type: Date, default: Date.now },
+    update_date: { type: Date, default: Date.now },
+    is_rootview: { type: Boolean, required: true, default: false }
+*/
+
+    console.log('New view'); 
+    console.log(req.body);     
+
     var view = new View();
-    view.user_id = req.body.user_id ? req.body.user_id : view.user_id;
-    view.type = req.body.type ? req.body.type : view.type;
+    view.name = req.body.name ? req.body.name : view.name;
+    view.user = req.body.user_id ? req.body.user_id : view.user;
+    view.parent = req.body.parent_id ? req.body.parent_id : view.parent;
     view.tags = req.body.tags ? req.body.tags : view.tags;
     view.data = req.body.data ? req.body.data : view.data;
     // view.color = req.body.color;

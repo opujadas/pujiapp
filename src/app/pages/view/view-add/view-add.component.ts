@@ -17,7 +17,7 @@ import { View } from './../../../core/model/view/view.model';
 import { MessageSocket } from './../../../core/model/message-socket/message-socket.model';
 
 import { AppRoutingModule } from '../../../app-routing.module';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { Socket } from 'ng-socket-io';
 import { Subscription } from 'rxjs/Subscription';
@@ -35,9 +35,11 @@ export class ViewAddComponent implements OnInit, OnDestroy  {
   addViewForm: FormGroup; 
 
   private name : string; 
-  
+  private parent_id : string; 
   //private content : string; 
   private subscription: Subscription;
+  private subscriptionView: Subscription;
+  
   private selectableTags: any; 
   private selectedTags = []; 
 
@@ -48,7 +50,8 @@ export class ViewAddComponent implements OnInit, OnDestroy  {
       private slimLoadingBarService: SlimLoadingBarService, 
       public toastr: ToastsManager, 
       vcr: ViewContainerRef, 
-      private router: Router, 
+      private router: Router,
+      private route: ActivatedRoute,
       private socket: Socket,
       private _tagService: TagService,
       private _viewService: ViewService,
@@ -65,15 +68,33 @@ export class ViewAddComponent implements OnInit, OnDestroy  {
       /*, 
       'content': new FormControl(null, Validators.required) */
     });
+
+    console.log(this.route.snapshot); 
+    this.parent_id = this.route.snapshot.url[1].path; 
     
+    console.log('ID view compo : ' + this.parent_id); 
+
+/*
+    this.subscriptionView = this.route.params
+      .subscribe(
+        (params: Params) => {
+            console.log(params);             
+            this.parentid = params['parentid'];
+            // Dans tous les cas on initialise le formulaire
+            console.log('Initialisation du form'); 
+            this.refreshElementList(); 
+        });
+  */  
 
     // On charge les tags 
     this.subscription = this._tagService.getTags()
       .subscribe(data => {
         console.log('tags récupérés ');
         console.log(data);  
-          this.selectableTags = data; 
+        if (data.data){          
+          this.selectableTags = data.data; 
           this.toastr.success('Les tags sont chargés !', 'Success!');
+        }
           this.slimLoadingBarService.complete();  
     });
 
@@ -141,7 +162,7 @@ export class ViewAddComponent implements OnInit, OnDestroy  {
     //console.log(view); 
 
   // constructor(id : number = -1, name: string = "", user_id: number = -1, parent_id : number = 0, tags : Tag[]) {
-    let view = new View(-1, this.name, -1, 0, this.selectedTags, []); // type = 1 pour les Views 
+    let view = new View(-1, this.name, localStorage.getItem('user_id'), this.parent_id, this.selectedTags, []); // type = 1 pour les Views 
     console.log(view); 
 
     return  this._viewService.addView(view)

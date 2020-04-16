@@ -55,7 +55,7 @@ const appRoutes: Routes = [
 
   { path: 'views', component: ViewLayoutComponent, canActivate: [AuthGuard], children: [
       { path: 'elements', component: ElementListComponent, canActivate: [AuthGuard] },
-      { path: 'add', component: ViewAddComponent, canActivate: [AuthGuard] }, 
+      { path: 'add/:parentid', component: ViewAddComponent, canActivate: [AuthGuard] }, 
       /* { path: ':elementtypeid', component: PostListComponent, canActivate: [AuthGuard] } */
       { path: ':idview', component: ViewComponent, canActivate: [AuthGuard] }
   ] },  

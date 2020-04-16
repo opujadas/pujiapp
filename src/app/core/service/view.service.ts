@@ -79,7 +79,7 @@ export class ViewService {
         return this._dataService.updateView(view);
     }  
 
-    getViews(parent_id: number) {
+    getViews(parent_id: string) {
         console.log('elements  -> On choppe les vues filles de ' + parent_id); 
         return this._dataService.getViews(parent_id);
     }
@@ -89,7 +89,7 @@ export class ViewService {
         return this._dataService.getViewsForMenu(parent_id);
     }
 
-    getView(id: number) {
+    getView(id: string) {
         console.log('getView  -> On choppe la vue avec id ' + id); 
         // this.currentViewChanged.next(id);
         return this._dataService.getView(id); 

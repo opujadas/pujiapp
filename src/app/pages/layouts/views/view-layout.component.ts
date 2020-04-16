@@ -51,7 +51,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   private subscriptionGetCurrentView: Subscription;
   
 
-  private id : number; 
+  private id : string; 
   private view : View; 
 
   private tags: Tag[]; 
@@ -64,7 +64,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   private showDialogTrash : boolean = false; 
 
   rootViewHasChanged : any; 
-
+  rootview : string;
 
 
   constructor(/*private postService: PostService,
@@ -81,21 +81,21 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
               private _elementListService : ElementListService
               ){ 
 
+
+
+    this.rootview = localStorage.getItem('rootview');
+
     // this.refreshRootViewList();
     this.subscriptionGetCurrentView = this._viewService.getCurrentViewChanged().subscribe(data => { 
       console.log('CURRENT view');
       console.log(data);  
-      this.view = data;
-
-      
+      this.view = data;      
     }); 
 
 
-
-
-    this.subscriptionGetViews = this._viewService.getViews(0).subscribe((data : View[]) =>  {
-         //console.log('ICHIIII');  
-         //console.log(data); 
+    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe((data : View[]) =>  {
+         console.log('ICHIIII');  
+         console.log(data); 
         // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
           this.rootViews = data; 
           //console.log('Views => ');
@@ -237,17 +237,18 @@ moveToRecycleBin(event){
     // console.log('refreshTagList'); 
     // initialement on charge la liste des tags
     this.subscriptionGetTags = this._tagListService.getTags()
-      .subscribe((data : Tag[]) =>  {
-          
-        // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
-          this.tags = data; 
-          console.log('Tags => ');
-          console.log(this.tags);
+      .subscribe(data =>  {
+          if(data.data){
+          // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
+            this.tags = data.data; 
+            console.log('Tags => ');
+            console.log(this.tags);            
+          }
       });    
   } 
 
   refreshRootViewList(){
-    this.subscriptionGetViews = this._viewService.getViews(0).subscribe((data : View[]) =>  {
+    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe((data : View[]) =>  {
           
         // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
           this.rootViews = data; 

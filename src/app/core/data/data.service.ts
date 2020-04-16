@@ -143,6 +143,8 @@ export class DataService
   }
 
   addView(view: View)  {
+    console.log('Data addview'); 
+    console.log(view); 
     return this.http.post(ServicesEndPoints.VIEWS, view, { headers : new HttpHeaders().set('Content-Type', 'application/json')});
   }  
 
@@ -151,19 +153,19 @@ export class DataService
     return this.http.put(ServicesEndPoints.VIEWS, view,  { headers : new HttpHeaders().set('Content-Type', 'application/json')});
   }
 
-  getViews(parent_id: number){
+  getViews(parent_id: string){
       return this.http.get(ServicesEndPoints.VIEWS +  '/children/' + parent_id);
   } 
 
-  getViewsForMenu(parent_id: number) {
+  getViewsForMenu(parent_id: string) {
       return this.http.get(ServicesEndPoints.VIEWS +  '/childrenformenu/' + parent_id);
   }
 
-  getView(id: number) {
+  getView(id: string) {
       return this.http.get(ServicesEndPoints.VIEWS + '/' + id);         
   }
 
-  addTagToView(tag_id : number, view_id : number) {
+  addTagToView(tag_id : string, view_id : string) {
     let params = {};
     params['tag_id'] = tag_id;
     params['view_id'] = view_id;
@@ -171,7 +173,7 @@ export class DataService
   }
 
 
-  deleteTagFromView(tag_id : number, view_id : number) {
+  deleteTagFromView(tag_id : string, view_id : string) {
     let params = {};
     params['tag_id'] = tag_id;
     params['view_id'] = view_id;

@@ -89,8 +89,9 @@
 
     <b>VUES FILTREES</b><br>
     <br>
+
+    <a routerLink="/views/{{rootview}}">View Root</a> <a routerLink="/views/add/{{rootview}}"><span class="badge">Nouvelle vue</span></a><br>
     <!--
-    <a routerLink="/views/0">View Root</a> <a routerLink="/views/add"><span class="badge">Nouvelle vue</span></a><br>
     - Affichage des enfants<br>
       <span *ngFor="let view of rootViews; let i = index">
 
@@ -152,7 +153,6 @@
 <div id="panelTags" ngDraggable [handle]="myHandle" class="mypanel" *ngIf="showDialogTags">
     <div #myHandle class="drag-block-handle" id="mydivheader">Liste des tags <a  (click)="hideDialogSelectorTags()">[FERMER]</a></div>
 
-   <!--   
       <div *ngFor="let tag of tags; let i = index">
           <div dnd-draggable [dragEnabled]="true"  [dragData]="tag"> 
                    
@@ -163,7 +163,7 @@
                   
           </div>
       </div>
--->
+
 </div>
 
     <div id="panelTrash" ngDraggable [handle]="myHandle" class="mypanel" *ngIf="showDialogTrash">
