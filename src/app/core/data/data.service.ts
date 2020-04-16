@@ -39,7 +39,7 @@ export class DataService
       if (localStorage.getItem('token'))
         this.url_token = 'token=' + localStorage.getItem('token');
       if (localStorage.getItem('user_id'))
-        this.url_userid = 'user_id=' + localStorage.getItem('user_id');
+        this.url_userid = 'userid=' + localStorage.getItem('user_id');
   }
 
 
@@ -74,9 +74,8 @@ export class DataService
   }
 
   getCategories() {
-
-    console.log(ServicesEndPoints.CATEGORIES + '?' + this.url_token + '&' + this.url_userid); 
-    return this.http.get(ServicesEndPoints.CATEGORIES + '?' + this.url_token + '&' + this.url_userid);
+    console.log(ServicesEndPoints.CATEGORIES + '/user/' + localStorage.getItem('user_id')); 
+    return this.http.get(ServicesEndPoints.CATEGORIES + '/user/' + localStorage.getItem('user_id'));
   }  
 
   getCategory(id: string) {

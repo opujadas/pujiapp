@@ -30,11 +30,12 @@ router.route('/contacts/:contact_id')
 // Import contact controller
 var categorieController = require('../controllers/categorieController');
 // Categories routes
+router.route('/categories/user/:user_id')
+    .get(categorieController.index);
 router.route('/categories/:category_id')
     .get(categorieController.view)
     .delete(categorieController.delete);
-router.route('/categories')
-    .get(categorieController.index)
+router.route('/categories')    
     .post(categorieController.new)
     .put(categorieController.update);
 
