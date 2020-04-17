@@ -1,7 +1,7 @@
 <div class="item item-3" fxFlex>
-
+TEST ==> {{view.name}}
   <!-- vue avec un ID défini -->
-  <div id="infoview" *ngIf="view.id > 0">
+  <div id="infoview" *ngIf="!view.is_rootview">
      <h1 (click)="editView(view)">{{view.name}}</h1> 
       
       <div *ngIf="view.tags.length > 0">Tags : 
@@ -20,7 +20,7 @@
   </div>
 
   <!-- cas de la vue root -->
-  <div id="infoview" *ngIf="view.id == 0">
+  <div id="infoview" *ngIf="view.is_rootview">
     <h1>{{view.name}}</h1>
   </div> 
 <hr>

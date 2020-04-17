@@ -2,9 +2,10 @@
 var mongoose = require('mongoose');
 // Setup schema
 var viewSchema = mongoose.Schema({
-    name: 		{ type: String, required: true },
-    parent: 	{ type: mongoose.Schema.Types.ObjectId, ref: 'View', required: false },
-    user: 		{ type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
+    name: 		 { type: String, required: true },
+    parent: 	 { type: mongoose.Schema.Types.ObjectId, ref: 'View', required: false },
+    user: 		 { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: false },
+   	tags: 		 { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', required: false }]},
     create_date: { type: Date, default: Date.now },
     update_date: { type: Date, default: Date.now },
     is_rootview: { type: Boolean, required: true, default: false }

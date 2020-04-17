@@ -73,6 +73,8 @@ router.route('/elements')
 
 var viewController = require('../controllers/viewController');
 // View routes
+router.route('/views/children/:parent_id')
+    .get(viewController.viewchildren);
 router.route('/views/:view_id')
     .get(viewController.view)
     .delete(viewController.delete);

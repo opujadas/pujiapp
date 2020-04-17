@@ -123,13 +123,14 @@ private title : string;
     console.log('refreshElementList');
     this.subscriptionView = this._viewService.getView(this.id)
       .subscribe((data: View) => {
-          console.log(data); 
-          this.view = data;
-          this.elements = data.elements; 
+          console.log(data);
+          if(data.data){
+            this.view = data.data;
+            this.elements = data.data.elements; 
 
-          console.log('INFO au service que la vue a changé'); 
-          this.subscriptionViewChanged = this._viewService.setCurrentView(data); 
-
+            console.log('INFO au service que la vue a changé'); 
+            this.subscriptionViewChanged = this._viewService.setCurrentView(data.data);             
+          } 
 
           // this.toastr.success('Les sites sont chargés !', 'Success!');
           this.slimLoadingBarService.complete();  

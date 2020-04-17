@@ -99,6 +99,32 @@ exports.viewbytype = function (req, res) {
     }
 };
 
+exports.viewchildren = function (req, res) {
+    console.log('viewchildren'); 
+    console.log(req.params); 
+    console.log(req.params.parent_id); 
+
+
+    if(req.params.parent_id){
+        View.find({parent: req.params.parent_id}, function (err, views) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
+            else {
+            res.json({
+                status: "success",
+                message: 'View details loading..',
+                data: views
+            });
+        /* }}).populate({path: 'tags', model : Tags, populate: {path: category, model : Category}}); */
+    }});
+    }
+};
+
+
 
 
 // Handle view view info

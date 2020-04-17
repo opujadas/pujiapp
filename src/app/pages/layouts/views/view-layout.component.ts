@@ -55,7 +55,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   private view : View; 
 
   private tags: Tag[]; 
-  private rootViews : View[]; 
+  private rootViews : any[] = []; 
 
   transferData: Object = {id: 1, msg: 'Hello'};
   transferData2: Object = {id: 2, msg: 'FFHello'};
@@ -84,6 +84,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
 
 
     this.rootview = localStorage.getItem('rootview');
+    console.log('Rootview extracted : ' + this.rootview); 
 
     // this.refreshRootViewList();
     this.subscriptionGetCurrentView = this._viewService.getCurrentViewChanged().subscribe(data => { 
@@ -93,11 +94,15 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
     }); 
 
 
-    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe((data : View[]) =>  {
-         console.log('ICHIIII');  
+    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe(data =>  {
+         console.log('Recup des filles');  
          console.log(data); 
+         if (data.data){
+          this.rootViews = data.data; 
+          console.log('this rootViews'); 
+          console.log(this.rootViews); 
+         }
         // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
-          this.rootViews = data; 
           //console.log('Views => ');
           //console.log(this.rootViews);
       });  
@@ -248,14 +253,17 @@ moveToRecycleBin(event){
   } 
 
   refreshRootViewList(){
-    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe((data : View[]) =>  {
-          
-        // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
-          this.rootViews = data; 
-          console.log('Views => ');
-          console.log(this.rootViews);
-      });    
- 
+    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview'))
+        .subscribe(data => {
+            console.log('refresh ?');           
+            if(data.data){
+              console.log(data.data);           
+              // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
+              this.rootViews = data.data; 
+              console.log('Views => ');
+              console.log(this.rootViews);              
+            }
+      });   
   }
 
   showDialogSelectorTags() : void {       
