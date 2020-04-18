@@ -84,7 +84,7 @@ export class ViewService {
         return this._dataService.getViews(parent_id);
     }
 
-    getViewsForMenu(parent_id: number) {
+    getViewsForMenu(parent_id: string) {
         console.log('elements  -> On choppe les vues filles de ' + parent_id); 
         return this._dataService.getViewsForMenu(parent_id);
     }
@@ -107,7 +107,7 @@ export class ViewService {
         return this._dataService.addTagToView(tagid, viewid);
     }
 
-    deleteTagFromView(tagid: number, viewid: number) {
+    deleteTagFromView(tagid: string, viewid: string) {
         console.log('View service : on va supprimer le tag ' + tagid + ' du View ' + viewid);
         return this._dataService.deleteTagFromView(tagid, viewid);
     }

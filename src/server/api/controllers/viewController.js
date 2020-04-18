@@ -70,6 +70,7 @@ var viewSchema = mongoose.Schema({
 };
 
 
+
 // Handle view views by type 
 
 exports.viewbytype = function (req, res) {

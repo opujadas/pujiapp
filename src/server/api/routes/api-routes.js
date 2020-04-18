@@ -78,6 +78,10 @@ router.route('/views/children/:parent_id')
 router.route('/views/:view_id')
     .get(viewController.view)
     .delete(viewController.delete);
+router.route('/views/addtag')
+    .post(viewController.addtag);
+router.route('/views/deletetag')
+    .put(viewController.deletetag);
 router.route('/views')
     .get(viewController.index)
     .post(viewController.new)

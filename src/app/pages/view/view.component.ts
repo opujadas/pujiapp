@@ -288,12 +288,14 @@ export class DialogEditView implements OnDestroy  {
     });
 
     this.subscriptionGetTags = this._tagListService.getTags()
-      .subscribe((data : Tag[]) =>  {
-          
-        // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
-          this.tags = data; 
-          console.log('Tags => ');
-          console.log(this.tags);
+      .subscribe(data =>  {
+          if (data.data){
+          // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
+            this.tags = data.data; 
+            console.log('Tags => ');
+            console.log(this.tags);
+
+          }
       });    
 
   }
@@ -339,16 +341,16 @@ export class DialogEditView implements OnDestroy  {
 
       console.log(event);
       if(event.dragData.ref == 'tag'){      
-        console.log('Ajouter aux tags de la vue  : ' + this.view.id);
+        console.log('Ajouter aux tags de la vue  : ' + this.view._id);
 
         console.log('Add tag to view !!'); 
         console.log(event.dragData); 
         console.log(event.dragData.id); 
-        console.log('On ajoute ' + event.dragData.id + ' au view ' + this.view.id); 
+        console.log('On ajoute ' + event.dragData.id + ' au view ' + this.view._id); 
 
 
         // On met à jour la BDD pour associer le event.dragData au post
-        this.subscriptionAddTag = this._viewService.addTagToView(event.dragData.id, this.view.id)
+        this.subscriptionAddTag = this._viewService.addTagToView(event.dragData._id, this.view._id)
                                 .subscribe(data => {
                                     console.log(data); 
                                 }); 
@@ -358,9 +360,9 @@ export class DialogEditView implements OnDestroy  {
 
         console.log('On va chercher dans le tag dans les tags de element'); 
         console.log(this.view.tags); 
-        console.log(event.dragData.id); 
+        console.log(event.dragData._id); 
 
-        if ((this.view.tags).findIndex(x => x.id == event.dragData.id) == -1)
+        if ((this.view.tags).findIndex(x => x._id == event.dragData._id) == -1)
           this.view.tags.push(event.dragData);      
       }
       else {
@@ -374,18 +376,20 @@ export class DialogEditView implements OnDestroy  {
   */
 
   deleteTag(event){
-    this.subscriptionDeleteTag = this._viewService.deleteTagFromView(event, this.view.id)
+    console.log('On va supprimer un tag de la liste des tags de la vue : '); 
+    console.log(this.view._id); 
+    this.subscriptionDeleteTag = this._viewService.deleteTagFromView(event, this.view._id)
                         .subscribe(data => {
                             console.log(data); 
                         }); 
 
       console.log(); 
-      let index = (this.view.tags).findIndex(x => x.id == event); 
+      let index = (this.view.tags).findIndex(x => x._id == event); 
       if (index == -1){
         console.log('chaine non trouvée');
       } else {
          console.log('index trouvé : ');
-         this.view.tags.splice( ((this.view.tags).findIndex(x => x.id == event)), 1); 
+         this.view.tags.splice( ((this.view.tags).findIndex(x => x._id == event)), 1); 
       }     
   }
 

@@ -107,6 +107,7 @@ export class ViewAddComponent implements OnInit, OnDestroy  {
 
     console.log('dragData');
     console.log(dData.dragData);
+    console.log(index);
      
     let tag: Tag = dData.dragData; 
     //tag = dragData[0].dragData; 
@@ -117,7 +118,7 @@ export class ViewAddComponent implements OnInit, OnDestroy  {
 
     this.selectableTags.splice(index, 1);
 
-      if ((this.selectedTags).findIndex(x => x.id == tag.id) == -1)
+      if ((this.selectedTags).findIndex(x => x._id == tag._id) == -1)
         this.selectedTags.push(tag);
 
     console.log('Selectable tags : '); 

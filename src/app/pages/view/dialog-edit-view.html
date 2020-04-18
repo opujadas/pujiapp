@@ -37,9 +37,9 @@ Nb de tags : {{view.tags.length}}
 <tagelement 
   [label]="tag.name"
   [bgcolor]="tag.category.color"
-  [tag_id]="tag.id"
-  [view_id]="view.id"
-  (deleteTag)='deleteTag(tag.id)'
+  [tag_id]="tag._id"
+  [view_id]="view._id"
+  (deleteTag)='deleteTag(tag._id)'
 ></tagelement>
 
 </span>
@@ -70,6 +70,7 @@ Nb de tags : {{view.tags.length}}
           <div dnd-draggable [dragEnabled]="true"  [dragData]="tag"> 
                    
             <tagelement  
+              ref="tag"
               [label]="tag.name"
               [bgcolor]="tag.category.color"
             ></tagelement>
