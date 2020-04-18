@@ -44,11 +44,12 @@ export class ViewComponent implements OnInit, OnDestroy {
   private subscriptionView : Subscription; 
   private subscriptionViewChanged : Subscription; 
   private subscriptionElementDeleted : Subscription; 
-  private subscriptionViewTagsChanged : Subscription; 
+  private subscriptionViewTagsChanged : Subscription;
+  private subscriptionElements : Subscription;  
 
   //   constructor(id : number = -1, name: string = "", user_id: number = -1, parent_id : number = 0, tags : Tag[]) {
 
-  private view : View = new View(-1, "", -1, 0, [], []);
+  private view : View = new View(-1, localStorage.getItem('user_id'), -1, 0, [], []);
   private id : string; 
   private elements : Element[]; 
   addPostForm: FormGroup; 
@@ -122,7 +123,7 @@ private title : string;
   refreshElementList(){
     console.log('refreshElementList');
     this.subscriptionView = this._viewService.getView(this.id)
-      .subscribe((data: View) => {
+      .subscribe(data => {
           console.log(data);
           if(data.data){
             this.view = data.data;
@@ -155,14 +156,15 @@ private title : string;
     console.log(post); 
 
     //constructor(id : number = -1, user_id: number = 1, tags : Tag[], type, data : {}) {
-    let element = new Element(-1, 9999, this.view['tags'], 1, post); // type = 1 pour les posts 
+    let element = new Element(-1, localStorage.getItem('user_id'), this.view['tags'], "post", post); // type = 1 pour les posts 
     console.log('Element'); 
     console.log(element); 
 
     return  this._elementService.addElement(element)
-        .subscribe((data: Element) => {
+        .subscribe(data => {
+          if (data.data){
             console.log('retous du addElement');
-            console.log(data);  
+            console.log(data.data);  
 
             // On toaste pour l'utilisateur en cours
             this._translate.get('TOASTER.POST.ADD.SUCCESS').subscribe((res: string) => {
@@ -178,12 +180,13 @@ private title : string;
               });    
 
             // On ajoute l'élément à la liste en cours (vue root ou pas c'est pareil)
-            this.elements.unshift(data); 
+            this.elements.unshift(data.data); 
 
             console.log(this.elements); 
 
             // On vide le formulaire
-            this.addPostForm.reset(); 
+            this.addPostForm.reset();             
+          }
           },
           error => console.log("Error: ", error),
           () => {
@@ -306,6 +309,17 @@ export class DialogEditView implements OnDestroy  {
     console.log(this.view);
     console.log('Elément updaté ?'); 
     console.log(this.editViewForm); 
+    console.log('Nom vue : ' + this.editViewForm.value.name);
+/*
+    console.log('Title saisi : ' + this.editCategoryForm.value.name);
+    console.log('Color saisi : ' + this.editCategoryForm.value.color);
+  
+    this.name = this.editCategoryForm.value.name;
+*/
+    this.view.name = this.editViewForm.value.name;
+console.log('this.view'); 
+    console.log(this.view); 
+
 
     // On met à jour la BDD pour associer le event.dragData au View
     this.subscriptionUpdate = this._viewService.updateView(this.view)

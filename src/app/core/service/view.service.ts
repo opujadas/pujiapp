@@ -73,9 +73,11 @@ export class ViewService {
 
     updateView(view: View)  {
         // On informe qu'on va devoir reloader les elements, puisque potentiellement des tags ont changé pour cette vue
-       this.viewTagsChanged.next(view);
+       // this.viewTagsChanged.next(view);
  
-        console.log('vue  -> On choppe les vues filles de ' + view.id); 
+        console.log('Update de la vue ' + view.id); 
+        console.log('Update de la vue ' + view._id); 
+        console.log(view); 
         return this._dataService.updateView(view);
     }  
 
@@ -104,11 +106,14 @@ export class ViewService {
 
     addTagToView(tagid: number, viewid: number) {
         console.log('Post service : on va ajouter le tag ' + tagid + ' au View ' + viewid);
+        // this.viewTagsChanged.next(view);
         return this._dataService.addTagToView(tagid, viewid);
     }
 
     deleteTagFromView(tagid: string, viewid: string) {
+
         console.log('View service : on va supprimer le tag ' + tagid + ' du View ' + viewid);
+        // this.viewTagsChanged.next(view);
         return this._dataService.deleteTagFromView(tagid, viewid);
     }
 /*

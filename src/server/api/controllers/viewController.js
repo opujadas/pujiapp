@@ -140,11 +140,27 @@ exports.view = function (req, res) {
                 });
             }
             else {
-                res.json({
-                    status: "success",
-                    message: 'View details loading..',
-                    data: view
-                });            
+
+                console.log('OK, on recup les elements de la vue ' + req.params.view_id); 
+                console.log('Vue : '); 
+                console.log(view); 
+                console.log(view.tags); 
+
+
+                Element.find({'tags._id' : { $in: view.tags } }, function (errelements, elements) {
+                    console.log('Found elements : '); 
+                    console.log(elements); 
+                    view.elements = elements; 
+
+                    res.json({
+                        status: "success",
+                        message: 'View details loading..',
+                        data: view
+                    });            
+                });
+
+
+
             }
         }).populate({
         path : 'tags', 
@@ -228,8 +244,16 @@ exports.deletetag = function (req, res) {
 // Handle update view info
 exports.update = function (req, res) {  
     
-    if (req.body && req.body.view && req.body.view.id){
-        View.findById(req.body.view.id, function (err, view) {
+        console.log('UPDATE View'); 
+        console.log(req.body); 
+
+
+//         view.name = req.body.name ? req.body.name : view.name;
+
+
+    if (req.body && req.body._id){
+
+        View.findById(req.body._id, function (err, view) {
             if (err) {
                 res.json({
                     status: "error",
@@ -237,7 +261,7 @@ exports.update = function (req, res) {
                 });
             }
             else {
-                view.data = req.body.view.data ? req.body.view.data : view.data;
+                view.name = req.body.name ? req.body.name : view.name;
                 // save the view and check for errors
                 view.save(function (err) {
                     if (err)

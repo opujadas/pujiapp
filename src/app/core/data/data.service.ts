@@ -149,7 +149,7 @@ export class DataService
   }  
 
   updateView(view : View){
-    console.log('vue  -> On choppe les vues filles de ' + view.id); 
+    console.log('vue  -> update de ' + view._id); 
     return this.http.put(ServicesEndPoints.VIEWS, view,  { headers : new HttpHeaders().set('Content-Type', 'application/json')});
   }
 
