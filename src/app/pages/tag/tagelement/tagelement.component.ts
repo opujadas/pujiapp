@@ -34,19 +34,19 @@ export class TagelementComponent
   bgcolor : string = "#DDDDDD";
 
   @Input()
-  element_id : number = 0;
+  element_id : string = 0;
 
   @Input()
-  view_id : number = 0;
+  view_id : string = 0;
 
   @Input()
-  tag_id : number = 0;
+  tag_id : string = 0;
 
   @Input()
   show_delete_action : boolean = true; 
 
   @Output() 
-  deleteTag : EventEmitter<number> = new EventEmitter<number>();
+  deleteTag : EventEmitter<string> = new EventEmitter<string>();
 
 
 

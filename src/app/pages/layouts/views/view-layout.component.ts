@@ -315,8 +315,9 @@ export class DialogAddChildView implements OnDestroy  {
   // param : any; // titre du View à supprimer
   elementBackup : Element; 
   tags: Tag[]; 
-  private parentView : View = new View(-1, "", -1, 0, [], []);
-  private newView : View = new View(-1, "", -1, 0, [], []);
+  // let view = new View(-1, this.name, localStorage.getItem('user_id'), this.parent_id, this.selectedTags, []); // type = 1 pour les Views 
+  private parentView : View = new View('-1', '', localStorage.getItem('user_id'), '0', [], []);
+  private newView : View = new View('-1', '', localStorage.getItem('user_id'), '0', [], []);
 
   private childname : string = ''; 
 
@@ -339,15 +340,17 @@ export class DialogAddChildView implements OnDestroy  {
     // if (element.data.title) this.oldtitle = element.data.title; 
     // if (element.data.content) this.oldcontent = element.data.content; 
 
-    this.subscriptionView = this._viewService.getView(view.id)
-      .subscribe((data: View) => {
+    this.subscriptionView = this._viewService.getView(view._id)
+      .subscribe(data => {
           console.log(data); 
-          this.parentView = data;
-          this.newView.parent_id = this.parentView.id; 
-          console.log('new View : ');
-          console.log(this.newView); 
-          console.log('PARENT'); 
-          console.log(this.parentView); 
+          if (data.data){
+            this.parentView = data.data;
+            this.newView.parent_id = this.parentView._id; 
+            console.log('new View : ');
+            console.log(this.newView); 
+            console.log('PARENT'); 
+            console.log(this.parentView);             
+          }
           //this.tags = data.tags; 
           // this.toastr.success('Les sites sont chargés !', 'Success!');
         });            
@@ -365,20 +368,21 @@ export class DialogAddChildView implements OnDestroy  {
     });
 
     this.subscriptionGetTags = this._tagListService.getTags()
-      .subscribe((data : Tag[]) =>  {
-          
-        // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
-          this.tags = data; 
-          console.log('Tags => ');
-          console.log(this.tags);
+      .subscribe(data =>  {
+          if (data.data){          
+          // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
+            this.tags = data.data; 
+            console.log('Tags => ');
+            console.log(this.tags);
 
-          // On va supprimer les tags de la vue mère qu'on ne puisse pas les sélectionner
-          for(var i=0; i<this.parentView.tags.length; i++){
-            console.log('On retire le tag ' + this.parentView.tags[i]['id']);
-            var index = (this.tags).findIndex(x => x.id == this.parentView.tags[i]['id']);
-            console.log(index); 
-            
-            this.tags.splice(index, 1);
+            // On va supprimer les tags de la vue mère qu'on ne puisse pas les sélectionner
+            for(var i=0; i<this.parentView.tags.length; i++){
+              console.log('On retire le tag ' + this.parentView.tags[i]['_id']);
+              var index = (this.tags).findIndex(x => x._id == this.parentView.tags[i]['_id']);
+              console.log(index); 
+              
+              this.tags.splice(index, 1);
+            }
           }
 
 
