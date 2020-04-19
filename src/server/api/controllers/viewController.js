@@ -140,14 +140,29 @@ exports.view = function (req, res) {
                 });
             }
             else {
-
                 console.log('OK, on recup les elements de la vue ' + req.params.view_id); 
                 console.log('Vue : '); 
                 console.log(view); 
                 console.log(view.tags); 
 
+                var vuetagsID = []; 
+                for(i=0; i<view.tags.length; i++){
+                    vuetagsID[i] = view.tags[i]._id;
+                }
 
-                Element.find({'tags._id' : { $in: view.tags } }, function (errelements, elements) {
+                console.log('view.tags : '); 
+                console.log(vuetagsID); 
+/*
+        var sql = 'SELECT el.id, el.created, el.trash, el.typeelement_id FROM elements el 
+        JOIN elements_a_tags eat ON eat.element_id = el.id 
+        AND eat.tag_id IN ( SELECT DISTINCT tag_id FROM views_a_tags ta WHERE ta.view_id = ' + req.params.id + ' ) 
+        GROUP BY el.id 
+        HAVING COUNT( DISTINCT eat.tag_id ) = (SELECT COUNT(tag_id) as total FROM views_a_tags WHERE view_id = ' + req.params.id + ') 
+        AND el.trash=0 
+        ORDER BY el.id DESC';
+*/
+                /* Element.find({'tags._id' : { $in: ['5e9b4d46f4ab6549c0ec2cf0'] } }, function (errelements, elements) { */
+                    Element.find({tags : { $all: vuetagsID }}, function (errelements, elements) { 
                     console.log('Found elements : '); 
                     console.log(elements); 
                     view.elements = elements; 
@@ -158,9 +173,6 @@ exports.view = function (req, res) {
                         data: view
                     });            
                 });
-
-
-
             }
         }).populate({
         path : 'tags', 
