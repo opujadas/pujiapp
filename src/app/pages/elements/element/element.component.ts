@@ -113,16 +113,16 @@ export class ElementComponent  implements OnDestroy {
 
       console.log(event);
       if(event.dragData.ref == 'tag'){      
-        console.log('Ajouter aux tags de element : ' + this.element.id);
+        console.log('Ajouter aux tags de element : ' + this.element._id);
 
         console.log('Add tag to element !!'); 
         console.log(event.dragData); 
-        console.log(event.dragData.id); 
-        console.log('On ajoute ' + event.dragData.id + ' au element ' + this.element.id); 
+        console.log(event.dragData._id); 
+        console.log('On ajoute ' + event.dragData._id + ' au element ' + this.element._id); 
 
 
         // On met à jour la BDD pour associer le event.dragData au post
-        this.subscriptionAddTag = this._elementService.addTagToElement(event.dragData.id, this.element.id)
+        this.subscriptionAddTag = this._elementService.addTagToElement(event.dragData._id, this.element._id)
                                 .subscribe(data => {
                                     console.log(data); 
                                 }); 
@@ -132,9 +132,9 @@ export class ElementComponent  implements OnDestroy {
 
         console.log('On va chercher dans le tag dans les tags de element'); 
         console.log(this.element.tags); 
-        console.log(event.dragData.id); 
+        console.log(event.dragData._id); 
 
-        if ((this.element.tags).findIndex(x => x.id == event.dragData.id) == -1)
+        if ((this.element.tags).findIndex(x => x.id == event.dragData._id) == -1)
           this.element.tags.push(event.dragData);      
       }
       else {

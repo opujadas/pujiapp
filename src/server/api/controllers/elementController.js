@@ -260,9 +260,9 @@ exports.addtag = function (req, res) {
                 path: 'category', 
                 model : Categorie
             })
-        }).exec(function(err, elements) {
+        }).exec(function(err, element) {
                   console.log('Elements with tags ?');
-                  console.log(elements);  
+                  console.log(element);  
                   //elements = elements.filter(function(user) {
             if (err) {
                 res.json({
@@ -281,7 +281,7 @@ exports.addtag = function (req, res) {
                         res.json({
                             status: "success",
                             message: 'Element Info updated',
-                            data: elements
+                            data: element
                         });
                     });                    
                  };                    
