@@ -148,16 +148,17 @@ private title : string;
   getCurrentViewElements(){
     console.log('getCurrentViewElements');
 
+    var vuetagsID = this.view.tags; 
 
-    console.log('creation tableau de tags');
+/*    console.log('creation tableau de tags');
     var vuetagsID = []; 
     for(var i=0; i<this.view.tags.length; i++){
-        vuetagsID[i] = this.view.tags[i]._id;
+        vuetagsID[i] = this.view.tags;
     }
 
     console.log('view.tags : '); 
     console.log(vuetagsID); 
-
+*/
     this.subscriptionElements = this._elementService.getElementsWithTags(vuetagsID)
       .subscribe(data => {
           
@@ -165,10 +166,9 @@ private title : string;
             console.log(data.data);
             this.elements = data.data; 
             console.log(this.elements); 
+            this.slimLoadingBarService.complete();  
           } 
 
-          // this.toastr.success('Les sites sont chargés !', 'Success!');
-          this.slimLoadingBarService.complete();  
         });           
   }
 

@@ -69,6 +69,7 @@ exports.getElementsWithTags = function (req, res) {
 
         console.log('params ok'); 
         console.log(req.body.tagIdList); 
+
 // tagIdList
 /*
                     Element.find({tags : { $all: vuetagsID }}, function (errelements, elements) { 
@@ -85,23 +86,39 @@ exports.getElementsWithTags = function (req, res) {
                         });            
 */
 
-        Element.find({tags: { $all: req.body.tagIdList }}, function (err, elements) {
-            if (err) {
-                res.json({
-                    status: "error",
-                    message: err,
-                });
-            }
-            else {
-            console.log('RES'); 
-            console.log(elements); 
-            res.json({
-                status: "success",
-                message: 'Element details loading..',
-                data: elements
-            });
-        /* }}).populate({path: 'tags', model : Tags, populate: {path: category, model : Category}}); */
-        }}); // .populate({path: 'tags', model : Tags, populate: {path: category, model : Category}}); 
+        Element.find({tags: { $all: req.body.tagIdList }}).populate({
+            path: 'tags', 
+            model : Tag, 
+            populate: ({
+                path: 'category', 
+                model : Categorie
+            })
+        }).exec(function(err, elements) {
+                  console.log('Elements with tags ?');
+                  console.log(elements);  
+                  //elements = elements.filter(function(user) {
+                  
+                        res.json({
+                            status: "success",
+                            message: 'View details loading..',
+                            data: elements
+                        });                  
+                    //});
+                });  
+/*
+Users.find().populate({
+  path: 'email',
+  match: {
+    type: 'Gmail'
+  }
+}).exec(function(err, users) {
+  users = users.filter(function(user) {
+    return user.email; // return only users with email matching 'type: "Gmail"' query
+  });
+});
+*/
+
+
     }};
 
 

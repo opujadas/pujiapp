@@ -188,7 +188,6 @@ exports.view = function (req, res) {
     }
 };
 
-
 // Handle update view info
 exports.addtag = function (req, res) {  
     if (req.body && req.body.tag_id && req.body.view_id){       
