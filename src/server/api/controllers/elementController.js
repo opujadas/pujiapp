@@ -39,7 +39,7 @@ exports.new = function (req, res) {
     categorie.user = req.body.user_id ? req.body.user_id : categorie.user;
     console.log(categorie); 
 */
-    // save the element and check for errors
+
     element.save(function (err) {
         if (err) {
             res.json({
@@ -48,11 +48,29 @@ exports.new = function (req, res) {
             });
         } 
         else {
-            res.json({
-            status: "success",
-            message: 'New element created!',
-            data: element
-            });
+            console.log('element._id'); 
+            console.log(element._id); 
+
+            Element.findById(element._id).populate({
+                path: 'tags', 
+                model : Tag, 
+                populate: ({
+                    path: 'category', 
+                    model : Categorie
+                })
+            }).exec(function(err, fullElement) {
+                  console.log('Elements with tags ?');
+                  console.log(fullElement);  
+                  //elements = elements.filter(function(user) {
+                  
+                        res.json({
+                            status: "success",
+                            message: 'View details loading..',
+                            data: fullElement
+                        });                  
+                    //});
+                });
+
         }
     });
 };
@@ -189,7 +207,12 @@ exports.view = function (req, res) {
 };
 
 
+
+
+
+
 // Handle update element info
+/*
 exports.addtag = function (req, res) {  
     if (req.body && req.body.tag_id && req.body.element_id){       
         Element.findById(req.body.element_id, function (err, element) {            
@@ -215,9 +238,59 @@ exports.addtag = function (req, res) {
                     });                    
                 }
             }
-        });
+        }).populate({
+            path: 'tags', 
+            model : Tag, 
+            populate: ({
+                path: 'category', 
+                model : Categorie
+            })
+    });
     }
 };
+*/
+
+exports.addtag = function (req, res) {  
+    if (req.body && req.body.tag_id && req.body.element_id){       
+
+        Element.findById(req.body.element_id).populate({
+            path: 'tags', 
+            model : Tag, 
+            populate: ({
+                path: 'category', 
+                model : Categorie
+            })
+        }).exec(function(err, elements) {
+                  console.log('Elements with tags ?');
+                  console.log(elements);  
+                  //elements = elements.filter(function(user) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
+            else {
+                if((element.tags).indexOf(req.body.tag_id) == -1){
+                    element.tags.push(req.body.tag_id);
+
+                    // save the element and check for errors
+                    element.save(function (err) {
+                        if (err)
+                            res.json(err);
+                        res.json({
+                            status: "success",
+                            message: 'Element Info updated',
+                            data: elements
+                        });
+                    });                    
+                 };                    
+                   
+            }                  
+        });
+    }
+};                
+
 
 
 // Handle update element info
