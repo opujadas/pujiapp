@@ -56,18 +56,19 @@ export class ElementComponent  implements OnDestroy {
   */
 
   deleteTag(event){
-    this.subscriptionDeleteTag = this._elementService.deleteTagFromElement(event, this.element.id)
+    this.subscriptionDeleteTag = this._elementService.deleteTagFromElement(event, this.element._id)
                         .subscribe(data => {
                             console.log(data); 
                         }); 
 
-      console.log(); 
-      let index = (this.element.tags).findIndex(x => x.id == event); 
+      console.log(this.element.tags);
+
+      let index = (this.element.tags).findIndex(x => x._id == event); 
       if (index == -1){
         console.log('chaine non trouvée');
       } else {
          console.log('index trouvé : ');
-         this.element.tags.splice( ((this.element.tags).findIndex(x => x.id == event)), 1); 
+         this.element.tags.splice( ((this.element.tags).findIndex(x => x._id == event)), 1); 
       }     
   }
 

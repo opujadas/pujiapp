@@ -21,9 +21,9 @@
         <tagelement 
           [label]="tag.name"
           [bgcolor]="tag.category.color"
-          [tag_id]="tag.id"
-          [element_id]="element.id"
-          (deleteTag)='deleteTag(tag.id)'
+          [tag_id]="tag._id"
+          [element_id]="element._id"
+          (deleteTag)='deleteTag(tag._id)'
         ></tagelement>
 
 		</span>
