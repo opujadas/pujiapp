@@ -258,9 +258,11 @@ exports.deletetag = function (req, res) {
 
 // Handle update element info
 exports.update = function (req, res) {  
-    
-    if (req.body && req.body.element && req.body.element.id){
-        Element.findById(req.body.element.id, function (err, element) {
+    console.log('UPDATE Element'); 
+    console.log(req.body);
+
+    if (req.body && req.body._id){
+        Element.findById(req.body._id, function (err, element) {
             if (err) {
                 res.json({
                     status: "error",
@@ -268,7 +270,7 @@ exports.update = function (req, res) {
                 });
             }
             else {
-                element.data = req.body.element.data ? req.body.element.data : element.data;
+                element.data = req.body.data ? req.body.data : element.data;
                 // save the element and check for errors
                 element.save(function (err) {
                     if (err)

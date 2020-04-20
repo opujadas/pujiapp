@@ -185,7 +185,8 @@ export class DataService
   ***********************************************************************/
 
   updateElement(element : Element){
-    return this.http.put(ServicesEndPoints.ELEMENTS + '/update', element,  { headers : new HttpHeaders().set('Content-Type', 'application/json')});    
+    console.log('On fait update element'); 
+    return this.http.put(ServicesEndPoints.ELEMENTS, element,  { headers : new HttpHeaders().set('Content-Type', 'application/json')});    
   }
 
   getElements(){
@@ -258,14 +259,14 @@ export class DataService
     return this.http.delete(ServicesEndPoints.ELEMENTS + '/' + id);
   }
 
-  editElement(element: Element) {
+/*  editElement(element: Element) {
     console.log('data elem'); 
     let params = {};
     params['element'] = element; 
 
     return this.http.put(ServicesEndPoints.ELEMENTS, params,  { headers : new HttpHeaders().set('Content-Type', 'application/json')});
   }
-
+*/
   /*********************************************************************** 
   *                         POSTS
   ***********************************************************************/
