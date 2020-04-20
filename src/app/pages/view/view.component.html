@@ -67,7 +67,7 @@ TEST ==> {{view.name}}
 
       <div *ngFor="let el of elements; let i = index" >
           <div dnd-draggable [dragEnabled]="true"  [dragData]="el"> 
-                   
+             {{el.data._id}}<br>  
               <element  [element]="el"></element>
                   
           </div>

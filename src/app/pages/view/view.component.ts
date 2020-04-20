@@ -51,7 +51,7 @@ export class ViewComponent implements OnInit, OnDestroy {
 
   private view : View = new View(-1, localStorage.getItem('user_id'), -1, 0, [], []);
   private id : string; 
-  private elements : Element[]; 
+  private elements : any[]; // Element[]; 
   addPostForm: FormGroup; 
 
 private title : string; 
@@ -94,7 +94,7 @@ private title : string;
             this.id = params['idview'];
             // Dans tous les cas on initialise le formulaire
             console.log('Initialisation du form'); 
-            this.refreshElementList(); 
+            this.getCurrentViewInfo(); 
         });
 
 
@@ -112,7 +112,7 @@ private title : string;
 
     this.subscriptionViewTagsChanged = this._viewService.getViewTagsChanged().subscribe(data => { 
        console.log('Refresh de la liste des éléments'); 
-        this.refreshElementList();
+        this.getCurrentViewElements();
     });   
 
 
@@ -120,14 +120,21 @@ private title : string;
   }
 
 
-  refreshElementList(){
-    console.log('refreshElementList');
+  getCurrentViewInfo(){
+    console.log('getCurrentViewInfo');
     this.subscriptionView = this._viewService.getView(this.id)
       .subscribe(data => {
           console.log(data);
           if(data.data){
             this.view = data.data;
-            this.elements = data.data.elements; 
+
+            // On choppe les id tags de la vue actuelle
+            // console.log(); 
+            // this.elements = data.data.elements; 
+
+            console.log('On choppe les elements'); 
+            this.getCurrentViewElements(); 
+
 
             console.log('INFO au service que la vue a changé'); 
             this.subscriptionViewChanged = this._viewService.setCurrentView(data.data);             
@@ -137,6 +144,34 @@ private title : string;
           this.slimLoadingBarService.complete();  
         });            
   }
+
+  getCurrentViewElements(){
+    console.log('getCurrentViewElements');
+
+
+    console.log('creation tableau de tags');
+    var vuetagsID = []; 
+    for(var i=0; i<this.view.tags.length; i++){
+        vuetagsID[i] = this.view.tags[i]._id;
+    }
+
+    console.log('view.tags : '); 
+    console.log(vuetagsID); 
+
+    this.subscriptionElements = this._elementService.getElementsWithTags(vuetagsID)
+      .subscribe(data => {
+          
+          if(data.data){
+            console.log(data.data);
+            this.elements = data.data; 
+            console.log(this.elements); 
+          } 
+
+          // this.toastr.success('Les sites sont chargés !', 'Success!');
+          this.slimLoadingBarService.complete();  
+        });           
+  }
+
 
 
 

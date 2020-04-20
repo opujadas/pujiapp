@@ -142,8 +142,9 @@ exports.view = function (req, res) {
             else {
                 console.log('OK, on recup les elements de la vue ' + req.params.view_id); 
                 console.log('Vue : '); 
-                console.log(view); 
-                console.log(view.tags); 
+                // console.log(view); 
+                // console.log(view.tags); 
+                view.elements = []; 
 
                 var vuetagsID = []; 
                 for(i=0; i<view.tags.length; i++){
@@ -163,15 +164,17 @@ exports.view = function (req, res) {
 */
                 /* Element.find({'tags._id' : { $in: ['5e9b4d46f4ab6549c0ec2cf0'] } }, function (errelements, elements) { */
                     Element.find({tags : { $all: vuetagsID }}, function (errelements, elements) { 
-                    console.log('Found elements : '); 
-                    console.log(elements); 
-                    view.elements = elements; 
+                        console.log('Found elements : '); 
+                        console.log(elements); 
+                        view.elements = elements; 
+                        console.log('VUE A RENVOYER : '); 
+                        console.log(view); 
 
-                    res.json({
-                        status: "success",
-                        message: 'View details loading..',
-                        data: view
-                    });            
+                        res.json({
+                            status: "success",
+                            message: 'View details loading..',
+                            data: view
+                        });            
                 });
             }
         }).populate({

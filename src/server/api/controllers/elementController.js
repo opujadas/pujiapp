@@ -60,6 +60,55 @@ exports.new = function (req, res) {
 
 // Handle view elements by type 
 
+exports.getElementsWithTags = function (req, res) {
+    
+        console.log('Get getElementsWithTags'); 
+        console.log(req.body); 
+
+    if (req.body.tagIdList) {
+
+        console.log('params ok'); 
+        console.log(req.body.tagIdList); 
+// tagIdList
+/*
+                    Element.find({tags : { $all: vuetagsID }}, function (errelements, elements) { 
+                        console.log('Found elements : '); 
+                        console.log(elements); 
+                        view.elements = elements; 
+                        console.log('VUE A RENVOYER : '); 
+                        console.log(view); 
+
+                        res.json({
+                            status: "success",
+                            message: 'View details loading..',
+                            data: view
+                        });            
+*/
+
+        Element.find({tags: { $all: req.body.tagIdList }}, function (err, elements) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
+            else {
+            console.log('RES'); 
+            console.log(elements); 
+            res.json({
+                status: "success",
+                message: 'Element details loading..',
+                data: elements
+            });
+        /* }}).populate({path: 'tags', model : Tags, populate: {path: category, model : Category}}); */
+        }}); // .populate({path: 'tags', model : Tags, populate: {path: category, model : Category}}); 
+    }};
+
+
+
+
+// Handle view elements by type 
+
 exports.viewbytype = function (req, res) {
     if ((req.params.type) && (req.params.user_id)) {
         console.log('params ok'); 

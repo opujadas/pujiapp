@@ -51,6 +51,12 @@ export class ElementService {
         return this._dataService.getElementsByType(typeelement); 
     }
 
+    getElementsWithTags(tagIdList: any[]){
+        console.log('getElementsWithTags');
+        console.log(tagIdList);
+        return this._dataService.getElementsWithTags(tagIdList);     
+    }
+
 
     addTagToElement(tagid: string, elementid: string) {
         console.log('Post service : on va ajouter le tag ' + tagid + ' au element ' + elementid);

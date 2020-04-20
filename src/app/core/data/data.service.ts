@@ -197,6 +197,15 @@ export class DataService
       return this.http.get(ServicesEndPoints.ELEMENTS + '/getTags/' + id);         
   }
 
+  getElementsWithTags (tagIdList: any[])  : any {
+      console.log('getElementsWithTags > On get les element tags pour : '); 
+      console.log(tagIdList); 
+    let params = {};
+    params['tagIdList'] = tagIdList;      
+      return this.http.post(ServicesEndPoints.ELEMENTS + '/getElementsWithTags/', params, { headers : new HttpHeaders().set('Content-Type', 'application/json')});        
+  }
+
+
   getElement(id: string) {
       return this.http.get(ServicesEndPoints.ELEMENTS + '/' + id);         
   }

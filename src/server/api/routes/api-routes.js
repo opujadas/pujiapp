@@ -61,6 +61,9 @@ router.route('/elements/addtag')
     .post(elementController.addtag);
 router.route('/elements/deletetag')
     .post(elementController.deletetag);   
+router.route('/elements/getElementsWithTags')
+    .post(elementController.getElementsWithTags);
+
 router.route('/elements/:element_id')
     .get(elementController.view)
     .delete(elementController.delete);
