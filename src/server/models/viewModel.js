@@ -8,7 +8,9 @@ var viewSchema = mongoose.Schema({
    	tags: 		 { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', required: false }]},
     create_date: { type: Date, default: Date.now },
     update_date: { type: Date, default: Date.now },
-    is_rootview: { type: Boolean, required: true, default: false }
+    is_rootview: { type: Boolean, required: true, default: false },
+    children: [{type: mongoose.Schema.Types.ObjectId, ref: 'View'}],
+
 });
 
 /*viewSchema.pre('deleteOne', function(next) {

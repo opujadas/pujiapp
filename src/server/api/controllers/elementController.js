@@ -111,7 +111,7 @@ exports.getElementsWithTags = function (req, res) {
                 path: 'category', 
                 model : Categorie
             })
-        }).exec(function(err, elements) {
+        }).sort({ 'create_date' : 'descending' }).exec(function(err, elements) {
                   console.log('Elements with tags ?');
                   console.log(elements);  
                   //elements = elements.filter(function(user) {

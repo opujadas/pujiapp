@@ -60,10 +60,42 @@ var viewSchema = mongoose.Schema({
             });
         } 
         else {
-            res.json({
-            status: "success",
-            message: 'New view created!',
-            data: view
+            console.log('On va enregistrer la vue dan les children de la vue parente'); 
+                console.log('parent ID : ');
+            console.log(req.body.parent_id);
+
+            View.findById(req.body.parent_id, function (parenterr, parentview) {
+                if (parenterr) {
+                    res.json({
+                        status: "error",
+                        message: parenterr,
+                    });
+                }
+                else {
+                    console.log('parentview'); 
+                    console.log(parentview); 
+                    console.log('nouvelleview'); 
+                    console.log(view); 
+
+                    console.log('PUSH IN parentview'); 
+                    parentview.children.push(view);
+                    console.log(parentview); 
+                    parentview.save(function (errsave) {
+                        if (errsave) {
+                            res.json({
+                                status: "error",
+                                message: errsave,
+                            });
+                        } 
+                        else {
+                            res.json({
+                            status: "success",
+                            message: 'New view created!',
+                            data: view
+                            });
+                        }
+                    }); 
+                }
             });
         }
     });
@@ -115,17 +147,27 @@ exports.viewchildren = function (req, res) {
                 });
             }
             else {
+
             res.json({
                 status: "success",
                 message: 'View details loading..',
                 data: views
             });
         /* }}).populate({path: 'tags', model : Tags, populate: {path: category, model : Category}}); */
-    }});
+    }}).populate({path: 'tags', model : Tag, populate: {path: 'category', model : Categorie }});
     }
 };
 
-
+/*
+.populate({
+                path: 'tags', 
+                model : Tag, 
+                populate: ({
+                    path: 'category', 
+                    model : Categorie
+                })
+            })
+*/
 
 
 // Handle view view info

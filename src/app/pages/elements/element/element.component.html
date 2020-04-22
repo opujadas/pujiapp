@@ -15,7 +15,7 @@
         <p [innerHTML]="element.data.content | htmlcontent"></p>
     </div>
 
-		<span *ngIf="element.tags.length > 0">Tags : </span>
+		<span *ngIf="(element) && (element.tags) && (element.tags.length > 0)">Tags : </span>
 		<span *ngFor="let tag of element.tags;">
 
         <tagelement 
