@@ -31,7 +31,38 @@ import { View } from './../../../core/model/view/view.model';
 
 
 
+interface FoodNode {
+  name: string;
+  children?: FoodNode[];
+}
 
+const TREE_DATA: FoodNode[] = [
+  {
+    name: 'Fruit',
+    children: [
+      {name: 'Apple'},
+      {name: 'Banana'},
+      {name: 'Fruit loops'},
+    ]
+  }, {
+    name: 'Vegetables',
+    children: [
+      {
+        name: 'Green',
+        children: [
+          {name: 'Broccoli'},
+          {name: 'Brussels sprouts'},
+        ]
+      }, {
+        name: 'Orange',
+        children: [
+          {name: 'Pumpkins'},
+          {name: 'Carrots'},
+        ]
+      },
+    ]
+  },
+];
 
 
 @Component({
@@ -66,6 +97,15 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   rootViewHasChanged : any; 
   rootview : string;
 
+/*
+treeControl = new NestedTreeControl<FoodNode>(node => node.children);
+  dataSource = new MatTreeNestedDataSource<FoodNode>();
+*/
+
+treeControl = new NestedTreeControl<View>(node => node.children);
+  dataSource = new MatTreeNestedDataSource<View>();
+
+
 
   constructor(/*private postService: PostService,
               private ViewLayoutService: ViewLayoutService,*/
@@ -82,15 +122,17 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
               ){ 
 
 
+//    this.dataSource.data = TREE_DATA;
 
     this.rootview = localStorage.getItem('rootview');
     console.log('Rootview extracted : ' + this.rootview); 
 
     // this.refreshRootViewList();
     this.subscriptionGetCurrentView = this._viewService.getCurrentViewChanged().subscribe(data => { 
-      console.log('CURRENT view');
+      console.log('CURRENT view bien ici ?');
       console.log(data);  
-      this.view = data;      
+      this.view = data;
+      this.dataSource.data = data.children;     
     }); 
 
 
@@ -123,6 +165,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   }
 
 
+  hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
 
   /* Fonction addViewAction(event) 
       => event : View => correspond au numéro du tag à supprimer
