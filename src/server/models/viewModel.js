@@ -9,10 +9,18 @@ var viewSchema = mongoose.Schema({
     create_date: { type: Date, default: Date.now },
     update_date: { type: Date, default: Date.now },
     is_rootview: { type: Boolean, required: true, default: false },
-    children: [{type: mongoose.Schema.Types.ObjectId, ref: 'View'}],
-
+    children: 	 { type: [{type: mongoose.Schema.Types.ObjectId, ref: 'View'}] }
 });
 
+
+var autoPopulateChildren = function(next) {
+    this.populate('children');
+    next();
+};
+
+viewSchema
+.pre('findOne', autoPopulateChildren)
+.pre('find', autoPopulateChildren)
 /*viewSchema.pre('deleteOne', function(next) {
 
 	console.log('View : pre function'); 

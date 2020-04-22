@@ -137,9 +137,47 @@ exports.viewchildren = function (req, res) {
     console.log(req.params); 
     console.log(req.params.parent_id); 
 
-
     if(req.params.parent_id){
-        View.find({parent: req.params.parent_id}, function (err, views) {
+        console.log('On a une vue parente, on choppe tous les enfants '); 
+        View.find({parent: req.params.parent_id}).populate({
+            path: 'tags', 
+            model : Tag, 
+            populate: { 
+                path: 'category', 
+                model : Categorie 
+            }
+        }).populate({
+            path : 'children', 
+            model: View
+        }).exec(function(err, views) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            } 
+            else {
+                    console.log('Vue récupérées ');
+                    console.log(views);  
+
+                    res.json({
+                        status: "success",
+                        message: 'View details loading..',
+                        data: views
+                    });                                      
+            } 
+        });  
+    }
+    else {
+        console.log('Paramétrage POK');
+    }
+};
+
+/*
+.exec(function(err, fullElement) {
+                  console.log('Elements with tags ?');
+                  console.log(fullElement);  
+
             if (err) {
                 res.json({
                     status: "error",
@@ -153,10 +191,7 @@ exports.viewchildren = function (req, res) {
                 message: 'View details loading..',
                 data: views
             });
-        /* }}).populate({path: 'tags', model : Tags, populate: {path: category, model : Category}}); */
-    }}).populate({path: 'tags', model : Tag, populate: {path: 'category', model : Categorie }});
-    }
-};
+*/
 
 /*
 .populate({
