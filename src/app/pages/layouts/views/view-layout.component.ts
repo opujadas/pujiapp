@@ -132,7 +132,7 @@ treeControl = new NestedTreeControl<View>(node => node.children);
       console.log('CURRENT view bien ici ?');
       console.log(data);  
       this.view = data;
-      this.dataSource.data = data.children;     
+//      this.dataSource.data = data.children;     
     }); 
 
 
@@ -143,6 +143,7 @@ treeControl = new NestedTreeControl<View>(node => node.children);
           this.rootViews = data.data; 
           console.log('this rootViews'); 
           console.log(this.rootViews); 
+          this.dataSource.data = data.data;     
          }
         // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
           //console.log('Views => ');
