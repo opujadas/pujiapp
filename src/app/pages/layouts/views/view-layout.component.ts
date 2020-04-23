@@ -245,7 +245,7 @@ moveToRecycleBin(event){
                                     console.log(data); 
 
                                     console.log('On va supprimer visuellement élément de la vue');
-                                    console.log(event.dragData.id); 
+                                    console.log(event.dragData._id); 
 
                                     // On envoie la nouvelle valeur au service 
                                     this._elementListService.deleteElementListAction(event.dragData);
