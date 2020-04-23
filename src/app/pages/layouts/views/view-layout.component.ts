@@ -145,22 +145,7 @@ treeControl = new NestedTreeControl<View>(node => node.children);
           console.log(this.rootViews); 
           this.dataSource.data = data.data;     
          }
-        // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
-          //console.log('Views => ');
-          //console.log(this.rootViews);
       });  
-
-
-
-
-    this.subscription = this._viewService.getViewAction().subscribe(data => { 
-      console.log('view layout');
-      console.log(data);  
-      this.rootViewHasChanged = data;
-
-      console.log('Action efectuée sur une vue root, on refresh la liste !');  
-      this.refreshRootViewList();
-    }); 
 
   
   }
@@ -297,17 +282,17 @@ moveToRecycleBin(event){
   } 
 
   refreshRootViewList(){
-    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview'))
-        .subscribe(data => {
-            console.log('refresh ?');           
-            if(data.data){
-              console.log(data.data);           
-              // Dasn la réalité, ça ne renvoie pas une liste de tags (puisque c'est le résultat d'une jointure avec les catégories de tags)
-              this.rootViews = data.data; 
-              console.log('Views => ');
-              console.log(this.rootViews);              
-            }
-      });   
+    this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe(data =>  {
+         console.log('Recup des filles');  
+         console.log(data); 
+         if (data.data){
+          this.rootViews = data.data; 
+          console.log('this rootViews'); 
+          console.log(this.rootViews); 
+          this.dataSource.data = data.data;     
+         }
+      });  
+
   }
 
   showDialogSelectorTags() : void {       
