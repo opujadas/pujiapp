@@ -73,10 +73,6 @@
 
       <a *ngIf="!showDialogTrash" (click)="showTrash()">[CORBEILLE]</a>
       <a *ngIf="showDialogTrash" (click)="hideTrash()">[MASQUER CORBEILLE]</a>
-<br>
-<br>
-
-
 
 <!--      <br>
       Contacts<br>
@@ -90,23 +86,8 @@
     <b>VUES FILTREES</b><br>
     <br>
 
-    <a routerLink="/views/{{rootview}}">View Root</a> <a routerLink="/views/add/{{rootview}}"><span class="badge">Nouvelle vue</span></a><br>
-    
-    - Affichage des enfants<br>
-
-      <span *ngFor="let vue of rootViews">
-
-          <a dnd-draggable [dragEnabled]="true"  [dragData]="vue" (click)="showChildren(vue)" routerLink="/views/{{vue._id}}">{{vue.name}}</a> <a (click)="addChildView(vue)">&nbsp; <span class="badge"> + </span></a><br>
-<!--
-          <span *ngFor="let child of view.children;">
-                - <a dnd-draggable [dragEnabled]="true"  [dragData]="child" (click)="showChildren(child)" routerLink="/views/{{child.id}}">{{child.name}}</a><br>          
-          </span>
--->
-         </span>
-
-      <hr>    
-
-    <b>GENERAL</b><br><br>
+    <a routerLink="/views/{{rootview}}">View Root</a> <a routerLink="/views/add/{{rootview}}"><span class="badge">Nouvelle vue</span></a><br><br>
+ 
     
 
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
