@@ -104,7 +104,7 @@ exports.getElementsWithTags = function (req, res) {
                         });            
 */
 
-        Element.find({tags: { $all: req.body.tagIdList }}).populate({
+        Element.find({ $and: [{ deleted : false }, {tags: { $all: req.body.tagIdList }}]}).populate({
             path: 'tags', 
             model : Tag, 
             populate: ({
@@ -290,6 +290,53 @@ exports.addtag = function (req, res) {
         });
     }
 };                
+
+// recycle
+// Handle update element info
+exports.recycle = function (req, res) {  
+    console.log('RECYCLE Element'); 
+    console.log(req.body);
+
+    if (req.body && req.body._id){
+        Element.findById(req.body._id, function (err, element) {
+            if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
+            else {
+                console.log('ELEMENT');
+                console.log(element);  
+                element.deleted = 'true';
+                // element.deleted_date = Date.now; 
+                // element.recycle.in_recycle_bin
+                // save the element and check for errors
+                console.log('ELEMENT NEW ?');
+                console.log(element);  
+
+
+                element.save(function (err) {
+                    if (err)
+                        res.json(err);
+                    else {
+                        
+                        console.log('****** Element sauvé ? *********');
+                        console.log(element); 
+
+                        res.json({
+                            status: "success",
+                            message: 'Element in recycle bin !',
+                            data: element
+                        });
+                    }
+                });
+            }
+        });
+    }
+    
+};
+
 
 
 

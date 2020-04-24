@@ -31,10 +31,8 @@ var elementSchema = mongoose.Schema({
    	tags: { type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', required: false }]},
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     ref:  { type: String, required: true, default: 'element' },
-    recyle: {
-      in_recycle_bin : { type: Boolean, required: true, default: false },
-      deletion_date : { type: Date, default: Date.now },
-    }
+    deleted :     { type: Boolean, required: true, default: false },
+    deleted_date : { type: Date, default: Date.now }
 });
 
 

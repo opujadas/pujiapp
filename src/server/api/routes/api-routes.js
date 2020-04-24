@@ -57,6 +57,8 @@ var elementController = require('../controllers/elementController');
 // Categories routes
 router.route('/elements/type/:type/user/:user_id')
     .get(elementController.viewbytype);
+router.route('/elements/recycle')
+    .put(elementController.recycle);
 router.route('/elements/addtag')
     .post(elementController.addtag);
 router.route('/elements/deletetag')
