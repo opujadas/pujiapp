@@ -1,3 +1,14 @@
+.mat-tree {
+	background: none; 
+}
+
+
+
+
+.mat-tree-node {
+	min-height: 30px; 
+}
+
 .example-tree-invisible {
   display: none;
 }

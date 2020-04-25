@@ -5,12 +5,12 @@ import { Observable } from 'rxjs/Rx';
 import { BaseRequestOptions } from '@angular/http';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
-import 'rxjs/Rx';
+import 'rxjs/Rx'; 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Element } from './../../core/model/element/element.model';
-import { Message } from './../../core/model/message/message.model';
+// import { Message } from './../../core/model/message/message.model';
 import { Post } from './../../core/model/post/post.model';
 import { Tag } from './../../core/model/tag/tag.model';
 import { View } from './../../core/model/view/view.model';

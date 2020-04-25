@@ -240,11 +240,11 @@ exports.view = function (req, res) {
         ORDER BY el.id DESC';
 */
                 /* Element.find({'tags._id' : { $in: ['5e9b4d46f4ab6549c0ec2cf0'] } }, function (errelements, elements) { */
-                    Element.find({ $and: [{ deleted : false }, {tags : { $all: vuetagsID }}]}, function (errelements, elements) { 
+                    Element.find({tags : { $all: vuetagsID }}, function (errelements, elements) { 
                         console.log('Found elements : '); 
                         console.log(elements); 
                         view.elements = elements; 
-                        console.log('VUE A RENVOYER : '); 
+                        console.log('VUE A RENVOYER : ');  
                         console.log(view); 
 
                         res.json({

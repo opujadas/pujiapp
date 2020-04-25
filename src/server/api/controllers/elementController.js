@@ -86,7 +86,7 @@ exports.getElementsWithTags = function (req, res) {
     if (req.body.tagIdList) {
 
         console.log('params ok'); 
-        console.log(req.body.tagIdList); 
+        console.log(req.body.tagIdList);
 
 // tagIdList
 /*
@@ -104,7 +104,7 @@ exports.getElementsWithTags = function (req, res) {
                         });            
 */
 
-        Element.find({ $and: [{ deleted : false }, {tags: { $all: req.body.tagIdList }}]}).populate({
+        Element.find({ $and: [ {$or: [{ deleted : false }, { deleted: {$exists: false}}]}, {tags: { $all: req.body.tagIdList }}]}).populate({
             path: 'tags', 
             model : Tag, 
             populate: ({
