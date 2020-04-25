@@ -96,7 +96,24 @@
     <li class="mat-tree-node">
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-<a dnd-draggable [dragEnabled]="true"  [dragData]="node" (click)="showChildren(node)" routerLink="/views/{{node._id}}">{{node.name}}</a> <a (click)="addChildView(node)">&nbsp; <span class="badge"> + </span></a>
+<a dnd-draggable [dragEnabled]="true"  [dragData]="node" (click)="showChildren(node)" routerLink="/views/{{node._id}}">{{node.name}}</a> <a (click)="addChildView(node)">&nbsp; <span class="badge"> + </span></a> 
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>Check voice mail</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
     </li>
   </mat-tree-node>
   <!-- This is the tree node template for expandable nodes -->
@@ -109,7 +126,24 @@
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
         </button>
-<a dnd-draggable [dragEnabled]="true"  [dragData]="node" (click)="showChildren(node)" routerLink="/views/{{node._id}}">{{node.name}}</a> <a (click)="addChildView(node)">&nbsp; <span class="badge"> + </span></a>
+<a dnd-draggable [dragEnabled]="true"  [dragData]="node" (click)="showChildren(node)" routerLink="/views/{{node._id}}">{{node.name}}</a> <a (click)="addChildView(node)">&nbsp; <span class="badge"> + </span></a> 
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>Check voice mail</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
 
       </div>
       <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
