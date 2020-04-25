@@ -119,7 +119,9 @@ import { DataService } from './core/data/data.service';
 import { ViewLayoutComponent, DialogSelectorTags} from './pages/layouts/views/view-layout.component';
 import { DialogAddChildView } from './pages/layouts/views/dialogs/dialog-add-child-view.component';
 import { ViewAddComponent } from './pages/view/view-add/view-add.component';
-import { ViewComponent, DialogEditView } from './pages/view/view.component';
+import { ViewComponent } from './pages/view/view.component';
+import { DialogEditView } from './pages/view/dialogs/dialog-edit-view.component';
+
 import { ViewService } from './core/service/view.service';
 import { ChildrenviewComponent } from './pages/view/childrenview/childrenview.component';
 
