@@ -116,11 +116,14 @@ import { ElementComponent, DialogEditPost } from './pages/elements/element/eleme
 
 import { DataService } from './core/data/data.service';
 
-import { ViewLayoutComponent, DialogSelectorTags, DialogAddChildView } from './pages/layouts/views/view-layout.component';
+import { ViewLayoutComponent, DialogSelectorTags} from './pages/layouts/views/view-layout.component';
+import { DialogAddChildView } from './pages/layouts/views/dialogs/dialog-add-child-view.component';
 import { ViewAddComponent } from './pages/view/view-add/view-add.component';
 import { ViewComponent, DialogEditView } from './pages/view/view.component';
 import { ViewService } from './core/service/view.service';
 import { ChildrenviewComponent } from './pages/view/childrenview/childrenview.component';
+
+import { TreeviewmenuComponent } from './pages/layouts/views/menus/treeviewmenu.component';
 
 
 
@@ -187,6 +190,8 @@ import {DndModule} from 'ng2-dnd';
     ViewAddComponent,
     ViewComponent,
     ChildrenviewComponent,
+    TreeviewmenuComponent,
+    
     ElementListComponent,
       ElementComponent, 
 

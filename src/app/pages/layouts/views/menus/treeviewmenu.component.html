@@ -1,0 +1,71 @@
+<!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>voicemail</mat-icon>
+    <span>Check voice mail</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+</mat-menu>
+-->
+
+
+
+
+
+
+<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item  routerLink="/views/{{node._id}}">
+    <mat-icon>remove_red_eye</mat-icon>
+    <span>Afficher la vue</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>create</mat-icon>
+    <span>Editer la vue</span>
+  </button>
+  <button mat-menu-item disabled>
+    <mat-icon>delete_sweep</mat-icon>
+    <span>Supprimer la vue</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span (click)="addChildView(node)">Ajouter une sous-vue</span>
+  </button>  
+</mat-menu>
+
+
+
+
+<!-- 
+  <button mat-menu-item>
+    <mat-icon>dynamic_feed</mat-icon>
+    <span (click)="addChildView(node)">Ajouter une sous-vue</span>
+  </button>
+
+
+
+
+
+
+
+
+<div [style.background-color]="bgcolor" class="tagelement">
+	{{label}} 	
+
+	<span *ngIf="show_delete_action">
+		<a *ngIf="element_id !== 0" (click)="deleteTagFromElement(tag_id)"> X ELEM </a>
+		<a *ngIf="view_id !== 0" (click)="deleteTagFromElement(tag_id)"> X VIEW </a>
+	</span>
+</div>
+-->

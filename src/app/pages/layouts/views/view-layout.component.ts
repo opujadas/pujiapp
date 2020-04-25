@@ -88,9 +88,6 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   private tags: Tag[]; 
   private rootViews : any[] = []; 
 
-  transferData: Object = {id: 1, msg: 'Hello'};
-  transferData2: Object = {id: 2, msg: 'FFHello'};
-
   private showDialogTags : boolean = false; 
   private showDialogTrash : boolean = false; 
 
@@ -107,47 +104,30 @@ treeControl = new NestedTreeControl<View>(node => node.children);
 
 
 
-  constructor(/*private postService: PostService,
-              private ViewLayoutService: ViewLayoutService,*/
-              private router: Router,
-
-              private route: ActivatedRoute,
-              public dialog: MatDialog,
-              private socket: Socket,
-              public toastr: ToastsManager,
-              private _tagListService : TagListService,
-              private _viewService : ViewService,
-              private _elementService : ElementService,
-              private _elementListService : ElementListService
-              ){ 
-
-
-//    this.dataSource.data = TREE_DATA;
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public dialog: MatDialog,
+    private socket: Socket,
+    public toastr: ToastsManager,
+    private _tagListService : TagListService,
+    private _viewService : ViewService,
+    private _elementService : ElementService,
+    private _elementListService : ElementListService
+    ){ 
 
     this.rootview = localStorage.getItem('rootview');
-    console.log('Rootview extracted : ' + this.rootview); 
 
-    // this.refreshRootViewList();
     this.subscriptionGetCurrentView = this._viewService.getCurrentViewChanged().subscribe(data => { 
-      console.log('CURRENT view bien ici ?');
-      console.log(data);  
       this.view = data;
-//      this.dataSource.data = data.children;     
     }); 
 
-
     this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe(data =>  {
-         console.log('Recup des filles');  
-         console.log(data); 
          if (data.data){
           this.rootViews = data.data; 
-          console.log('this rootViews'); 
-          console.log(this.rootViews); 
           this.dataSource.data = data.data;     
          }
       });  
-
-  
   }
 
 
@@ -167,26 +147,6 @@ treeControl = new NestedTreeControl<View>(node => node.children);
 
 
   ngOnInit() { 
-
-
-    // On va essayer de récuperer le id de la vue en cours, pour pouvoir afficher les infos détail dans le panel droit
-    
-/*    console.log(this.route.snapshot); 
-    this.id = +this.route.snapshot.url[0].path; 
-    
-    console.log('ID view layout : ' + this.id); 
-
-    this.subscriptionGetCurrentView = this.route.params
-      .subscribe(
-        (params: Params) => {            
-            this.id = +params['idview'];
-            // Dans tous les cas on initialise le formulaire
-            //console.log('Initialisation du form'); 
-            //this.refreshElementList(); 
-        });
-*/
-
-    // console.log('On est dans le tag list component, on va chopper la liste des tags'); 
     // initialement on charge la liste des tags
     this.refreshTagList();
     this.refreshRootViewList(); 
@@ -201,7 +161,6 @@ treeControl = new NestedTreeControl<View>(node => node.children);
 
     this.subscriptionGetChildrenViews = this._viewService.getViews(view.id).subscribe((data : View[]) =>  {
          console.log('yihaaa');  
-         console.log(data);
          view.children = data;
          console.log(view); 
       });  
@@ -325,7 +284,7 @@ moveToRecycleBin(event){
 }
 
 
-
+/*
 @Component({
   selector: 'dialog-add-child-view',
   templateUrl: 'dialog-add-child-view.html',
@@ -420,28 +379,6 @@ export class DialogAddChildView implements OnDestroy  {
 
   }
 
-/*
-  onSubmit(){
-    console.log('Submit'); 
-    console.log(this.view);
-    console.log('Elément updaté ?'); 
-    console.log(this.editViewForm); 
-
-    // On met à jour la BDD pour associer le event.dragData au View
-    this.subscriptionUpdate = this._viewService.updateView(this.view)
-                            .subscribe(data => {
-                                console.log(data);
-                                this.dialogRef.close();
-
-        // On toaste pour l'utilisateur en cours
-        this._translate.get('TOASTER.ELEMENT.UPDATE.SUCCESS').subscribe((res: string) => {
-            console.log(res);
-            this.toastr.success(res, 'Success!');
-        });                                  
-                            }); 
-       
-  }
-*/
   onNoClick(): void {
     console.log('on no click'); 
 
@@ -547,11 +484,7 @@ export class DialogAddChildView implements OnDestroy  {
 
 
             // Redirection vers la nouvelle vue ou la vue parente si pb
-            /*if (data.id > 0)
-             this.router.navigate([ '/views/' + data.id ])
-            else
-              this.router.navigate([ '/views/' + this.parentView.id ])
-            */
+
           },
           error => console.log("Error: ", error),
           () => {
@@ -581,7 +514,7 @@ export class DialogAddChildView implements OnDestroy  {
 }
 
 
-
+*/
 
 
 @Component({
