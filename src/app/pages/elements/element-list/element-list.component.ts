@@ -63,6 +63,7 @@ export class ElementListComponent implements OnInit, OnDestroy
               private _translate: TranslateService,
               private _elementListService: ElementListService
               ) { 
+    console.log("ELEMENT LIST COMPONENT !"); 
     // Démarrage de la barre de chargement 
     this.slimLoadingBarService.start();
     
@@ -75,7 +76,17 @@ export class ElementListComponent implements OnInit, OnDestroy
     this.subscriptionElementDeleted = this._elementListService.getElementDeletedAction().subscribe(data => { 
       
       //  On supprime visuellement l'élément passé     
-      (this.elements).splice((this.elements).findIndex(x => x.id == data.id), 1);
+      console.log('Elements : '); 
+      console.log(this.elements); 
+      console.log('Il faut supprimer : '); 
+      console.log(data); 
+
+      console.log('data._id'); 
+      console.log(data._id); 
+
+      (this.elements).splice((this.elements).findIndex(x => x._id == data._id), 1);
+
+
 
       // On toaste pour l'utilisateur en cours
       this._translate.get('TOASTER.ELEMENT.TRASH.SUCCESS').subscribe((res: string) => {

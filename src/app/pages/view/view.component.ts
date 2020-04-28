@@ -101,7 +101,13 @@ private title : string;
 
     this.subscriptionElementDeleted = this._elementListService.getElementDeletedAction().subscribe(data => { 
       //  On supprime visuellement l'élément passé     
-      (this.elements).splice((this.elements).findIndex(x => x.id == data.id), 1);
+      console.log('On supprime '); 
+      console.log(data); 
+      console.log('Dans la liste :  '); 
+    console.log(this.elements); 
+      
+
+      (this.elements).splice((this.elements).findIndex(x => x._id == data._id), 1);
       // On toaste pour l'utilisateur en cours
       this._translate.get('TOASTER.ELEMENT.TRASH.SUCCESS').subscribe((res: string) => {
           console.log(res);

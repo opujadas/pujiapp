@@ -128,6 +128,29 @@ treeControl = new NestedTreeControl<View>(node => node.children);
           this.dataSource.data = data.data;     
          }
       });  
+/*
+    this.subscriptionElementDeleted = this._elementListService.getElementDeletedAction().subscribe(data => { 
+      
+      //  On supprime visuellement l'élément passé     
+      console.log('Elements : '); 
+      console.log(this.view.elements); 
+      console.log('Il faut supprimer : '); 
+      console.log(data); 
+
+      console.log('data._id'); 
+      console.log(data._id); 
+
+      (this.elements).splice((this.elements).findIndex(x => x._id == data._id), 1);
+
+      // On toaste pour l'utilisateur en cours
+      this._translate.get('TOASTER.ELEMENT.TRASH.SUCCESS').subscribe((res: string) => {
+          console.log(res);
+          this.toastr.success(res, 'Success!');
+      });
+      
+      });             
+*/
+
   }
 
 
@@ -205,10 +228,12 @@ moveToRecycleBin(event){
 
                                     console.log('On va supprimer visuellement élément de la vue');
                                     console.log(event.dragData._id); 
+                                    console.log('à supprimer de : ');
+                                    
 
                                     // On envoie la nouvelle valeur au service 
                                     this._elementListService.deleteElementListAction(event.dragData);
-                                    // this.elements.tags.splice( ((this.element.tags).findIndex(x => x.id == event)), 1); 
+                                    // this.elements.tags.splice( ((this.elements.tags).findIndex(x => x._id == event)), 1); 
                                 });             
         break; 
 
