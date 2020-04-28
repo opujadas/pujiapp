@@ -142,7 +142,14 @@
                 "FIELD.CONTENT.PLACEHOLDER": "Contenu de la vue",
                 "FIELD.TAGS.PLACEHOLDER": "Tags de la vue",
                 "BT.ADD" : "Créer"                
-            }
+            },
+            "EDIT":{
+                "TITLE" : "Mettre à jour une vue",                        
+                "FIELD.TITLE.PLACEHOLDER": "Nom de la vue",
+                "FIELD.CONTENT.PLACEHOLDER": "Contenu de la vue",
+                "FIELD.TAGS.PLACEHOLDER": "Tags de la vue",
+                "BT.UPDATE" : "Mettre à jour"                
+            }            
         },
         "POST": {
             "LIST":{

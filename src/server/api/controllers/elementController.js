@@ -88,55 +88,50 @@ exports.getElementsWithTags = function (req, res) {
         console.log('params ok'); 
         console.log(req.body.tagIdList);
 
-// tagIdList
-/*
-                    Element.find({tags : { $all: vuetagsID }}, function (errelements, elements) { 
-                        console.log('Found elements : '); 
-                        console.log(elements); 
-                        view.elements = elements; 
-                        console.log('VUE A RENVOYER : '); 
-                        console.log(view); 
+        if (req.body.tagIdList.length == 0){
+            console.log('On est sur la vue root, on charge tout'); 
 
-                        res.json({
-                            status: "success",
-                            message: 'View details loading..',
-                            data: view
-                        });            
-*/
+            Element.find({$or: [{ deleted : false }, { deleted: {$exists: false}}]}).populate({
+                path: 'tags', 
+                model : Tag, 
+                populate: ({
+                    path: 'category', 
+                    model : Categorie
+                })
+            }).limit(30).sort({ 'create_date' : 'descending' }).exec(function(err, elements) {
+                      console.log(elements);  // limit(10).
+                      //elements = elements.filter(function(user) {
+                      
+                            res.json({
+                                status: "success",
+                                message: 'View details loading..',
+                                data: elements
+                            });                  
+                        //});
+                    });  
+        }
+        else {
+            Element.find({ $and: [ {$or: [{ deleted : false }, { deleted: {$exists: false}}]}, {tags: { $all: req.body.tagIdList }}]}).populate({
+                path: 'tags', 
+                model : Tag, 
+                populate: ({
+                    path: 'category', 
+                    model : Categorie
+                })
+            }).sort({ 'create_date' : 'descending' }).exec(function(err, elements) {
+                      console.log('Elements with tags ?');
+                      console.log(elements);  
+                      //elements = elements.filter(function(user) {
+                      
+                            res.json({
+                                status: "success",
+                                message: 'View details loading..',
+                                data: elements
+                            });                  
+                        //});
+                    });  
 
-        Element.find({ $and: [ {$or: [{ deleted : false }, { deleted: {$exists: false}}]}, {tags: { $all: req.body.tagIdList }}]}).populate({
-            path: 'tags', 
-            model : Tag, 
-            populate: ({
-                path: 'category', 
-                model : Categorie
-            })
-        }).sort({ 'create_date' : 'descending' }).exec(function(err, elements) {
-                  console.log('Elements with tags ?');
-                  console.log(elements);  
-                  //elements = elements.filter(function(user) {
-                  
-                        res.json({
-                            status: "success",
-                            message: 'View details loading..',
-                            data: elements
-                        });                  
-                    //});
-                });  
-/*
-Users.find().populate({
-  path: 'email',
-  match: {
-    type: 'Gmail'
-  }
-}).exec(function(err, users) {
-  users = users.filter(function(user) {
-    return user.email; // return only users with email matching 'type: "Gmail"' query
-  });
-});
-*/
-
-
+        }
     }};
 
 
