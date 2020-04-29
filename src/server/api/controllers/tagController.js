@@ -10,24 +10,29 @@ Tag = require('../../models/tagModel');
 exports.index = function (req, res) {
 
     // Tag.get(function (err, tags) { 
-    Tag.find({user: req.params.user_id}, function(err, result) {
-
-       if (err) {
-            res.json({
-                status: "error",
-                message: err,
-            });
-        }
-        else {
-            res.json({
-                status: "success",
-                message: "tags retrieved successfully",
-                data: result
-            });
-
-        }
-    }).populate('category');
+//         .sort({ 'category.name' : 'descending' })
+    Tag.find({user: req.params.user_id})
+        .populate({path : 'category'})
+        .sort({ 'category.name' : 'ascending' })
+        .exec(function(err, elements) {
+           if (err) {
+                res.json({
+                    status: "error",
+                    message: err,
+                });
+            }
+            else {
+                console.log('Pas erreur : CHOPPAGE DE TAGS !!!!!!!!'); 
+                res.json({
+                    status: "success",
+                    message: 'View details loading..',
+                    data: elements
+                });                  
+            }   
+        });  
 };
+
+
 
 // Handle create contact actions
 exports.new = function (req, res) {

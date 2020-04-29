@@ -85,8 +85,8 @@ exports.getElementsWithTags = function (req, res) {
 
     if (req.body.tagIdList) {
 
-        console.log('params ok'); 
-        console.log(req.body.tagIdList);
+ //       console.log('params ok'); 
+//        console.log(req.body.tagIdList);
 
         if (req.body.tagIdList.length == 0){
             console.log('On est sur la vue root, on charge tout'); 
@@ -99,7 +99,7 @@ exports.getElementsWithTags = function (req, res) {
                     model : Categorie
                 })
             }).limit(30).sort({ 'create_date' : 'descending' }).exec(function(err, elements) {
-                      console.log(elements);  // limit(10).
+                      // console.log(elements);  // limit(10).
                       //elements = elements.filter(function(user) {
                       
                             res.json({
@@ -119,8 +119,8 @@ exports.getElementsWithTags = function (req, res) {
                     model : Categorie
                 })
             }).sort({ 'create_date' : 'descending' }).exec(function(err, elements) {
-                      console.log('Elements with tags ?');
-                      console.log(elements);  
+                      // console.log('Elements with tags ?');
+                      // console.log(elements);  
                       //elements = elements.filter(function(user) {
                       
                             res.json({
