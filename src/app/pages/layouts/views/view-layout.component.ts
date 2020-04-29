@@ -91,7 +91,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   private showDialogTags : boolean = false; 
   private showDialogTrash : boolean = false; 
 
-  rootViewHasChanged : any; 
+  rootViewHasChanged : Subscription; 
   rootview : string;
 
 /*
@@ -127,7 +127,16 @@ treeControl = new NestedTreeControl<View>(node => node.children);
           this.rootViews = data.data; 
           this.dataSource.data = data.data;     
          }
-      });  
+      });
+
+
+    this.rootViewHasChanged = this._viewService.getViewAction().subscribe(data => {
+      console.log('Actions sur vue => affecte le root tree : on refresh !'); 
+      console.log(data); 
+      this.refreshRootViewList(); 
+  }); 
+        
+
 /*
     this.subscriptionElementDeleted = this._elementListService.getElementDeletedAction().subscribe(data => { 
       

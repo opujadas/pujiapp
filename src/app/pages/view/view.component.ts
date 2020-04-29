@@ -132,7 +132,7 @@ private title : string;
     this.subscriptionView = this._viewService.getView(this.id)
       .subscribe(data => {
           console.log(data);
-          if(data.data){
+          if ((data.data) && (data.data !== undefined)) {
             this.view = data.data;
 
             // On choppe les id tags de la vue actuelle
@@ -204,7 +204,7 @@ private title : string;
 
     return  this._elementService.addElement(element)
         .subscribe(data => {
-          if (data.data){
+          if ((data != undefined) && (data.data != undefined)) {
             console.log('retous du addElement');
             console.log(data.data);  
 

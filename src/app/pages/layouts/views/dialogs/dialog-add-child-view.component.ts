@@ -239,13 +239,8 @@ export class DialogAddChildView implements OnDestroy  {
               this.router.navigate([ '/views/' + this.parentView.id ])
             */
           },
-          error => console.log("Error: ", error),
-          () => {
-            console.log('Ici ? Wtf'); 
-            // Fin de la barre de chargement 
-            //this.slimLoadingBarService.complete();              
-          });     
-  
+          error => console.log("Error: ", error)
+      );     
   }
 
 
