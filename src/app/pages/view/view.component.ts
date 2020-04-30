@@ -250,52 +250,26 @@ export class ViewComponent implements OnInit, OnDestroy {
 
   editView(view : View) : void {
 
-    console.log('On ouvre une fenetre dialogue pour affichier / editer la vue'); 
-    console.log('AVant édition : '); 
-    console.log(this.viewPreEdition); 
-
-         
     let dialogRef = this.dialog.open(DialogEditView, {
       width :            '80%',
       data :             this.view
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
-      console.log('ici The dialog was closed');
-      console.log(result);
+      // Si on a validé une mise à jour, on a un result
       if (result !== undefined){
-        console.log('Mise à jour OK');
-        // On doit raffraichir les vues root
-        console.log('INFO au service que la vue a changé'); 
+        // On doit raffraichir les vues root, on informe le viewService
         this.subscriptionViewChanged = this._viewService.sendViewAction(this.view);             
-
-
       } 
+      // Si on a annulé l'édition, le result est undefined
       else {
-          console.log('Annulation, on remet les anciennes valeurs');         
           this.view = JSON.parse(JSON.stringify(this.viewPreEdition));
 
           // On toaste pour l'utilisateur en cours
           this._translate.get('TOASTER.VIEW.UPDATE.CANCEL').subscribe((res: string) => {
-              console.log('Envoi message !');
-              console.log(res);
               this.toastr.info(res, 'Information');
           });                                            
       }
-
-
-      // this.refreshList(); 
-
-    // On met à jour la BDD pour associer le event.dragData au View
-/*
-    this.subscriptionUpdate = this._viewService.updateView(this.view)
-                            .subscribe(data => {
-                                console.log(data);
-                                // this.dialogRef.close();
-      });       
-    });
-    */
      }); 
   }
 
