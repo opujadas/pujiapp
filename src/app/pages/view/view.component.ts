@@ -265,7 +265,12 @@ export class ViewComponent implements OnInit, OnDestroy {
       console.log('ici The dialog was closed');
       console.log(result);
       if (result !== undefined){
-        console.log('Mise à jour OK'); 
+        console.log('Mise à jour OK');
+        // On doit raffraichir les vues root
+        console.log('INFO au service que la vue a changé'); 
+        this.subscriptionViewChanged = this._viewService.sendViewAction(this.view);             
+
+
       } 
       else {
           console.log('Annulation, on remet les anciennes valeurs');         
