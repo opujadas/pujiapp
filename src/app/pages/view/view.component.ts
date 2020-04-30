@@ -50,14 +50,16 @@ export class ViewComponent implements OnInit, OnDestroy {
 
   //   constructor(id : number = -1, name: string = "", user_id: number = -1, parent_id : number = 0, tags : Tag[]) {
 
-  private view : View = new View(-1, localStorage.getItem('user_id'), -1, 0, [], []);
+  private view : View = new View("-1", localStorage.getItem('user_id'), "-1", "0", [], []);
+  private viewPreEdition : View; 
+
   private id : string; 
   private elements : any[]; // Element[]; 
   addPostForm: FormGroup; 
 
-private title : string; 
+  private title : string; 
   private content : string; 
-    post : Post; 
+  post : Post; 
 
   constructor(private slimLoadingBarService: SlimLoadingBarService, 
               private router: Router,
@@ -134,6 +136,11 @@ private title : string;
           console.log(data);
           if ((data.data) && (data.data !== undefined)) {
             this.view = data.data;
+            // On clone this.view dans backup : 
+            this.viewPreEdition = JSON.parse(JSON.stringify(data.data));
+
+            console.log('INIT : Avant édition : '); 
+            console.log(this.viewPreEdition); 
 
             // On choppe les id tags de la vue actuelle
             // console.log(); 
@@ -193,12 +200,12 @@ private title : string;
     // constructor(id : number = -1, element_id : number = -1, title: string, content: string) {
 
     
-    let post = new Post(-1, -1, this.title, this.content);       /*,1 ,      this.selectedTags */    
+    let post = new Post("-1", -1, this.title, this.content);       /*,1 ,      this.selectedTags */    
     console.log('Post : '); 
     console.log(post); 
 
     //constructor(id : number = -1, user_id: number = 1, tags : Tag[], type, data : {}) {
-    let element = new Element(-1, localStorage.getItem('user_id'), this.view['tags'], "post", post); // type = 1 pour les posts 
+    let element = new Element("-1", localStorage.getItem('user_id'), this.view['tags'], "post", post); // type = 1 pour les posts 
     console.log('Element'); 
     console.log(element); 
 
@@ -244,14 +251,35 @@ private title : string;
   editView(view : View) : void {
 
     console.log('On ouvre une fenetre dialogue pour affichier / editer la vue'); 
+    console.log('AVant édition : '); 
+    console.log(this.viewPreEdition); 
+
          
     let dialogRef = this.dialog.open(DialogEditView, {
-      width: '80%',
-      data: this.view
+      width :            '80%',
+      data :             this.view
     });
 
     dialogRef.afterClosed().subscribe(result => {
+
       console.log('ici The dialog was closed');
+      console.log(result);
+      if (result !== undefined){
+        console.log('Mise à jour OK'); 
+      } 
+      else {
+          console.log('Annulation, on remet les anciennes valeurs');         
+          this.view = JSON.parse(JSON.stringify(this.viewPreEdition));
+
+          // On toaste pour l'utilisateur en cours
+          this._translate.get('TOASTER.VIEW.UPDATE.CANCEL').subscribe((res: string) => {
+              console.log('Envoi message !');
+              console.log(res);
+              this.toastr.info(res, 'Information');
+          });                                            
+      }
+
+
       // this.refreshList(); 
 
     // On met à jour la BDD pour associer le event.dragData au View

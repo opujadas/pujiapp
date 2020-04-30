@@ -11,6 +11,8 @@ import { Element } from './../../../core/model/element/element.model';
 import { Tag } from './../../../core/model/tag/tag.model';
 import { Post } from './../../../core/model/post/post.model';
 
+import {MatDividerModule} from '@angular/material/divider';
+
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { FormGroup, FormControl } from '@angular/forms'; 
@@ -92,8 +94,11 @@ export class DialogEditView implements OnDestroy  {
   onSubmit(){
     console.log('Submit'); 
     console.log(this.view);
+    console.log(this.view.name); 
+
     console.log('Elément updaté ?'); 
     console.log(this.editViewForm); 
+    
     console.log('Nom vue : ' + this.editViewForm.value.name);
 /*
     console.log('Title saisi : ' + this.editCategoryForm.value.name);
@@ -102,23 +107,22 @@ export class DialogEditView implements OnDestroy  {
     this.name = this.editCategoryForm.value.name;
 */
     this.view.name = this.editViewForm.value.name;
-console.log('this.view'); 
+    console.log('this.view'); 
     console.log(this.view); 
 
-
     // On met à jour la BDD pour associer le event.dragData au View
-    this.subscriptionUpdate = this._viewService.updateView(this.view)
-                            .subscribe(data => {
-                                console.log(data);
-                                this.dialogRef.close();
+    this.subscriptionUpdate = this._viewService
+        .updateView(this.view)
+        .subscribe(data => {
+          console.log(data);
+          this.dialogRef.close(data);
 
-        // On toaste pour l'utilisateur en cours
-        this._translate.get('TOASTER.ELEMENT.UPDATE.SUCCESS').subscribe((res: string) => {
-            console.log(res);
-            this.toastr.success(res, 'Success!');
-        });                                  
-                            }); 
-       
+          // On toaste pour l'utilisateur en cours
+          this._translate.get('TOASTER.ELEMENT.UPDATE.SUCCESS').subscribe((res: string) => {
+              console.log(res);
+              this.toastr.success(res, 'Success!');
+          });                                  
+    });    
   }
 
   onNoClick(): void {

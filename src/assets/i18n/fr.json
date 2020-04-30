@@ -40,6 +40,7 @@
             },
             "UPDATE": {
                 "SUCCESS": "L'élément a bien été mise à jour !",
+                "CANCEL": "L'élément n'a pas été modifié",
                 "EMIT":{
                     "SUCCESS":  "Un utilisateur vient de mettre à jour un élément"
                 }                
@@ -58,6 +59,15 @@
                     "SUCCESS":  "Un utilisateur vient de créer une nouvelle vue :  {{value}} !"
                 }
             },
+            "UPDATE": {
+                "SUCCESS": "La vue a bien été mise à jour",
+                "CANCEL": "Annulation de l'action : la vue n'a pas été modifiée",
+                "EMIT":{
+                    "SUCCESS":  "Un utilisateur vient de créer une nouvelle vue :  {{value}} !"
+                }
+            },
+
+
             "DELETE": {
                 "SUCCESS": "La vue a bien été supprimée !",
                 "EMIT":{
@@ -141,14 +151,17 @@
                 "FIELD.TITLE.PLACEHOLDER": "Nom de la vue",
                 "FIELD.CONTENT.PLACEHOLDER": "Contenu de la vue",
                 "FIELD.TAGS.PLACEHOLDER": "Tags de la vue",
-                "BT.ADD" : "Créer"                
+                "BT.ADD" : "Créer",
+                "BT.CANCEL" : "Annuler"
+
             },
             "EDIT":{
                 "TITLE" : "Mettre à jour une vue",                        
                 "FIELD.TITLE.PLACEHOLDER": "Nom de la vue",
                 "FIELD.CONTENT.PLACEHOLDER": "Contenu de la vue",
                 "FIELD.TAGS.PLACEHOLDER": "Tags de la vue",
-                "BT.UPDATE" : "Mettre à jour"                
+                "BT.UPDATE" : "Mettre à jour",
+                "BT.CANCEL" : "Annuler"                
             }            
         },
         "POST": {

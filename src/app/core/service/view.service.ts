@@ -16,7 +16,7 @@ import 'rxjs/Rx';
 
 export class ViewService {
 
-
+ 
     private listRootViewsChanged = new Subject<View>();
     private viewTagsChanged = new Subject<View>();
 

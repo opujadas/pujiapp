@@ -49,16 +49,23 @@ Nb de tags : {{view.tags.length}}
 </div>
 
 
-    <br>
-    <br>
+<mat-divider></mat-divider>
+<br>
 
-
-      <button     mat-button type="submit" 
+      <button     mat-button type="button" 
                   mat-raised-button 
                   class="button-action"
+                  (click)="onNoClick()">
+                  <i class="material-icons">backspace</i> {{ 'PAGES.VIEW.EDIT.BT.CANCEL' | translate }}
+      </button>
+      &nbsp; &nbsp; 
+      <button     mat-button type="submit" 
+                  mat-raised-button 
+                  class="button-danger"
                   [disabled]="!editViewForm.valid">
                   <i class="material-icons">update</i> {{ 'PAGES.VIEW.EDIT.BT.UPDATE' | translate }}
       </button>
+
 </form>
   </div>
   <div class="col-md-4">
