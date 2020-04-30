@@ -1,33 +1,32 @@
-import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
+// Core components
+import { Component, OnInit, OnDestroy, Inject, ViewContainerRef } from '@angular/core';
+import { FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
+import { AppRoutingModule } from '../../app-routing.module';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+
+// Plugins & modules 
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+import { Socket } from 'ng-socket-io';
+import { ToastsManager } from 'ng6-toastr/ng2-toastr';
+import { TranslateService } from 'ng2-translate';
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+// Custom models
+import { MessageSocket } from './../../core/model/message-socket/message-socket.model';
+import { Element } from './../../core/model/element/element.model';
+import { Tag } from './../../core/model/tag/tag.model';
+import { Post } from './../../core/model/post/post.model';
+import { View } from './../../core/model/view/view.model';
+
+// Custom services
+import { ViewService } from './../../core/service/view.service';
+import { DialogEditView } from './dialogs/dialog-edit-view.component';
 import { DataService } from './../../core/data/data.service';
 import { ElementListService } from './../../core/service/element-list.service';
 import { ElementService } from './../../core/service/element.service';
 import { TagListService } from './../../core/service/tag-list.service';
-//import { viewListComponent } from './view-list/view-list.component';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
-import { ToastsManager } from 'ng6-toastr/ng2-toastr';
-import { ViewContainerRef } from '@angular/core'; 
-import { Element } from './../../core/model/element/element.model';
-import { Tag } from './../../core/model/tag/tag.model';
-import { Post } from './../../core/model/post/post.model';
-
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-
-import { FormGroup, FormControl } from '@angular/forms'; 
-import { FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-
-
-import { View } from './../../core/model/view/view.model';
-import { Subscription } from 'rxjs/Subscription';
-import { Socket } from 'ng-socket-io';
-import { AppRoutingModule } from '../../app-routing.module';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ViewService } from './../../core/service/view.service';
-
-import { TranslateService } from 'ng2-translate';
-import { MessageSocket } from './../../core/model/message-socket/message-socket.model';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { DialogEditView } from './dialogs/dialog-edit-view.component';
 
  
 @Component({
