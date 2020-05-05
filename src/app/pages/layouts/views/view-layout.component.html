@@ -96,7 +96,7 @@
     <li class="mat-tree-node">
       <!-- use a disabled button to provide padding for tree leaf -->
       <button mat-icon-button disabled></button>
-<a dnd-draggable [dragEnabled]="true"  [dragData]="node" (click)="showChildren(node)" routerLink="/views/{{node._id}}">{{node.name}}</a> 
+<a dnd-draggable [dragEnabled]="true"  [dragData]="node"  routerLink="/views/{{node._id}}">{{node.name}}</a> 
 <treeviewmenu [node]="node"></treeviewmenu>
     </li>
   </mat-tree-node>
@@ -110,7 +110,7 @@
             {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
           </mat-icon>
         </button>
-<a dnd-draggable [dragEnabled]="true" [dragData]="node" (click)="showChildren(node)" routerLink="/views/{{node._id}}">{{node.name}}</a> 
+<a dnd-draggable [dragEnabled]="true" [dragData]="node"  routerLink="/views/{{node._id}}">{{node.name}}</a> 
 <treeviewmenu [node]="node"></treeviewmenu>
 
       </div>
