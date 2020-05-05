@@ -56,10 +56,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   // Subscriptions (don't forget to unsubscribe !)
   private subscriptionGetTags: Subscription;
   private subscriptionGetViews: Subscription;
-  private subscriptionGetChildrenViews: Subscription;
-  private subscription: Subscription; 
   private subscriptionRecycleBin: Subscription; 
-  private subscriptionElementDeleted: Subscription; 
   private subscriptionGetCurrentView: Subscription;
 
 
@@ -92,32 +89,7 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
       console.log('Actions sur vue => affecte le root tree : on refresh !'); 
       console.log(data); 
       this.refreshRootViewList(); 
-  }); 
-        
-
-/*
-    this.subscriptionElementDeleted = this._elementListService.getElementDeletedAction().subscribe(data => { 
-      
-      //  On supprime visuellement l'élément passé     
-      console.log('Elements : '); 
-      console.log(this.view.elements); 
-      console.log('Il faut supprimer : '); 
-      console.log(data); 
-
-      console.log('data._id'); 
-      console.log(data._id); 
-
-      (this.elements).splice((this.elements).findIndex(x => x._id == data._id), 1);
-
-      // On toaste pour l'utilisateur en cours
-      this._translate.get('TOASTER.ELEMENT.TRASH.SUCCESS').subscribe((res: string) => {
-          console.log(res);
-          this.toastr.success(res, 'Success!');
-      });
-      
-      });             
-*/
-
+    }); 
   }
 
 
@@ -229,21 +201,46 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
       });  
   }
 
+  /**********************************************************************************************************
+   Fonction showDialogSelectorTags() 
+      => fonction pour afficher le widget de selection des tags 
+  ***********************************************************************************************************/
+
   showDialogSelectorTags() : void {       
     this.showDialogTags = true; 
   }
+
+  /**********************************************************************************************************
+   Fonction hideDialogSelectorTags() 
+      => fonction pour masquer le widget de selection des tags 
+  ***********************************************************************************************************/
 
   hideDialogSelectorTags() : void {       
     this.showDialogTags = false; 
   }
 
+  /**********************************************************************************************************
+   Fonction showTrash() 
+      => fonction pour afficher le widget de la poubelle
+  ***********************************************************************************************************/
+
   showTrash() : void {       
     this.showDialogTrash = true; 
   }
+ 
+  /**********************************************************************************************************
+   Fonction showDialogSelectorTags() 
+      => fonction pour masquer le widget de la poubelle  
+  ***********************************************************************************************************/
 
   hideTrash() : void {       
     this.showDialogTrash = false; 
   }
+
+  /**********************************************************************************************************
+   Fonction ngOnDestroy() 
+    => on unsubscribe !
+  ***********************************************************************************************************/
 
   ngOnDestroy() {
     if (this.subscriptionGetTags)
@@ -252,11 +249,14 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
       this.subscriptionGetViews.unsubscribe();
     if (this.subscriptionRecycleBin)
       this.subscriptionRecycleBin.unsubscribe();
+    if (this.subscriptionGetCurrentView)
+      this.subscriptionGetCurrentView.unsubscribe();  
   }
+
 }
 
 
-
+/*
 @Component({
   selector: 'dialog-selector-tags',
   templateUrl: 'dialog-selector-tags.html',
@@ -317,4 +317,4 @@ export class DialogSelectorTags implements OnInit, OnDestroy  {
     if (this.subscription)
       this.subscription.unsubscribe();
   }
-}
+} */

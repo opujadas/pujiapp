@@ -116,7 +116,8 @@ import { ElementComponent, DialogEditPost } from './pages/elements/element/eleme
 
 import { DataService } from './core/data/data.service';
 
-import { ViewLayoutComponent, DialogSelectorTags} from './pages/layouts/views/view-layout.component';
+import { ViewLayoutComponent } from './pages/layouts/views/view-layout.component';
+import { DialogSelectorTags } from './pages/layouts/views/dialogs/dialog-selector-tags.component';
 import { DialogAddChildView } from './pages/layouts/views/dialogs/dialog-add-child-view.component';
 import { ViewAddComponent } from './pages/view/view-add/view-add.component';
 import { ViewComponent } from './pages/view/view.component';
