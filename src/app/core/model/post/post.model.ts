@@ -3,14 +3,14 @@
 
 export class Post {
 
-  public id: number; 
-  public element_id: number; 
+  public id: string; 
+  public element_id: string; 
   public title: string;
   public content: string;
 
   
-  // constructor(id : number = -1, title: string, content: string, user_id: number = 1, tags: Tag[], element_id = -1) {
-    constructor(id : number = -1, element_id : number = -1, title: string, content: string) {
+  // constructor(id : string = -1, title: string, content: string, user_id: string = 1, tags: Tag[], element_id = -1) {
+    constructor(id : string = -1, element_id : string = -1, title: string, content: string) {
     this.id = id; 
     this.element_id = element_id; 
     this.title = title;

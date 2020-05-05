@@ -34,186 +34,148 @@ import { TagListService } from './../../core/service/tag-list.service';
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css']
 })
+
 export class ViewComponent implements OnInit, OnDestroy {
 
+  // Custom variables & attributes
 
-    public Editor = ClassicEditor;
+  private view            : View = new View("-1", localStorage.getItem('user_id'), "-1", "0", [], []);
+  private viewPreEdition  : View; 
+  private id              : string; 
+  private elements        : any[]; // Element[]; 
+  addPostForm             : FormGroup; 
+  private title           : string; 
+  private content         : string; 
+  post                    : Post; 
 
-  //private views: view[]; 
-  private subscription : Subscription; 
-  private subscriptionView : Subscription; 
-  private subscriptionViewChanged : Subscription; 
-  private subscriptionElementDeleted : Subscription; 
+  // Variables for plugins 
+  
+  public Editor = ClassicEditor;
+  
+  // Subscriptions (don't forget to unsubscribe !)
+  
+  private subscription :                Subscription; 
+  private subscriptionView :            Subscription; 
+  private subscriptionViewChanged :     Subscription; 
+  private subscriptionElementDeleted :  Subscription; 
   private subscriptionViewTagsChanged : Subscription;
-  private subscriptionElements : Subscription;  
+  private subscriptionElements :        Subscription;  
+  
 
-  //   constructor(id : number = -1, name: string = "", user_id: number = -1, parent_id : number = 0, tags : Tag[]) {
-
-  private view : View = new View("-1", localStorage.getItem('user_id'), "-1", "0", [], []);
-  private viewPreEdition : View; 
-
-  private id : string; 
-  private elements : any[]; // Element[]; 
-  addPostForm: FormGroup; 
-
-  private title : string; 
-  private content : string; 
-  post : Post; 
-
-  constructor(private slimLoadingBarService: SlimLoadingBarService, 
-              private router: Router,
-              private route: ActivatedRoute,
-              private _viewService : ViewService,
-              private _elementListService: ElementListService,  
-              private _elementService: ElementService,             
-              private _translate: TranslateService,
-               public toastr: ToastsManager,
-                             private socket: Socket,
-
-                   public dialog: MatDialog
-
-              ) { 
-      // Démarrage de la barre de chargement 
-      this.slimLoadingBarService.start();
-
-    this.addPostForm = new FormGroup({
-      'title': new FormControl(), 
-      'content': new FormControl(null, Validators.required)
-    });
-
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    public toastr: ToastsManager,
+    private socket: Socket,
+    public dialog: MatDialog,
+    private _slimLoadingBarService: SlimLoadingBarService, 
+    private _viewService : ViewService,
+    private _elementListService: ElementListService,  
+    private _elementService: ElementService,             
+    private _translate: TranslateService 
+  ) { 
+      this._slimLoadingBarService.start();
+      this.addPostForm = new FormGroup({
+        'title': new FormControl(), 
+        'content': new FormControl(null, Validators.required)
+      });
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot); 
+    // On récupère l'ID passé en URL
     this.id = this.route.snapshot.url[0].path; 
     
-    console.log('ID view compo : ' + this.id); 
-
+    // On récupère les infos de la vue 
     this.subscription = this.route.params
       .subscribe(
         (params: Params) => {
-            console.log(params);             
             this.id = params['idview'];
             // Dans tous les cas on initialise le formulaire
-            console.log('Initialisation du form'); 
             this.getCurrentViewInfo(); 
         });
-
-
+ 
+    // On s'abonne, si jamais on a un element supprimé, on le supprime visuellement
     this.subscriptionElementDeleted = this._elementListService.getElementDeletedAction().subscribe(data => { 
       //  On supprime visuellement l'élément passé     
-      console.log('On supprime '); 
-      console.log(data); 
-      console.log('Dans la liste :  '); 
-    console.log(this.elements); 
-      
-
       (this.elements).splice((this.elements).findIndex(x => x._id == data._id), 1);
       // On toaste pour l'utilisateur en cours
       this._translate.get('TOASTER.ELEMENT.TRASH.SUCCESS').subscribe((res: string) => {
-          console.log(res);
           this.toastr.success(res, 'Success!');
       });            
     });   
 
-
-
+    // On s'abonne si jamais la vue a changé de tags, on doit raffraichir la liste des éléments (à vérifier)
     this.subscriptionViewTagsChanged = this._viewService.getViewTagsChanged().subscribe(data => { 
        console.log('Refresh de la liste des éléments'); 
         this.getCurrentViewElements();
     });   
 
-
-    this.slimLoadingBarService.complete();
+    this._slimLoadingBarService.complete();
   }
 
+  /**********************************************************************************************************
+    Fonction getCurrentViewInfo() : permet de charger une vue & ses éléments
+      => s'applique dès qu'on clique sur une nouvelle vue (basé sur l'URL) 
+      => on charge les infos de la vue, on sauvegarde une copie de la vue (clone) 
+         si jamais on fait des modifications dessus qu'on puisse revenir en arrière si on annule des modifs
+  ***********************************************************************************************************/
 
   getCurrentViewInfo(){
     console.log('getCurrentViewInfo');
+    this._slimLoadingBarService.start();
     this.subscriptionView = this._viewService.getView(this.id)
       .subscribe(data => {
-          console.log(data);
           if ((data.data) && (data.data !== undefined)) {
             this.view = data.data;
             // On clone this.view dans backup : 
             this.viewPreEdition = JSON.parse(JSON.stringify(data.data));
 
-            console.log('INIT : Avant édition : '); 
-            console.log(this.viewPreEdition); 
-
-            // On choppe les id tags de la vue actuelle
-            // console.log(); 
-            // this.elements = data.data.elements; 
-
-            console.log('On choppe les elements'); 
+            // On récupère les éléments de la vue actuelle
             this.getCurrentViewElements(); 
 
-
-            console.log('INFO au service que la vue a changé'); 
-            this.subscriptionViewChanged = this._viewService.setCurrentView(data.data);             
+            // On informe le viewService de la vue actuelle 
+            this.subscriptionViewChanged = this._viewService.setCurrentView(data.data);
           } 
 
           // this.toastr.success('Les sites sont chargés !', 'Success!');
-          this.slimLoadingBarService.complete();  
+          this._slimLoadingBarService.complete();  
         });            
   }
 
+  /**********************************************************************************************************
+    Fonction getCurrentViewElements() : les éléments de la vue en cours, d'après ses tags
+  ***********************************************************************************************************/
+
   getCurrentViewElements(){
     console.log('getCurrentViewElements');
-
-    var vuetagsID = this.view.tags; 
-
-/*    console.log('creation tableau de tags');
-    var vuetagsID = []; 
-    for(var i=0; i<this.view.tags.length; i++){
-        vuetagsID[i] = this.view.tags;
-    }
-
-    console.log('view.tags : '); 
-    console.log(vuetagsID); 
-*/
-    this.subscriptionElements = this._elementService.getElementsWithTags(vuetagsID)
-      .subscribe(data => {
-          
+    this._slimLoadingBarService.start();
+    this.subscriptionElements = this._elementService.getElementsWithTags(this.view.tags)
+      .subscribe(data => {          
           if(data.data){
-            console.log(data.data);
-            this.elements = data.data; 
-            console.log(this.elements); 
-            this.slimLoadingBarService.complete();  
+            this.elements = data.data;             
           } 
-
+          this._slimLoadingBarService.complete();  
         });           
   }
 
-
-
+  /**********************************************************************************************************
+    Fonction onSubmit() : appelée lorsque l'on ajoute un nouvel élément (post pour le moment)
+  ***********************************************************************************************************/
 
   onSubmit()  {
-    // Démarrage de la barre de chargement 
-    this.slimLoadingBarService.start();
+    this._slimLoadingBarService.start();
 
     this.title = this.addPostForm.value.title;
     this.content = this.addPostForm.value.content;
 
-    // On construit 
-    // constructor(id : number = -1, element_id : number = -1, title: string, content: string) {
-
-    
-    let post = new Post("-1", -1, this.title, this.content);       /*,1 ,      this.selectedTags */    
-    console.log('Post : '); 
-    console.log(post); 
-
-    //constructor(id : number = -1, user_id: number = 1, tags : Tag[], type, data : {}) {
+    // Elément posté // pour le moment un élément de type post 
+    let post = new Post("-1", "-1", this.title, this.content);
     let element = new Element("-1", localStorage.getItem('user_id'), this.view['tags'], "post", post); // type = 1 pour les posts 
-    console.log('Element'); 
-    console.log(element); 
-
+    
     return  this._elementService.addElement(element)
         .subscribe(data => {
           if ((data != undefined) && (data.data != undefined)) {
-            console.log('retous du addElement');
             console.log(data.data);  
-
             // On toaste pour l'utilisateur en cours
             this._translate.get('TOASTER.POST.ADD.SUCCESS').subscribe((res: string) => {
                 console.log(res);
@@ -222,15 +184,12 @@ export class ViewComponent implements OnInit, OnDestroy {
 
             // On envoie un message pour les autres utilisateurs connectés
             this._translate.get('TOASTER.POST.ADD.EMIT.SUCCESS', {value: this.title}).subscribe((res: string) => {
-                console.log(res);
                 var messageSocket = new MessageSocket(res, 'success', element, 'add_post'); 
                 this.socket.emit("message", messageSocket);
               });    
 
             // On ajoute l'élément à la liste en cours (vue root ou pas c'est pareil)
             this.elements.unshift(data.data); 
-
-            console.log(this.elements); 
 
             // On vide le formulaire
             this.addPostForm.reset();             
@@ -239,13 +198,17 @@ export class ViewComponent implements OnInit, OnDestroy {
           error => console.log("Error: ", error),
           () => {
             // Fin de la barre de chargement 
-            this.slimLoadingBarService.complete();              
-            // this.router.navigate([ '/views/elements' ])
+            this._slimLoadingBarService.complete();              
           });     
   }
 
 
 
+  /**********************************************************************************************************
+    Fonction editView() : permet de modifier une vue (appelle le dialogue d'édition de vue)
+      => Si la vue a été modifiée, on sauvegarde
+      => Sinon (annulation) on recharge le clone créé en début de component
+  ***********************************************************************************************************/
 
   editView(view : View) : void {
 
@@ -272,9 +235,18 @@ export class ViewComponent implements OnInit, OnDestroy {
      }); 
   }
 
+
+  /**********************************************************************************************************
+    Fonction onNewView() : permet de rediriger pour créer une nouvelle vue
+  ***********************************************************************************************************/
+
   onNewView() {
     this.router.navigate(['add'], {relativeTo: this.route});
   }
+
+  /**********************************************************************************************************
+    Fonction ngOnDestroy() : permet d'annuler toutes les subscriptions
+  ***********************************************************************************************************/
 
   ngOnDestroy() {
 
@@ -282,14 +254,13 @@ export class ViewComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     if (this.subscriptionView)
       this.subscriptionView.unsubscribe();     
+    if (this.subscriptionViewChanged)
+      this.subscriptionViewChanged.unsubscribe();
     if (this.subscriptionElementDeleted)
-      this.subscriptionElementDeleted.unsubscribe();  
+      this.subscriptionElementDeleted.unsubscribe();
     if (this.subscriptionViewTagsChanged)
-      this.subscriptionViewTagsChanged.unsubscribe();  
+      this.subscriptionViewTagsChanged.unsubscribe();
+    if (this.subscriptionElements)
+      this.subscriptionElements.unsubscribe();
   }  
 }
-
-
-
-
-

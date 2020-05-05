@@ -1,42 +1,38 @@
-
-
+// Core components
 import { Component, Input, OnInit, OnDestroy, ViewChild, Inject, Injectable } from '@angular/core';
-import { Socket } from 'ng-socket-io';
-import { ToastsManager } from 'ng6-toastr/ng2-toastr';
-import { TranslateService } from 'ng2-translate';
+import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormControl } from '@angular/forms'; 
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FlatTreeControl, NestedTreeControl } from '@angular/cdk/tree';
+import { BehaviorSubject } from 'rxjs';
 
-import { FormGroup, FormControl } from '@angular/forms'; 
-import {FlatTreeControl} from '@angular/cdk/tree';
-
-import { FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-
-
-import {NestedTreeControl} from '@angular/cdk/tree';
+// Plugins & modules
+import { Socket } from 'ng-socket-io';
+import { TranslateService } from 'ng2-translate';
+import { ToastsManager } from 'ng6-toastr/ng2-toastr';
 import {MatTreeNestedDataSource, MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {BehaviorSubject} from 'rxjs';
 
-
+// Custom models
 import { MessageSocket } from './../../../core/model/message-socket/message-socket.model';
 import { TagListService } from './../../../core/service/tag-list.service';
 import { ViewService } from './../../../core/service/view.service';
 import { ElementService } from './../../../core/service/element.service';
 import { ElementListService } from './../../../core/service/element-list.service';
 
+// Custom services
 import { Tag } from './../../../core/model/tag/tag.model';
 import { View } from './../../../core/model/view/view.model';
 
 
 
-interface FoodNode {
+interface CustomNode {
   name: string;
-  children?: FoodNode[];
+  children?: CustomNode[];
 }
 
-const TREE_DATA: FoodNode[] = [
+/*
+const TREE_DATA: CustomNode[] = [
   {
     name: 'Fruit',
     children: [
@@ -63,7 +59,7 @@ const TREE_DATA: FoodNode[] = [
     ]
   },
 ];
-
+*/
 
 @Component({
   selector: 'app-view-layout',
@@ -73,6 +69,21 @@ const TREE_DATA: FoodNode[] = [
 
 export class ViewLayoutComponent implements OnInit, OnDestroy {
 
+  // Custom variables & attributes
+  private id : string; 
+  private view : View; 
+  private tags: Tag[]; 
+  private rootViews : any[] = []; 
+  private showDialogTags : boolean = false; 
+  private showDialogTrash : boolean = false; 
+  rootViewHasChanged : Subscription; 
+  rootview : string;
+
+  // Variables for plugins 
+  treeControl = new NestedTreeControl<View>(node => node.children);
+  dataSource = new MatTreeNestedDataSource<View>();
+
+  // Subscriptions (don't forget to unsubscribe !)
   private subscriptionGetTags: Subscription;
   private subscriptionGetViews: Subscription;
   private subscriptionGetChildrenViews: Subscription;
@@ -80,28 +91,6 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   private subscriptionRecycleBin: Subscription; 
   private subscriptionElementDeleted: Subscription; 
   private subscriptionGetCurrentView: Subscription;
-  
-
-  private id : string; 
-  private view : View; 
-
-  private tags: Tag[]; 
-  private rootViews : any[] = []; 
-
-  private showDialogTags : boolean = false; 
-  private showDialogTrash : boolean = false; 
-
-  rootViewHasChanged : Subscription; 
-  rootview : string;
-
-/*
-treeControl = new NestedTreeControl<FoodNode>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<FoodNode>();
-*/
-
-treeControl = new NestedTreeControl<View>(node => node.children);
-  dataSource = new MatTreeNestedDataSource<View>();
-
 
 
   constructor(
@@ -163,7 +152,7 @@ treeControl = new NestedTreeControl<View>(node => node.children);
   }
 
 
-  hasChild = (_: number, node: FoodNode) => !!node.children && node.children.length > 0;
+  hasChild = (_: number, node: CustomNode) => !!node.children && node.children.length > 0;
 
   /* Fonction addViewAction(event) 
       => event : View => correspond au numéro du tag à supprimer
