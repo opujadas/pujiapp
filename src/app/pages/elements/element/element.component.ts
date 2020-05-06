@@ -115,27 +115,30 @@ export class ElementComponent  implements OnDestroy {
       if(event.dragData.ref == 'tag'){      
         console.log('Ajouter aux tags de element : ' + this.element._id);
 
-        console.log('Add tag to element !!'); 
-        console.log(event.dragData); 
-        console.log(event.dragData._id); 
-        console.log('On ajoute ' + event.dragData._id + ' au element ' + this.element._id); 
-
-
-        // On met à jour la BDD pour associer le event.dragData au post
-        this.subscriptionAddTag = this._elementService.addTagToElement(event.dragData._id, this.element._id)
-                                .subscribe(data => {
-                                    console.log(data); 
-                                }); 
+        if ((this.element.tags).findIndex(x => x._id == event.dragData._id) == -1){
+          console.log('non trouvé, on ajoute !');
+          // On met à jour la BDD pour associer le event.dragData au post
+          this.subscriptionAddTag = this._elementService
+                                      .addTagToElement(event.dragData._id, this.element._id)
+                                      .subscribe(data => { console.log(data); }); 
         
-        // On modifie les listes
-        // this.selectableTags.splice(index, 1);
-
-        console.log('On va chercher dans le tag dans les tags de element'); 
-        console.log(this.element.tags); 
-        console.log(event.dragData._id); 
-
-        if ((this.element.tags).findIndex(x => x.id == event.dragData._id) == -1)
+          // Visuellement, on ajoute le tag à l'élément
           this.element.tags.push(event.dragData);      
+
+          // On envoie un message à l'utilisateur
+          this._translate.get('TOASTER.TAG.ADD_TO_ELEMENT.SUCCESS').subscribe((res: string) => {
+              console.log(res);
+              this.toastr.success(res, 'Success!');
+          });                                  
+        }
+        else {
+          console.log('Tag déjà dans la liste, on ne fait rien !'); 
+          // On envoie un message à l'utilisateur
+          this._translate.get('TOASTER.TAG.ADD_TO_ELEMENT.INFO').subscribe((res: string) => {
+              console.log(res);
+              this.toastr.info(res, 'Info !');
+          });                                  
+        }
       }
       else {
         console.log('DnD d\'un autre element'); 

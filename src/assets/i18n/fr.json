@@ -87,6 +87,10 @@
                 "EMIT":{
                     "SUCCESS":  "Un utilisateur vient de supprimer un tag :  {{value}} !"
                 }                
+            },
+            "ADD_TO_ELEMENT": {
+                "SUCCESS": "Le tag a bien été ajouté à l'élément !",
+                "INFO": "Le tag était déjà présent dans la liste des tags !"           
             }
         }
 	},
