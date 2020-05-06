@@ -351,7 +351,7 @@ exports.deletetag = function (req, res) {
                     (element.tags).splice(index, 1);
                     
                     // Vérification et sauvegarde
-                    if((element.tags).indexOf(req.body.tag_id) == -1){ // On s'assure qu'il n'est plus dans la liste !                        
+//                    if((element.tags).indexOf(req.body.tag_id) == -1){ // On s'assure qu'il n'est plus dans la liste !                        
 
                         // save the element and check for errors
                         element.save(function (err) {
@@ -363,7 +363,7 @@ exports.deletetag = function (req, res) {
                                 data: element
                             });
                         });                    
-                    }
+  //                  }
                 }                
             }
         });

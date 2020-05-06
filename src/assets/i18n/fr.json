@@ -91,7 +91,11 @@
             "ADD_TO_ELEMENT": {
                 "SUCCESS": "Le tag a bien été ajouté à l'élément !",
                 "INFO": "Le tag était déjà présent dans la liste des tags !"           
-            }
+            },
+            "DELETE_FROM_ELEMENT": {
+                "SUCCESS": "Le tag a bien été supprimé de l'élément !",
+                "WARNING": "Bizarre... Tag à supprimé non présent dans la liste des tags. Raffraichir pour voir ?"           
+            }            
         }
 	},
 	

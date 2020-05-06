@@ -56,20 +56,38 @@ export class ElementComponent  implements OnDestroy {
   */
 
   deleteTag(event){
-    this.subscriptionDeleteTag = this._elementService.deleteTagFromElement(event, this.element._id)
-                        .subscribe(data => {
-                            console.log(data); 
-                        }); 
+
 
       console.log(this.element.tags);
+      console.log('event');
+      console.log(event);
 
       let index = (this.element.tags).findIndex(x => x._id == event); 
+      console.log('INDEX : ' + index); 
       if (index == -1){
         console.log('chaine non trouvée');
+
+        // On envoie un message à l'utilisateur
+        this._translate.get('TOASTER.TAG.DELETE_FROM_ELEMENT.WARNING').subscribe((res: string) => {
+            console.log(res);
+            this.toastr.success(res, 'Warning !');
+        });                                                     
       } else {
          console.log('index trouvé : ');
-         this.element.tags.splice( ((this.element.tags).findIndex(x => x._id == event)), 1); 
-      }     
+
+         // On supprime le tag de la BDD
+         this.subscriptionDeleteTag = this._elementService.deleteTagFromElement(event, this.element._id)
+                                        .subscribe(data => {
+                                            console.log(data); 
+                                        }); 
+         // On supprime visuellement le tag
+         this.element.tags.splice(index , 1); 
+
+          // On envoie un message à l'utilisateur
+          this._translate.get('TOASTER.TAG.DELETE_FROM_ELEMENT.SUCCESS').subscribe((res: string) => {
+              console.log(res);
+              this.toastr.success(res, 'Success!');
+          });                                        }     
   }
 
   editElement(element) : void {
