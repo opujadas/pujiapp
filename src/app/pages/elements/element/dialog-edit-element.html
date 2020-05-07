@@ -19,13 +19,17 @@
           <br>
           <br>
 
-        <button mat-button md-raised-button class="button-action" (click)="onNoClick()">
-          <i class="material-icons">cancel</i> {{ 'PAGES.POST.DELETE.BT.CANCEL' | translate }}
-        </button>
+      <button     mat-button type="button" 
+                  mat-raised-button 
+                  class="button-action"
+                  (click)="onNoClick()">
+                  <i class="material-icons">backspace</i> {{ 'PAGES.POST.EDIT.BT.CANCEL' | translate }}
+      </button>
+      &nbsp; &nbsp; 
 
           <button     mat-button type="submit" 
                       mat-raised-button 
-                      class="button-action"
+                      class="button-danger"
                       [disabled]="!editPostForm.valid">
                       <i class="material-icons">update</i> {{ 'PAGES.POST.ADD.BT.ADD' | translate }}
           </button>

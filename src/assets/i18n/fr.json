@@ -40,7 +40,7 @@
             },
             "UPDATE": {
                 "SUCCESS": "L'élément a bien été mise à jour !",
-                "CANCEL": "L'élément n'a pas été modifié",
+                "CANCEL": "Action annulée : l'élément n'a pas été mis à jour",
                 "EMIT":{
                     "SUCCESS":  "Un utilisateur vient de mettre à jour un élément"
                 }                
@@ -206,7 +206,8 @@
                 "FIELD.TITLE.PLACEHOLDER": "Titre du post",
                 "FIELD.CONTENT.PLACEHOLDER": "Contenu du post",    
                 "FIELD.TAGS.PLACEHOLDER": "Tags du post",                                  
-                "BT.EDIT" : "Mettre à jour"
+                "BT.EDIT" : "Mettre à jour",
+                "BT.CANCEL" : "Annuler"   
             }            
         },
         "TAG": {
