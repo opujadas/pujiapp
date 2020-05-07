@@ -165,4 +165,3 @@ export class ElementComponent  implements OnDestroy {
       this.subscriptionUpdate.unsubscribe();
   }
 }
-

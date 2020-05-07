@@ -5,8 +5,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormsModule, ReactiveFormsModule, Validators, FormGroup, FormControl } from '@angular/forms'; 
 
 // Plugins & modules 
-import { TranslateService } from 'ng2-translate';
-import { ToastsManager } from 'ng6-toastr/ng2-toastr';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 // Custom models
@@ -22,24 +20,23 @@ import { HtmlcontentPipe } from '../../../../core/pipes/htmlcontent.pipe';
   templateUrl: 'dialog-edit-element.html',
   styleUrls: ['./dialog-edit-element.css']
 })
+
 export class DialogEditPost implements OnDestroy  {
 
+  // Custom variables & attributes
   editPostForm: FormGroup; 
-
-  private subscription: Subscription;
-  private subscriptionUpdate: Subscription;
   elementBackup : Element; 
-  oldtitle : string; 
-  oldcontent : string; 
+
+  // Modules & plugins variables  
   public Editor = ClassicEditor;
 
-
+  // Subscriptions
+  private subscription :        Subscription;
+  private subscriptionUpdate :  Subscription;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditPost>,
     private _elementService : ElementService,  
-    public toastr: ToastsManager, 
-    private _translate: TranslateService, 
     @Inject(MAT_DIALOG_DATA) public element: Element) { 
 
     console.log('Dialog constructeur'); 
@@ -51,6 +48,9 @@ export class DialogEditPost implements OnDestroy  {
   }
 
 
+  /* Fonction onSubmit() 
+      => mise à jour d'un élément 
+  */
 
   onSubmit(){
     // On met à jour la BDD pour associer le event.dragData au post
@@ -64,9 +64,19 @@ export class DialogEditPost implements OnDestroy  {
      });  
   }
 
+
+  /* Fonction onNoClick() 
+      => Si on ferme le dialogue, on annule les éventuelles modifications
+         Du coup on renvoie close() sans paramètres, ça sera intercepté par l'elementcomponent 
+  */
   onNoClick(): void {
     this.dialogRef.close();
   }
+
+
+  /* Fonction ngOnDestroy() 
+      - On se désabonne de tout !
+  */
 
   ngOnDestroy() {
     if (this.subscription)
@@ -74,5 +84,4 @@ export class DialogEditPost implements OnDestroy  {
     if (this.subscriptionUpdate)
       this.subscriptionUpdate.unsubscribe();
   }
-
 }
