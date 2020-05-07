@@ -112,7 +112,8 @@ import { SiteListComponent, DialogSupprimerSite } from './pages/site/site-list/s
 import { SiteListService } from './pages/site/site-list/site-list.service';
 
 import { ElementListComponent } from './pages/elements/element-list/element-list.component';
-import { ElementComponent, DialogEditPost } from './pages/elements/element/element.component';
+import { ElementComponent } from './pages/elements/element/element.component';
+import { DialogEditPost } from './pages/elements/element/dialogs/dialog-edit-element.component';
 
 import { DataService } from './core/data/data.service';
 
