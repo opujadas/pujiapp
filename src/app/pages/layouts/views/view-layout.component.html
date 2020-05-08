@@ -66,13 +66,21 @@
   <div class="item item-1" fxFlex="20%">
 
 
-    <b>TAGGERS</b><br>
+    <b>HELPERS</b><br>
     <br>
-      <a *ngIf="!showDialogTags" (click)="showDialogSelectorTags()">[AFFICHER LES TAGS]</a>
-      <a *ngIf="showDialogTags" (click)="hideDialogSelectorTags()">[MASQUER LES TAGS]</a>
+      <span  *ngIf="!showDialogTags" (click)="showDialogSelectorTags()" class="icons  material-icons icon-inactive">
+label
+</span>
+      <span  *ngIf="showDialogTags" (click)="hideDialogSelectorTags()" class="icons material-icons icon-active">
+label_off
+</span>
 
-      <a *ngIf="!showDialogTrash" (click)="showTrash()">[CORBEILLE]</a>
-      <a *ngIf="showDialogTrash" (click)="hideTrash()">[MASQUER CORBEILLE]</a>
+      <span *ngIf="!showDialogTrash" (click)="showTrash()" class="icons material-icons icon-inactive">
+delete
+</span>
+      <span  *ngIf="showDialogTrash" (click)="hideTrash()" class="icons material-icons icon-active">
+delete_forever
+</span>
 
 <!--      <br>
       Contacts<br>

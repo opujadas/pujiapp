@@ -1,3 +1,16 @@
+.icons {
+	    font-size: 40px;
+}
+
+.icon-active {
+	color : #555;
+}
+
+.icon-inactive {
+	color : #CCC;
+}
+
+
 .mat-tree {
 	background: none; 
 }
@@ -52,8 +65,8 @@
 	position: fixed;
 	left:75px;
 	top: 50px;
-	min-width: 200px;
-	min-height: 200px;
+	min-width: 30%;
+	min-height: 250px;
 }
 
 #mydivheader {
