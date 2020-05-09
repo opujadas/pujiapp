@@ -76,6 +76,8 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
 
     this.subscriptionGetCurrentView = this._viewService.getCurrentViewChanged().subscribe(data => { 
       this.view = data;
+      console.log('current vi');
+      console.log(this.view);  
     }); 
 
     this.subscriptionGetViews = this._viewService.getViews(localStorage.getItem('rootview')).subscribe(data =>  {

@@ -16,7 +16,7 @@ export class WebsocketService {
   // private socket;
 
   constructor(private socket: Socket, public toastr: ToastsManager) {
-    console.log('On est dans le WebsocketService'); 
+    // console.log('On est dans le WebsocketService'); 
    }
 
   connect(): Rx.Subject<MessageEvent> {

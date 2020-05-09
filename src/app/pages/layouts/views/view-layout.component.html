@@ -11,60 +11,52 @@
       </button>    
   </div>  
 
+  <h2>Informations / Détails</h2>
 
-<h2>Informations / Détails</h2>
-
-<!--
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <div fxFlex="40%" class="info_label">ID de la vue</div><div fxFlex="60%">{{view.id}}</div>
+<div *ngIf="view !== undefined" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="40%" class="info_label">ID de la vue</div><div fxFlex="60%">{{view._id}}</div>
 </div>
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+<div *ngIf="view !== undefined"  class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
   <div fxFlex="40%" class="info_label">Nom de la vue</div><div fxFlex="60%">{{view.name}}</div>
 </div>
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <div fxFlex="40%" class="info_label">Date de création</div><div fxFlex="60%">{{view.created}}</div>
+<div *ngIf="view !== undefined"  class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="40%" class="info_label">Date de création</div><div fxFlex="60%">{{view.create_date}}</div>
 </div>
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
-  <div fxFlex="40%" class="info_label">Nombre d'éléments</div><div fxFlex="60%">{{view.elements.length}}</div>
+<div *ngIf="view !== undefined" class="container" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="0.5%" fxLayoutAlign="center">
+  <div fxFlex="40%" class="info_label">Nombre d'éléments</div><div fxFlex="60%">{{view.children.length}}</div>
 </div>
 
 
 <br>
-
-
-
-
-
-
       <hr>
       <br><br>
-      <div *ngFor="let tag of tags; let i = index">
-          <div dnd-draggable [dragEnabled]="true"  [dragData]="tag">                    
-            <tagelement  
-              [label]="tag.name"
-              [bgcolor]="tag.category.color"
-            ></tagelement>
-                  
-          </div>
+      <div *ngIf="(view !== undefined) && (view.tags.length > 0)">Tags : 
+        <span *ngFor="let tag of view.tags">
+
+        <tagelement 
+          [label]="tag.name"
+          [bgcolor]="tag.category.color"
+          [tag_id]="tag.id"
+          [view_id]="view.id"
+          [show_delete_action] = false
+        ></tagelement>
+
+        </span>
       </div>
--->
+
+
   </mat-drawer>
   <!-- FIN Side bar (infos, options, etc...) -->
 
   <div class="app-sidenav-content">
-
-
-
-
-<div class="container"
-     fxLayout
-     fxLayout.xs="column"
-     fxLayoutAlign="center"
-     fxLayoutGap="10px"
-     fxLayoutGap.xs="0">
-  <!-- DEBUT Colonne menu interactif -->
-  <div class="item item-1" fxFlex="20%">
-
+    <div class="container"
+       fxLayout
+       fxLayout.xs="column"
+       fxLayoutAlign="center"
+       fxLayoutGap="10px"
+       fxLayoutGap.xs="0">
+    <!-- DEBUT Colonne menu interactif -->
+    <div class="item item-1" fxFlex="20%">
 
     <b>HELPERS</b><br>
     <br>
@@ -72,14 +64,14 @@
 label
 </span>
       <span  *ngIf="showDialogTags" (click)="hideDialogSelectorTags()" class="icons material-icons icon-active">
-label_off
+label
 </span>
 
       <span *ngIf="!showDialogTrash" (click)="showTrash()" class="icons material-icons icon-inactive">
 delete
 </span>
       <span  *ngIf="showDialogTrash" (click)="hideTrash()" class="icons material-icons icon-active">
-delete_forever
+delete
 </span>
 
 <!--      <br>
