@@ -3,7 +3,10 @@ TEST ==> {{view.name}}
   <!-- vue avec un ID défini -->
   <div id="infoview" *ngIf="!view.is_rootview">
      <h1 (click)="editView(view)">{{view.name}}</h1> 
-      
+     
+    <treeviewmenu [node]="view"></treeviewmenu>
+
+
       <div *ngIf="view.tags.length > 0">Tags : 
         <span *ngFor="let tag of view.tags">
 

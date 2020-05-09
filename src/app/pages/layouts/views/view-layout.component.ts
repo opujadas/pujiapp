@@ -119,6 +119,8 @@ export class ViewLayoutComponent implements OnInit, OnDestroy {
   /**********************************************************************************************************
    Fonction addChildView(view) 
       => fonction qui permet d'ouvrir une boite dialogue pour créer une sous-vue
+
+      /!\ Fonction semble redondante avec la même fonction dans treeviewmenu.components.ts
   ***********************************************************************************************************/
 
   addChildView(view : View) : void {
