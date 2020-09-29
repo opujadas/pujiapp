@@ -4,6 +4,12 @@ TEST ==> {{view.name}}
   <div id="infoview" *ngIf="!view.is_rootview">
      <h1 (click)="editView(view)">{{view.name}}</h1> 
      
+    <span (click)="changeStateShowAddElement()">
+      Ajouter un élément
+<!--      <span *ngIf="showAddElement == true" class="addElement icon-active material-icons">add_box</span>
+      <span *ngIf="showAddElement != true" class="addElement icon-inactive material-icons">add_box</span>      
+    -->
+    </span>   
     <treeviewmenu [node]="view"></treeviewmenu>
 
 
@@ -27,8 +33,8 @@ TEST ==> {{view.name}}
     <h1>{{view.name}}</h1>
   </div> 
 <hr>
-
-<mat-tab-group>
+<br>
+<mat-tab-group *ngIf="showAddElement == true">
   <mat-tab label="Posts">
      <form  [formGroup]="addPostForm"  (ngSubmit)="onSubmit()">
 

@@ -47,6 +47,7 @@ export class ViewComponent implements OnInit, OnDestroy {
   private title           : string; 
   private content         : string; 
   post                    : Post; 
+  private showAddElement  : boolean = false; 
 
   // Variables for plugins 
   
@@ -202,6 +203,14 @@ export class ViewComponent implements OnInit, OnDestroy {
           });     
   }
 
+
+  changeStateShowAddElement(){
+    console.log('This Add BEFORE : ');
+    console.log(this.showAddElement);  
+    this.showAddElement = !this.showAddElement;
+    console.log('This Add AFTER : ');
+    console.log(this.showAddElement);  
+  }
 
 
   /**********************************************************************************************************
